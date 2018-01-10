@@ -12,9 +12,11 @@ import {
     Menu,
     Segment,
     Visibility,
+    Sidebar
 } from 'semantic-ui-react'
-import {GoogleLogin} from 'react-google-login';
+import {GoogleLogin, GoogleLogout } from 'react-google-login';
 import Playlist from "./pages/Playlist";
+import {HomePage} from "./HomePage";
 require('./css/main.css')
 
 const FixedMenu = () => (
@@ -39,11 +41,12 @@ const FixedMenu = () => (
 export default class App extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {};
+        this.state = {visible :true, isLoggedIn : false, page: "home"};
     }
 
     hideFixedMenu = () => this.setState({visible: false});
     showFixedMenu = () => this.setState({visible: true});
+    toggleVisibility = () => this.setState({ visible: !this.state.visible });
 
     stopQuestionsStartRest(answers = {}) {
 
@@ -51,22 +54,8 @@ export default class App extends Component {
 
             sdk.getQuestions(answers, 10).then((data) => {
                     console.log(data);
-
-                    this.setState({
-                        isLoading: false,
-                        isSwipingQuestions: false,
-                        isSwipingResturants: true,
-                        rests: data.data
-                    });
                 },
                 (reason) => {
-                    this.setState({
-                        isLoading: false,
-                        isSwipingQuestions: false,
-                        isSwipingResturants: true,
-                        rests: []
-                    });
-
                     alert("Server Not Responding....");
                 }
             );
@@ -76,6 +65,15 @@ export default class App extends Component {
 
     responseGoogle(response) {
         console.log(response);
+        if(response.ok){//todo ???
+            this.setState({ isLoggedIn: true });
+        }
+    }
+    logout(){
+        this.setState({ isLoggedIn: false });
+    }
+    setPage(page){
+        this.setState({ page: page });
     }
 
     render() {
@@ -83,66 +81,69 @@ export default class App extends Component {
 
         return (
             <div>
-                { visible ? <FixedMenu /> : null }
-                <Visibility onBottomPassed={this.showFixedMenu} onBottomVisible={this.hideFixedMenu} once={false}>
-                    <Segment inverted textAlign='center' style={{minHeight: 700, padding: '1em 0em'}} vertical>
-                        <Container>
-                            <Menu inverted pointing secondary size='large'>
-                                <Menu.Item as='a' active>Home</Menu.Item>
-                                <Menu.Item position='right'>
-                                    <Button as='a' inverted>Log in</Button>
-                                    <GoogleLogin
-                                        clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-                                        buttonText="Login"
-                                        onSuccess={this.responseGoogle}
-                                        onFailure={this.responseGoogle}
-                                    />
-                                    <Button as='a' inverted style={{marginLeft: '0.5em'}}>Sign Up</Button>
-                                </Menu.Item>
-                            </Menu>
-                        </Container>
 
-                        <Container text>
-                            <Header as='h1' content='Songs Track' inverted
-                                    style={{fontSize: '4em', fontWeight: 'normal', marginBottom: 0, marginTop: '3em'}}/>
-                            <Header as='h2' content='Listen whatever you want whenever you want.' inverted
-                                    style={{fontSize: '1.7em', fontWeight: 'normal'}}/>
-                            <Button primary size='huge'>
-                                Get Started
-                                <Icon name='right arrow'/>
-                            </Button>
-                        </Container>
-                    </Segment>
-                </Visibility>
 
-                <Segment style={{padding: '8em 0em'}} vertical>
-                    <Grid container stackable verticalAlign='middle'>
-                        <Grid.Row>
-                            <Grid.Column width={8}>
-                                <Header as='h3' style={{fontSize: '2em'}}>No matter which mood you In..</Header>
-                                <p style={{fontSize: '1.33em'}}>
-                                    We can fit you the exactly music you up to, the music that gonna make you laugh,
-                                    cry, or both.
-                                </p>
-                                <Header as='h3' style={{fontSize: '2em'}}>No matter who you with or where you
-                                    are</Header>
-                                <p style={{fontSize: '1.33em'}}>
-                                    Our music going to makes your time more delightful then ever.
-                                </p>
-                            </Grid.Column>
+                <div>
+                    <Button onClick={this.toggleVisibility}>Toggle Menu</Button>
+                    <Sidebar.Pushable as={Segment}>
+                        <Sidebar as={Menu} animation='overlay' width='thin' visible={visible} icon='labeled' vertical inverted>
+                            <Menu.Item name='home' onClick={this.setPage.bind(this, "home")}>
+                                <Icon name='home' />
+                                Home
+                            </Menu.Item>
+                            <Menu.Item name='list layout' onClick={this.setPage.bind(this,"myplaylists")}>
+                                <Icon name='list layout' />
+                                My Playlists
+                            </Menu.Item>
+                            <Menu.Item name='music' onClick={this.setPage.bind(this,"makeplaylist")}>
+                                <Icon name='music' />
+                                Make Me A Playlist
+                            </Menu.Item>
+                        </Sidebar>
+                        <Sidebar.Pusher>
+                            <Segment basic>
+                                <Header as='h3'>
+                                    <Visibility /*onBottomPassed={this.showFixedMenu} onBottomVisible={this.hideFixedMenu}*/ once={false}>
+                                        <Segment inverted textAlign='center' style={{minHeight: 100, padding: '1em 0em'}} vertical>
+                                            <Container>
+                                                <Menu inverted pointing secondary size='large'>
+                                                    <Menu.Item as='a' active></Menu.Item>
+                                                    <Menu.Item position='right'>
+                                                        {/*<Button as='a' inverted>Log in</Button>*/}
+                                                        {!this.state.isLoggedIn && <GoogleLogin
+                                                            clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                                                            buttonText="Login"
+                                                            onSuccess={this.responseGoogle}
+                                                            onFailure={this.responseGoogle}
+                                                        />}
+                                                        {this.state.isLoggedIn &&
+                                                        <GoogleLogout
+                                                            buttonText="Logout"
+                                                            onLogoutSuccess={this.logout}
+                                                        >
+                                                        </GoogleLogout>}
 
-                            <Grid.Column floated='right' width={6}>
-                                <Image bordered rounded size='large' src='../public/music.png'/>
-                            </Grid.Column>
-                        </Grid.Row>
-                        <Grid.Row>
-                            <Grid.Column textAlign='center'>
+                                                        {/*<Button as='a' inverted style={{marginLeft: '0.5em'}}>Sign Up</Button>*/}
+                                                    </Menu.Item>
+                                                </Menu>
+                                            </Container>
+                                        </Segment>
+                                    </Visibility>
+                                    <Visibility /*onBottomPassed={this.showFixedMenu} onBottomVisible={this.hideFixedMenu}*/ once={false}>
+                                        <Segment inverted textAlign='center' style={{minHeight: 700, padding: '1em 0em', background: 'white'}} vertical>
+                                    {this.state.page === "home" && HomePage}
+                                    {this.state.page === "myplaylists" && <Playlist/>}
+                                        </Segment>
+                                    </Visibility>
 
-                            </Grid.Column>
-                        </Grid.Row>
-                    </Grid>
-                    <Playlist/>
-                </Segment>
+
+                                </Header>
+                                <Image src='/assets/images/wireframe/paragraph.png' />
+                            </Segment>
+                        </Sidebar.Pusher>
+                    </Sidebar.Pushable>
+                </div>
+
             </div>
         )
     }
