@@ -1,0 +1,19 @@
+
+.ui.tiny.image{
+    width: 150px !important;
+}
+
+.playlist-container{
+    margin: 100px auto;
+    width: 1175px;
+}
+.youtube-frame{
+    float: left;
+}
+.playlist-left{
+    float: left;
+    margin-left: 50px;
+    margin-right: 50px;
+    overflow-y: scroll;
+    height: 400px;
+}
