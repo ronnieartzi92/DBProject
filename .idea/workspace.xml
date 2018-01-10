@@ -24,8 +24,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0de7e4f7-9915-47d2-853b-cd018ecdee28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/my-app/src/Components/YoutubeFrame.js" afterPath="$PROJECT_DIR$/my-app/src/Components/YoutubeFrame.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/my-app/src/css/main.css" afterPath="$PROJECT_DIR$/my-app/src/css/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/my-app/src/pages/Playlist.js" afterPath="$PROJECT_DIR$/my-app/src/pages/Playlist.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -98,8 +96,8 @@
       <file leaf-file-name="Playlist.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/my-app/src/pages/Playlist.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="40" column="88" lean-forward="false" selection-start-line="40" selection-start-column="88" selection-end-line="40" selection-end-column="88" />
+            <state relative-caret-position="220">
+              <caret line="26" column="50" lean-forward="false" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#41#79#0" expanded="true" />
@@ -437,7 +435,7 @@
       <workItem from="1514929372918" duration="56000" />
       <workItem from="1515576271028" duration="1147000" />
       <workItem from="1515577481988" duration="2027000" />
-      <workItem from="1515586238814" duration="7380000" />
+      <workItem from="1515586238814" duration="7762000" />
     </task>
     <task id="LOCAL-00001" summary="add packeges">
       <created>1515578285507</created>
@@ -453,11 +451,18 @@
       <option name="project" value="LOCAL" />
       <updated>1515593200985</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add playlist look">
+      <created>1515596309207</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1515596309207</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12889000" />
+    <option name="totallyTimeSpent" value="13271000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
@@ -868,8 +873,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/my-app/src/pages/Playlist.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="40" column="88" lean-forward="false" selection-start-line="40" selection-start-column="88" selection-end-line="40" selection-end-column="88" />
+        <state relative-caret-position="220">
+          <caret line="26" column="50" lean-forward="false" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#41#79#0" expanded="true" />

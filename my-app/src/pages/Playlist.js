@@ -24,10 +24,8 @@ export default class Playlist extends Component {
     playNextSong(){
         if(this.state.currentPlayedIndex < items.length-1)
             this.setState({currentPlayedIndex : this.state.currentPlayedIndex + 1});
+        else this.setState({currentPlayedIndex : 0});
     }
-
-
-
 
 
     render() {
