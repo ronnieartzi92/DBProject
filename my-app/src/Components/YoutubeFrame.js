@@ -15,17 +15,22 @@ const opts = {
 export default class YoutubeFrame extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {};
+        this.state = {videoId: this.props.videoId};
     };
+    componentWillReceiveProps(nextProps){
+        this.setState({videoId: nextProps.videoId});
+    }
+
 
     render() {
-        const vidID = this.props.videoId || "2g811Eo7K8U";
+        const vidID = this.state.videoId || "2g811Eo7K8U";
 
         return (
             <YouTube
                 videoId={vidID}
                 opts={opts}
-                onReady={this._onReady}
+                onEnd={this.props.onEnd}
+                // onReady={this._onReady}
             />
         )
     }
