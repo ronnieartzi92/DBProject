@@ -16,8 +16,6 @@ import image from './img/music.png'
 
 export const HomePage = <div>
     {/*{ visible ? <FixedMenu /> : null }*/}
-
-
     <Visibility /*onBottomPassed={this.showFixedMenu} onBottomVisible={this.hideFixedMenu}*/ once={false}>
         <Segment inverted textAlign='center' style={{minHeight: 700, padding: '1em 0em'}} vertical>
 

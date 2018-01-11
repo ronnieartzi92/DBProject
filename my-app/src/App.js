@@ -17,6 +17,8 @@ import {
 import {GoogleLogin, GoogleLogout } from 'react-google-login';
 import Playlist from "./pages/Playlist";
 import {HomePage} from "./HomePage";
+import MyPlaylists from "./pages/MyPlaylists";
+import MakeMePlaylist from "./pages/MakeMePlaylist";
 require('./css/main.css')
 
 const FixedMenu = () => (
@@ -130,9 +132,10 @@ export default class App extends Component {
                                         </Segment>
                                     </Visibility>
                                     <Visibility /*onBottomPassed={this.showFixedMenu} onBottomVisible={this.hideFixedMenu}*/ once={false}>
-                                        <Segment inverted textAlign='center' style={{minHeight: 700, padding: '1em 0em', background: 'white'}} vertical>
+                                        <Segment inverted textAlign='center' style={{minHeight: 700, padding: '1em 0em', background: 'white', paddingTop: 0}} vertical>
                                     {this.state.page === "home" && HomePage}
-                                    {this.state.page === "myplaylists" && <Playlist/>}
+                                    {this.state.page === "myplaylists" && <MyPlaylists/>}
+                                    {this.state.page === "makeplaylist" && <MakeMePlaylist/>}
                                         </Segment>
                                     </Visibility>
 

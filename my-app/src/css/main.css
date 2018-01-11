@@ -53,6 +53,9 @@
 .ui.tiny.image{
     width: 150px !important;
 }
+.searchInput{
+    margin-left: 200px !important;
+}
 
 .playlist-container{
     margin: 100px auto;

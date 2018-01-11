@@ -19,7 +19,6 @@ export default class Playlist extends Component {
 
     playSong(index){
         this.setState({currentPlayedIndex : index});
-        debugger;
     }
     playNextSong(){
         if(this.state.currentPlayedIndex < items.length-1)
