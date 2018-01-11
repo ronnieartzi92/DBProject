@@ -77,7 +77,7 @@ export default class App extends Component {
             this.setState({isLoggedIn: true, userFullName: response.profileObj.name,
                             userImage : response.profileObj.imageUrl});
         }
-    }
+    };
 
     setPage(page){
         this.setState({ page: page });
@@ -89,7 +89,8 @@ export default class App extends Component {
     logout = () => {
         this.setState({isLoggedIn: false});
         this.setPage("home");
-    }
+    };
+
     loginOrSignup = (email, password) => {
         if(!this.validateEmail(email)){
             this.setState({formError: "Email is not valid"});
@@ -103,6 +104,8 @@ export default class App extends Component {
         }
 
     };
+    handleCloseModel = () => this.setState({ modalOpen: false });
+
 
 
     render() {
@@ -110,7 +113,7 @@ export default class App extends Component {
 
         return (
             <div>
-                <LoginModel modalOpen={this.state.modalOpen} type={this.state.modelType} onSubmit={this.loginOrSignup} error={this.state.formError} />
+                <LoginModel modalOpen={this.state.modalOpen} type={this.state.modelType} onSubmit={this.loginOrSignup} error={this.state.formError} handleClose={this.handleCloseModel} />
 
                 <div>
                     <Button onClick={this.toggleVisibility}>Toggle Menu</Button>

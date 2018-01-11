@@ -9,16 +9,12 @@ export default class LoginModel extends Component {
         super(props, context);
         this.state ={ modalOpen: this.props.modalOpen || false, type : this.props.type, email: "", password: "", error: this.props.error, warning: false};
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleClose = this.props.handleClose.bind(this);
 
     }
     componentWillReceiveProps(nextProps){
         this.setState({modalOpen: nextProps.modalOpen, type: nextProps.type, warning: nextProps.error !== "", error: nextProps.error});
     }
-
-
-    handleOpen = () => this.setState({ modalOpen: true });
-
-    handleClose = () => this.setState({ modalOpen: false });
 
     handleInputChange(event) {
         const target = event.target;
