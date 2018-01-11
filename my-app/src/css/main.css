@@ -50,6 +50,7 @@
     width: 250px;
 }
 
+
 .ui.tiny.image{
     width: 150px !important;
 }
@@ -63,6 +64,7 @@
 }
 .youtube-frame{
     float: left;
+    margin-bottom: 50px;
 }
 .playlist-left{
     float: left;
@@ -70,4 +72,9 @@
     margin-right: 50px;
     overflow-y: scroll;
     height: 400px;
+}
+
+.concerts{
+    width: 650px;
+    margin: auto auto;
 }
