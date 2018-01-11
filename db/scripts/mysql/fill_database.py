@@ -36,7 +36,7 @@ class MysqlScripts:
                 'from_date': tomorrow,
                 'to_date': date(9999, 1, 1),
             }
-            cursor.execute(add_salary, data_salary)
+            # cursor.execute(add_salary, data_salary)
 
             # Make sure data is committed to the database
             cnx.commit()
@@ -56,6 +56,6 @@ class MysqlScripts:
 
 
 if __name__ == "__main__":
-    mysql_scripts = MysqlScripts('root', 'songs')
+    mysql_scripts = MysqlScripts('root', 'fogi')
     mysql_scripts.connect()
 
