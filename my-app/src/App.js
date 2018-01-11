@@ -12,7 +12,8 @@ import {
     Menu,
     Segment,
     Visibility,
-    Sidebar
+    Sidebar,
+    Feed
 } from 'semantic-ui-react'
 import {GoogleLogin, GoogleLogout } from 'react-google-login';
 import Playlist from "./pages/Playlist";
@@ -65,18 +66,27 @@ export default class App extends Component {
     }
 
 
-    responseGoogle(response) {
+    responseGoogle = (response) => {
         console.log(response);
-        if(response.ok){//todo ???
-            this.setState({ isLoggedIn: true });
+        if(response && response.profileObj){
+            debugger;
+            this.setState({isLoggedIn: true, userFullName: response.profileObj.name,
+                            userImage : response.profileObj.imageUrl});
         }
     }
-    logout(){
-        this.setState({ isLoggedIn: false });
-    }
+
     setPage(page){
         this.setState({ page: page });
     }
+    openMyPlaylists(){
+        this.setPage("myplaylists");
+    }
+
+    logout = () => {
+        this.setState({isLoggedIn: false});
+        this.setPage("home");
+    }
+
 
     render() {
         const {visible} = this.state;
@@ -109,7 +119,7 @@ export default class App extends Component {
                                         <Segment inverted textAlign='center' style={{minHeight: 100, padding: '1em 0em'}} vertical>
                                             <Container>
                                                 <Menu inverted pointing secondary size='large'>
-                                                    <Menu.Item as='a' active></Menu.Item>
+                                                    {/*<Menu.Item as='a' active></Menu.Item>*/}
                                                     <Menu.Item position='right'>
                                                         {/*<Button as='a' inverted>Log in</Button>*/}
                                                         {!this.state.isLoggedIn && <GoogleLogin
@@ -127,6 +137,11 @@ export default class App extends Component {
 
                                                         {/*<Button as='a' inverted style={{marginLeft: '0.5em'}}>Sign Up</Button>*/}
                                                     </Menu.Item>
+                                                    {this.state.isLoggedIn && <Menu.Item active position='right' onClick={this.openMyPlaylists.bind(this)}>
+                                                        <img src={this.state.userImage} style={{marginRight : '20px'}} />
+                                                        Hey {this.state.userFullName}
+                                                    </Menu.Item>
+                                                    }
                                                 </Menu>
                                             </Container>
                                         </Segment>
