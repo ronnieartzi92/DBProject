@@ -14,6 +14,7 @@ import {GoogleLogin, GoogleLogout } from 'react-google-login';
 import {HomePage} from "./HomePage";
 import MyPlaylists from "./pages/MyPlaylists";
 import MakeMePlaylist from "./pages/MakeMePlaylist";
+import LoginModel from "./Components/LoginModel";
 require('./css/main.css')
 
 // const FixedMenu = () => (
@@ -35,15 +36,24 @@ require('./css/main.css')
 //     </Menu>
 // )
 
+
+
+
 export default class App extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {visible :true, isLoggedIn : false, page: "home"};
+        this.state = {visible :true, isLoggedIn : false, page: "home", modalOpen: false, formError : ""};
     }
 
     hideFixedMenu = () => this.setState({visible: false});
     showFixedMenu = () => this.setState({visible: true});
     toggleVisibility = () => this.setState({ visible: !this.state.visible });
+    openSignup = () => this.setState({modalOpen: true, modelType: "Sign Up"});
+    openLogin = () => this.setState({modalOpen: true, modelType: "Login"});
+    validateEmail = (email) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email.toLowerCase());
+    };
 
     stopQuestionsStartRest(answers = {}) {
 
@@ -80,6 +90,19 @@ export default class App extends Component {
         this.setState({isLoggedIn: false});
         this.setPage("home");
     }
+    loginOrSignup = (email, password) => {
+        if(!this.validateEmail(email)){
+            this.setState({formError: "Email is not valid"});
+        }
+        else if(password.length < 5){
+            this.setState({formError: "Password should be at least 5 chars"});
+        }
+        else{
+            alert(email);
+            this.setState({modalOpen: false, isLoggedIn :true, formError: ""});
+        }
+
+    };
 
 
     render() {
@@ -87,7 +110,7 @@ export default class App extends Component {
 
         return (
             <div>
-
+                <LoginModel modalOpen={this.state.modalOpen} type={this.state.modelType} onSubmit={this.loginOrSignup} error={this.state.formError} />
 
                 <div>
                     <Button onClick={this.toggleVisibility}>Toggle Menu</Button>
@@ -115,8 +138,11 @@ export default class App extends Component {
                                                 <Menu inverted pointing secondary size='large'>
                                                     {/*<Menu.Item as='a' active></Menu.Item>*/}
                                                     <Menu.Item position='right'>
-                                                        {/*<Button as='a' inverted>Log in</Button>*/}
-                                                        {!this.state.isLoggedIn && <GoogleLogin
+                                                        {!this.state.isLoggedIn && <div>
+                                                        <Button as='a' inverted style={{marginLeft: '0.5em'}} onClick={this.openSignup.bind(this)}>Sign Up</Button>
+                                                        <Button as='a' inverted onClick={this.openLogin.bind(this)}>Log in</Button>
+                                                        </div>}
+                                                            {!this.state.isLoggedIn && <GoogleLogin
                                                             clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
                                                             buttonText="Login"
                                                             onSuccess={this.responseGoogle}
@@ -129,7 +155,6 @@ export default class App extends Component {
                                                         >
                                                         </GoogleLogout>}
 
-                                                        {/*<Button as='a' inverted style={{marginLeft: '0.5em'}}>Sign Up</Button>*/}
                                                     </Menu.Item>
                                                     {this.state.isLoggedIn && <Menu.Item active position='right' onClick={this.openMyPlaylists.bind(this)}>
                                                         <img src={this.state.userImage} style={{marginRight : '20px'}} alt="User" />
