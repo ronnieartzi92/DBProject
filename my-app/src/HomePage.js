@@ -1,7 +1,7 @@
 /**
  * Created by guyy on 1/10/2018.
  */
-import React, {Component} from 'react'
+import React from 'react'
 import {
     Button,
     Container,

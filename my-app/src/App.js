@@ -3,43 +3,37 @@ import sdk from "./sdk/sdk"
 import {
     Button,
     Container,
-    Divider,
-    Grid,
     Header,
     Icon,
-    Image,
-    List,
     Menu,
     Segment,
     Visibility,
     Sidebar,
-    Feed
 } from 'semantic-ui-react'
 import {GoogleLogin, GoogleLogout } from 'react-google-login';
-import Playlist from "./pages/Playlist";
 import {HomePage} from "./HomePage";
 import MyPlaylists from "./pages/MyPlaylists";
 import MakeMePlaylist from "./pages/MakeMePlaylist";
 require('./css/main.css')
 
-const FixedMenu = () => (
-    <Menu fixed='top' size='large'>
-        <Container>
-            <Menu.Item as='a' active>Home</Menu.Item>
-            <Menu.Item as='a'>Work</Menu.Item>
-            <Menu.Item as='a'>Company</Menu.Item>
-            <Menu.Item as='a'>Careers</Menu.Item>
-            <Menu.Menu position='right'>
-                <Menu.Item className='item'>
-                    <Button as='a'>Log in</Button>
-                </Menu.Item>
-                <Menu.Item>
-                    <Button as='a' primary>Sign Up</Button>
-                </Menu.Item>
-            </Menu.Menu>
-        </Container>
-    </Menu>
-)
+// const FixedMenu = () => (
+//     <Menu fixed='top' size='large'>
+//         <Container>
+//             <Menu.Item as='a' active>Home</Menu.Item>
+//             <Menu.Item as='a'>Work</Menu.Item>
+//             <Menu.Item as='a'>Company</Menu.Item>
+//             <Menu.Item as='a'>Careers</Menu.Item>
+//             <Menu.Menu position='right'>
+//                 <Menu.Item className='item'>
+//                     <Button as='a'>Log in</Button>
+//                 </Menu.Item>
+//                 <Menu.Item>
+//                     <Button as='a' primary>Sign Up</Button>
+//                 </Menu.Item>
+//             </Menu.Menu>
+//         </Container>
+//     </Menu>
+// )
 
 export default class App extends Component {
     constructor(props, context) {
@@ -138,7 +132,7 @@ export default class App extends Component {
                                                         {/*<Button as='a' inverted style={{marginLeft: '0.5em'}}>Sign Up</Button>*/}
                                                     </Menu.Item>
                                                     {this.state.isLoggedIn && <Menu.Item active position='right' onClick={this.openMyPlaylists.bind(this)}>
-                                                        <img src={this.state.userImage} style={{marginRight : '20px'}} />
+                                                        <img src={this.state.userImage} style={{marginRight : '20px'}} alt="User" />
                                                         Hey {this.state.userFullName}
                                                     </Menu.Item>
                                                     }
@@ -156,7 +150,6 @@ export default class App extends Component {
 
 
                                 </Header>
-                                <Image src='/assets/images/wireframe/paragraph.png' />
                             </Segment>
                         </Sidebar.Pusher>
                     </Sidebar.Pushable>

@@ -1,8 +1,8 @@
 /**
  * Created by guyy on 1/10/2018.
  */
-import { Image, Item } from 'semantic-ui-react'
-import React, {Component} from 'react'
+import { Item } from 'semantic-ui-react'
+import React from 'react'
 
 export const PlayListItem = ({title, artist, imageURL}) => (
     <Item>
