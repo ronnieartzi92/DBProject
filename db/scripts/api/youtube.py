@@ -1,6 +1,5 @@
 from apiclient.discovery import build
-from apiclient.errors import HttpError
-from oauth2client.tools import argparser
+from apiclient.errors import  HttpError
 
 
 # Set DEVELOPER_KEY to the API key value from the APIs & auth > Registered apps
@@ -40,13 +39,13 @@ def youtube_search():
       playlists.append("%s (%s)" % (search_result["snippet"]["title"],
                                     search_result["id"]["playlistId"]))
 
-  print "Videos:\n", "\n".join(videos), "\n"
-  print "Channels:\n", "\n".join(channels), "\n"
-  print "Playlists:\n", "\n".join(playlists), "\n"
+  print ("Videos:\n", "\n".join(videos), "\n")
+  print ("Channels:\n", "\n".join(channels), "\n")
+  print ("Playlists:\n", "\n".join(playlists), "\n")
 
 
 if __name__ == "__main__":
   try:
     youtube_search()
-  except HttpError, e:
-    print "An HTTP error %d occurred:\n%s" % (e.resp.status, e.content)
+  except HttpError as e:
+    print("An HTTP error %d occurred:\n%s" % (e.resp.status, e.content))
