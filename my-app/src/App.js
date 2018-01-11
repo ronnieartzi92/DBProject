@@ -111,7 +111,7 @@ export default class App extends Component {
                                                     <Menu.Item position='right'>
                                                         {/*<Button as='a' inverted>Log in</Button>*/}
                                                         {!this.state.isLoggedIn && <GoogleLogin
-                                                            clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                                                            clientId="60150906703-els4j53jkve5kd9ijdf70s5l7k40ccsd.apps.googleusercontent.com"
                                                             buttonText="Login"
                                                             onSuccess={this.responseGoogle}
                                                             onFailure={this.responseGoogle}
