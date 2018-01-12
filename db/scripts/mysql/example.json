@@ -5,7 +5,7 @@
 		"description": "is the king",
 		"tracks": [
 			{
-				"name": "Mama Mia",
+				"name": "Mama Mia - Song 1",
 				"img": "https://blabla.com",
 				"lyrics": "I belive i can fly",
 				"description": "good song",
@@ -16,6 +16,19 @@
 						"date_published": "10-12-2015",
 						"description": "very good youtube"
 					}
+			},
+			{
+				"name": "Mama Mia - Song 2",
+				"img": "https://blabla.com",
+				"lyrics": "I belive i can fly",
+				"description": "good song",
+				"youtube":
+					{
+						"video_id": "ndsqondqdqASD123X",
+						"duration":  5,
+						"date_published": "10-12-2015",
+						"description": "youtube 2"
+					}
 			}
 		],
 		"events":[
@@ -24,9 +37,62 @@
 				"date": "10-15-2020",
 				"time": "10:53",
 				"uri": "https://blabla.com"
+			},
+			{
+				"location": "Paris - second event",
+				"date": "10-15-2020",
+				"time": "10:53",
+				"uri": "https://blabla.com"
 			}
 		]	
+	},
+		{
+		"name": "Singer #2",
+		"description": "is the king",
+		"tracks": [
+			{
+				"name": "Mama Mia - Song 1 of singer #2",
+				"img": "https://blabla.com",
+				"lyrics": "I belive i can fly",
+				"description": "good song",
+				"youtube":
+					{
+						"video_id": "ndsqondqdqASD123X",
+						"duration":  5,
+						"date_published": "10-12-2015",
+						"description": "very good youtube"
+					}
+			},
+			{
+				"name": "Mama Mia - Song 2 singer #2",
+				"img": "https://blabla.com",
+				"lyrics": "I belive i can fly",
+				"description": "good song",
+				"youtube":
+					{
+						"video_id": "ndsqondqdqASD123X",
+						"duration":  5,
+						"date_published": "10-12-2015",
+						"description": "youtube 2"
+					}
+			}
+		],
+		"events":[
+			{
+				"location": "Paris",
+				"date": "10-15-2020",
+				"time": "10:53",
+				"uri": "https://blabla.com"
+			},
+			{
+				"location": "Paris - second event",
+				"date": "10-15-2020",
+				"time": "10:53",
+				"uri": "https://blabla.com"
+			}
+		]
 	}
+
 
 ]
 
