@@ -1,6 +1,7 @@
 from __future__ import print_function
 from datetime import date, datetime, timedelta
 import mysql.connector
+import json
 from mysql.connector import errorcode
 
 
@@ -53,6 +54,13 @@ class MysqlScripts:
         else:
           cnx.close()
 
+
+    def main(self, path):
+        with open(path) as fp:
+            json_file = json.load(fp)
+            artists_list  = json_file['artists']
+            for artist_dict in artists_list:
+                pass
 
 
 if __name__ == "__main__":
