@@ -4,18 +4,19 @@
 		"name": "Madona",
 		"description": "is the king",
 		"tracks": [
-			"name": "Mama Mia",
-			"img": "https://blabla.com",
-			"lyrics": "I belive i can fly",
-			"description": "good song",
-			"youtube": 
-				{
-					"video_id": "ndsqondqdqASD123X",
-					"duration":  5,
-					"date_published": "10-12-2015",
-					"description": "very good youtube"
-				}
-		
+			{
+				"name": "Mama Mia",
+				"img": "https://blabla.com",
+				"lyrics": "I belive i can fly",
+				"description": "good song",
+				"youtube": 
+					{
+						"video_id": "ndsqondqdqASD123X",
+						"duration":  5,
+						"date_published": "10-12-2015",
+						"description": "very good youtube"
+					}
+			}
 		],
 		"events":[
 			{
