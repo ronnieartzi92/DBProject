@@ -71,8 +71,15 @@ class MysqlScripts:
                     track = Track(track_dict['name'], track_dict['img'], track_dict['lyrics'], track_dict['description'])
                     youtube_dict = track_dict['youtube']
                     youtube = Youtube(youtube_dict['video_id'], youtube_dict['duration'], youtube_dict['date_published'], youtube_dict['description'])
+                    tag_list = track_dict['tags']
+
                     print("\ttrack:", track.__dict__)
                     print("\t\tyoutube:", youtube.__dict__)
+
+                    for tag_str in tag_list:
+                        tag = Tag(tag_str)
+                        print("\t\ttag:", tag.__dict__)
+
 
 
                 for event_dict in artist_event_list:
