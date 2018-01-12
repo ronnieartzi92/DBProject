@@ -75,8 +75,9 @@ export default class App extends Component {
         if(response && response.profileObj){
             debugger;
             this.setState({isLoggedIn: true, userFullName: response.profileObj.name,
+                            userToken: response.tokenId,
                             userImage : response.profileObj.imageUrl});
-        }
+        } console.log(response.tokenId);
     };
 
     setPage(page){
