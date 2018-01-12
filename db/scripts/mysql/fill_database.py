@@ -2,6 +2,7 @@ from __future__ import print_function
 from datetime import date, datetime, timedelta
 import mysql.connector
 import json
+from db.entities.entities import *
 from mysql.connector import errorcode
 
 
@@ -54,16 +55,32 @@ class MysqlScripts:
         else:
           cnx.close()
 
-
-    def main(self, path):
+    @staticmethod
+    def main(path):
         with open(path) as fp:
             json_file = json.load(fp)
             artists_list  = json_file['artists']
             for artist_dict in artists_list:
-                pass
+                artist = Artist(artist_dict['name'], artist_dict['description'])
+                artist_track_list = artist_dict['tracks']
+                artist_event_list = artist_dict['events']
+
+                print("artist:", artist.__dict__)
+
+                for track_dict in artist_track_list:
+                    track = Track(track_dict['name'], track_dict['img'], track_dict['lyrics'], track_dict['description'])
+                    youtube_dict = track_dict['youtube']
+                    youtube = Youtube(youtube_dict['video_id'], youtube_dict['duration'], youtube_dict['date_published'], youtube_dict['description'])
+                    print("\ttrack:", track.__dict__)
+                    print("\t\tyoutube:", youtube.__dict__)
+
+
+                for event_dict in artist_event_list:
+                    event = Event(event_dict['location'], event_dict['date'], event_dict['time'], event_dict['uri'])
+                    print("\tevent:", event.__dict__)
 
 
 if __name__ == "__main__":
     mysql_scripts = MysqlScripts('root', 'fogi')
-    mysql_scripts.connect()
-
+    # mysql_scripts.connect()
+    MysqlScripts.main('example.json')
