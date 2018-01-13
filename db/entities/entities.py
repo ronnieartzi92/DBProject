@@ -1,4 +1,26 @@
-class User:
+from abc import ABC
+
+
+class AbstractTable(ABC):
+    @property
+    def table_name(self):
+        raise NotImplementedError
+
+    def get_columns_values(self):
+        keys = tuple(self.__dict__.keys())
+        values = tuple([self.__dict__[key] for key in keys])
+        return keys, values
+
+    def insert(self, cursor):
+        columns, values = self.get_columns_values()
+        command = "INSERT INTO %s %s " % (self.table_name, str(columns).replace("'", "").replace(",)", ")")) + "VALUES " + '(' + '%s, ' * (len(columns) - 1) + '%s)'
+        cursor.execute(command, values)
+        return cursor.lastrowid
+
+
+class User(AbstractTable):
+    table_name = 'users'
+
     def __init__(self, email, google_id, google_img, is_admin):
         self.email = email
         self.google_id = google_id
@@ -6,49 +28,78 @@ class User:
         self.is_admin = is_admin
 
 
-class PlayList:
-    def __init__(self, name, date_created):
+class PlayList(AbstractTable):
+    table_name = 'play_lists'
+
+    def __init__(self, user_id,  name, date_created):
+        self.user_id = user_id
         self.name = name
         self.date_created = date_created
 
 
-class Artist:
-    def __init__(self, name, description):
+class Artist(AbstractTable):
+    table_name = 'artists'
+
+    def __init__(self, name, description, img, play_count):
         self.name = name
         self.description = description
+        self.img = img
+        self.play_count = play_count
 
 
-class Track:
-    def __init__(self, name, img, lyrics, description):
+class Track(AbstractTable):
+    table_name = 'tracks'
+
+    def __init__(self, artist_id, name, album, play_count, img, lyrics, description):
+        self.artist_id = artist_id
         self.name = name
+        self.album = album
+        self.play_count = play_count
         self.img = img
         self.lyrics = lyrics
         self.description = description
 
 
-class TrackToTag:
+class TrackToTag(AbstractTable):
+    table_name = 'tracks_to_tags'
+
     def __init__(self, track_id, tag_id):
         self.track_id = track_id
         self.tag_id = tag_id
 
 
-class Youtube:
-    def __init__(self, video_id, duration, date_published, description):
-        self.video_id = video_id
+class Youtube(AbstractTable):
+    table_name = 'youtubes'
+
+    def __init__(self, track_id, url, duration, date_published, description):
+        self.track_id = track_id
+        self.url = url
         self.duration = duration
         self.date_published = date_published
         self.description = description
 
 
-class Tag:
+class Tag(AbstractTable):
+    table_name = 'tags'
+
     def __init__(self, name):
         self.name = name
 
+    def find_id_by_name(self, cursor):
+        command = "SELECT id FROM %s WHERE tags.name='%s'" % (self.table_name, self.name)
+        cursor.execute(command)
+        row = cursor.fetchone()
+        return None if row is None else row[0]
 
-class Event:
-    def __init__(self, location, date, time, uri):
+
+class Event(AbstractTable):
+    table_name = 'events'
+
+    def __init__(self, artist_id, location, date, url, description, title):
+        self.artist_id = artist_id
         self.location = location
         self.date = date
-        self.time = time
-        self.uri = uri
+        self.url = url
+        self.description = description
+        self.title = title
 

@@ -3,105 +3,117 @@
 	{
 		"name": "Madona",
 		"description": "is the king",
+		"play_count": 1020202,
+		"img": "http://img.com",
 		"tracks": [
 			{
 				"name": "Mama Mia - Song 1",
+				"album": "ALBUM1",
+				"play_count": 123,
 				"img": "https://blabla.com",
 				"lyrics": "I belive i can fly",
 				"description": "good song",
 				"youtube": 
 					{
-						"video_id": "ndsqondqdqASD123X",
+						"url": "ndsqondqdqASD123X",
 						"duration":  5,
-						"date_published": "10-12-2015",
+						"date_published": "1990-10-09 15:15:20",
 						"description": "very good youtube"
 					},
-				"tags": ["rock0", "love0"]
+				"tags": ["rock0-bla", "love0", "pop"]
 
 			},
 			{
 				"name": "Mama Mia - Song 2",
+				"album": "ALBUM2",
+				"play_count": 12332,
 				"img": "https://blabla.com",
 				"lyrics": "I belive i can fly",
 				"description": "good song",
 				"youtube":
 					{
-						"video_id": "ndsqondqdqASD123X",
+						"url": "ndsqondqdqASD123X",
 						"duration":  5,
-						"date_published": "10-12-2015",
+						"date_published": "1990-10-09 15:15:20",
 						"description": "youtube 2"
 					},
-				"tags": ["rock01", "love01"]
+				"tags": ["rock01", "love01", "love"]
 
 			}
 		],
 		"events":[
 			{
 				"location": "Paris",
-				"date": "10-15-2020",
-				"time": "10:53",
-				"uri": "https://blabla.com"
+				"date": "1990-10-09 15:15:20",
+				"url": "https://blabla.com",
+				"description": "First event desc1",
+				"title": "Title 1"
 			},
 			{
 				"location": "Paris - second event",
-				"date": "10-15-2020",
-				"time": "10:53",
-				"uri": "https://blabla.com"
+				"date": "1990-10-09 15:15:20",
+				"url": "https://blabla.com",
+				"description": "First event desc2",
+				"title": "Title 2"
 			}
 		]	
 	},
-		{
+	{
 		"name": "Singer #2",
 		"description": "is the king",
+		"play_count": 9020202213,
+		"img": "http://img.com",
 		"tracks": [
 			{
 				"name": "Mama Mia - Song 1 of singer #2",
+				"album": "ALBUM3",
+				"play_count": 12323,
 				"img": "https://blabla.com",
 				"lyrics": "I belive i can fly",
 				"description": "good song",
 				"youtube":
 					{
-						"video_id": "ndsqondqdqASD123X",
+						"url": "ndsqondqdqASD123X",
 						"duration":  5,
-						"date_published": "10-12-2015",
+						"date_published": "1990-10-09 15:15:20",
 						"description": "very good youtube"
 					},
-				"tags": ["rock", "love"]
+				"tags": ["rock", "love", "pop", "r&b"]
 			},
 			{
 				"name": "Mama Mia - Song 2 singer #2",
+				"album": "ALBUM4",
+				"play_count": 123,
 				"img": "https://blabla.com",
 				"lyrics": "I belive i can fly",
 				"description": "good song",
 				"youtube":
 					{
-						"video_id": "ndsqondqdqASD123X",
+						"url": "ndsqondqdqASD123X",
 						"duration":  5,
-						"date_published": "10-12-2015",
+						"date_published": "1990-10-09 15:15:20",
 						"description": "youtube 2"
 					},
-				"tags": ["rock1", "love2"]
+				"tags": ["rock1", "love2", "r&b", "rock"]
 
 			}
 		],
 		"events":[
 			{
 				"location": "Paris",
-				"date": "10-15-2020",
-				"time": "10:53",
-				"uri": "https://blabla.com"
+				"date": "1990-10-09 15:15:20",
+				"url": "https://blabla.com",
+				"description": "First event desc3",
+				"title": "Title 3"
 			},
 			{
 				"location": "Paris - second event",
-				"date": "10-15-2020",
-				"time": "10:53",
-				"uri": "https://blabla.com"
+				"date": "1990-10-09 15:15:20",
+				"url": "https://blabla.com",
+				"description": "First event desc4",
+				"title": "Title 4"
 			}
 		]
 	}
-
-
-]
-
-
+	]
 }
