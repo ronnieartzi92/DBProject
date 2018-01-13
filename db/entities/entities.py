@@ -20,14 +20,11 @@ class AbstractTable(ABC):
         values = tuple([self.__dict__[key] for key in keys])
         return keys, values
 
-
     def insert(self, cursor):
         columns, values = self.get_columns_values()
         command = "INSERT INTO %s %s " % (self.table_name, str(columns).replace("'","")) + "VALUES " + '(' + '%s, ' * (len(columns) - 1) + '%s)'
-        print(command)
-        data = ("mike@gmail.com", "number2", "sahjgjsaa", 1)
-        cursor.execute(command, data)
-
+        cursor.execute(command, values)
+        return cursor.lastrowid
 
 
 class User(AbstractTable):
@@ -45,7 +42,8 @@ class PlayList(AbstractTable):
     table_name = 'play_lists'
     columns = "(name, date_created)"
 
-    def __init__(self, name, date_created):
+    def __init__(self, user_id,  name, date_created):
+        self.user_id = user_id
         self.name = name
         self.date_created = date_created
 
@@ -63,7 +61,8 @@ class Track(AbstractTable):
     table_name = 'tracks'
     columns = "(name, img, lyrics, description)"
 
-    def __init__(self, name, img, lyrics, description):
+    def __init__(self, artist_id, name, img, lyrics, description):
+        self.artist_id = artist_id
         self.name = name
         self.img = img
         self.lyrics = lyrics
@@ -83,7 +82,8 @@ class Youtube(AbstractTable):
     table_name = 'youtubes'
     columns = "(video_id, duration, date_published, description)"
 
-    def __init__(self, video_id, duration, date_published, description):
+    def __init__(self, track_id, video_id, duration, date_published, description):
+        self.track_id = track_id
         self.video_id = video_id
         self.duration = duration
         self.date_published = date_published
@@ -97,12 +97,18 @@ class Tag(AbstractTable):
     def __init__(self, name):
         self.name = name
 
+    def find_id_by_name(self, cursor):
+        command = "SELECT id FROM %s WHERE tags.name='%s'" % (self.table_name, self.name)
+        cursor.execute(command)
+        row = cursor.fetchone()
+        return None if row is None else row[0]
 
 class Event(AbstractTable):
     table_name = 'events'
     columns = "(location, date, uri)"
 
-    def __init__(self, location, date, time, uri):
+    def __init__(self, artist_id, location, date, time, uri):
+        self.artist_id = artist_id
         self.location = location
         self.date = date
         self.uri = uri

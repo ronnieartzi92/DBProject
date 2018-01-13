@@ -3,7 +3,7 @@ USE fogi;
 
 CREATE TABLE users (
 	id INT AUTO_INCREMENT, 
-	email VARCHAR(255) NOT NULL, 
+	email VARCHAR(255) NOT NULL UNIQUE, 
 	google_id VARCHAR(255) NOT NULL, 
 	google_img VARCHAR(255), 
 	is_admin BOOLEAN DEFAULT FALSE, 
@@ -51,8 +51,9 @@ CREATE TABLE youtubes (
 
 CREATE TABLE tags (
 	id INT AUTO_INCREMENT, 	
-	name VARCHAR(20) NOT NULL, 
-	PRIMARY KEY (id)
+	name VARCHAR(255) NOT NULL UNIQUE, 
+	PRIMARY KEY (id),
+    INDEX(name)
 );
 
 
