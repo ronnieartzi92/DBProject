@@ -83,11 +83,15 @@ class MysqlScripts:
 
 
                 for event_dict in artist_event_list:
-                    event = Event(event_dict['location'], event_dict['date'], event_dict['time'], event_dict['uri'])
+                    event = Event(event_dict['location'], event_dict['date'], event_dict['uri'])
                     print("\tevent:", event.__dict__)
 
 
 if __name__ == "__main__":
-    mysql_scripts = MysqlScripts('root', 'fogi')
+    # mysql_scripts = MysqlScripts('root', 'fogi')
     # mysql_scripts.connect()
-    MysqlScripts.main('example.json')
+    # MysqlScripts.main('example.json')
+    add_employee = ("INSERT INTO employees "
+                    "(first_name, last_name, hire_date, gender, birth_date) "
+                    "VALUES (%s, %s, %s, %s, %s)")
+    print(add_employee)
