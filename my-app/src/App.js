@@ -73,7 +73,7 @@ export default class App extends Component {
     responseGoogle = (response) => {
         console.log(response);
         if(response && response.profileObj){
-            debugger;
+            // debugger;
             this.setState({isLoggedIn: true, userFullName: response.profileObj.name,
                             userToken: response.tokenId,
                             userImage : response.profileObj.imageUrl});
