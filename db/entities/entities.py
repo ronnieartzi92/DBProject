@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class AbstractTable(ABC):
     @property
     def table_name(self):
@@ -9,17 +10,22 @@ class AbstractTable(ABC):
     def columns(self):
         raise NotImplementedError
 
-    def num_of_columns(self):
-        return self.columns.count(',') + 1
-
     def create_str_values(self):
+        def num_of_columns(self):
+            return self.columns.count(',') + 1
         return '(' + '%s, ' * (self.num_of_columns() - 1) + '%s)'
 
+    def get_columns_values(self):
+        keys = tuple(self.__dict__.keys())
+        values = tuple([self.__dict__[key] for key in keys])
+        return keys, values
+
+
     def insert(self, cursor):
-        command = "INSERT INTO %s %s " % (self.table_name, self.columns) + "VALUES " + self.create_str_values()
-        data = self.__dict__
-        data = ("mike@gmail.com", "sahhjsa", "sahjgjsaa", 1)
+        columns, values = self.get_columns_values()
+        command = "INSERT INTO %s %s " % (self.table_name, str(columns).replace("'","")) + "VALUES " + '(' + '%s, ' * (len(columns) - 1) + '%s)'
         print(command)
+        data = ("mike@gmail.com", "number2", "sahjgjsaa", 1)
         cursor.execute(command, data)
 
 
