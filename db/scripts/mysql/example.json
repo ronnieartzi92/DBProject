@@ -3,15 +3,19 @@
 	{
 		"name": "Madona",
 		"description": "is the king",
+		"play_count": 1020202,
+		"img": "http://img.com",
 		"tracks": [
 			{
 				"name": "Mama Mia - Song 1",
+				"album": "ALBUM1",
+				"play_count": 123,
 				"img": "https://blabla.com",
 				"lyrics": "I belive i can fly",
 				"description": "good song",
 				"youtube": 
 					{
-						"video_id": "ndsqondqdqASD123X",
+						"url": "ndsqondqdqASD123X",
 						"duration":  5,
 						"date_published": "1990-10-09 15:15:20",
 						"description": "very good youtube"
@@ -21,12 +25,14 @@
 			},
 			{
 				"name": "Mama Mia - Song 2",
+				"album": "ALBUM2",
+				"play_count": 12332,
 				"img": "https://blabla.com",
 				"lyrics": "I belive i can fly",
 				"description": "good song",
 				"youtube":
 					{
-						"video_id": "ndsqondqdqASD123X",
+						"url": "ndsqondqdqASD123X",
 						"duration":  5,
 						"date_published": "1990-10-09 15:15:20",
 						"description": "youtube 2"
@@ -39,27 +45,35 @@
 			{
 				"location": "Paris",
 				"date": "1990-10-09 15:15:20",
-				"uri": "https://blabla.com"
+				"url": "https://blabla.com",
+				"description": "First event desc1",
+				"title": "Title 1"
 			},
 			{
 				"location": "Paris - second event",
 				"date": "1990-10-09 15:15:20",
-				"uri": "https://blabla.com"
+				"url": "https://blabla.com",
+				"description": "First event desc2",
+				"title": "Title 2"
 			}
 		]	
 	},
-		{
+	{
 		"name": "Singer #2",
 		"description": "is the king",
+		"play_count": 9020202213,
+		"img": "http://img.com",
 		"tracks": [
 			{
 				"name": "Mama Mia - Song 1 of singer #2",
+				"album": "ALBUM3",
+				"play_count": 12323,
 				"img": "https://blabla.com",
 				"lyrics": "I belive i can fly",
 				"description": "good song",
 				"youtube":
 					{
-						"video_id": "ndsqondqdqASD123X",
+						"url": "ndsqondqdqASD123X",
 						"duration":  5,
 						"date_published": "1990-10-09 15:15:20",
 						"description": "very good youtube"
@@ -68,12 +82,14 @@
 			},
 			{
 				"name": "Mama Mia - Song 2 singer #2",
+				"album": "ALBUM4",
+				"play_count": 123,
 				"img": "https://blabla.com",
 				"lyrics": "I belive i can fly",
 				"description": "good song",
 				"youtube":
 					{
-						"video_id": "ndsqondqdqASD123X",
+						"url": "ndsqondqdqASD123X",
 						"duration":  5,
 						"date_published": "1990-10-09 15:15:20",
 						"description": "youtube 2"
@@ -86,18 +102,18 @@
 			{
 				"location": "Paris",
 				"date": "1990-10-09 15:15:20",
-				"uri": "https://blabla.com"
+				"url": "https://blabla.com",
+				"description": "First event desc3",
+				"title": "Title 3"
 			},
 			{
 				"location": "Paris - second event",
 				"date": "1990-10-09 15:15:20",
-				"uri": "https://blabla.com"
+				"url": "https://blabla.com",
+				"description": "First event desc4",
+				"title": "Title 4"
 			}
 		]
 	}
-
-
-]
-
-
+	]
 }

@@ -21,27 +21,30 @@ CREATE TABLE play_lists (
 
 CREATE TABLE artists (
 	id INT AUTO_INCREMENT, 
-    name VARCHAR(255) NOT NULL, 
-	description VARCHAR(255), 
+    name VARCHAR(255) NOT NULL,
+	description VARCHAR(255),
+    img VARCHAR(255),
+    play_count BIGINT NOT NULL,
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE tracks (
 	id INT AUTO_INCREMENT, 
 	artist_id INT NOT NULL, 
-	name VARCHAR(255) NOT NULL, 
-	img VARCHAR(255), 
+	name VARCHAR(255) NOT NULL,
+    album VARCHAR(255),
+    play_count BIGINT NOT NULL,
+	img VARCHAR(255),
 	lyrics TEXT, 
 	description VARCHAR(255), 
 	PRIMARY KEY (id),
     FOREIGN KEY (artist_id) REFERENCES artists(id)
 );
 
-
 CREATE TABLE youtubes (
 	id INT AUTO_INCREMENT, 
 	track_id INT NOT NULL, 
-	video_id VARCHAR(255), 
+	url VARCHAR(255),
 	duration INT, 
 	date_published DATETIME,  
 	description VARCHAR(255), 
@@ -56,13 +59,14 @@ CREATE TABLE tags (
     INDEX(name)
 );
 
-
 CREATE TABLE events (
 	id INT AUTO_INCREMENT, 
 	artist_id INT NOT NULL, 
 	location VARCHAR(255) NOT NULL, 
-	date DATETIME NOT NULL, 
-	uri VARCHAR(255) NOT NULL, 
+	date DATETIME NOT NULL,
+	url VARCHAR(255) NOT NULL,
+	description VARCHAR(255),
+	title VARCHAR(255),
 	PRIMARY KEY (id),
     FOREIGN KEY (artist_id) REFERENCES artists(id)
 );

@@ -6,10 +6,6 @@ class AbstractTable(ABC):
     def table_name(self):
         raise NotImplementedError
 
-    @property
-    def columns(self):
-        raise NotImplementedError
-
     def create_str_values(self):
         def num_of_columns(self):
             return self.columns.count(',') + 1
@@ -29,7 +25,6 @@ class AbstractTable(ABC):
 
 class User(AbstractTable):
     table_name = 'users'
-    columns = "(email, google_id, google_img, is_admin)"
 
     def __init__(self, email, google_id, google_img, is_admin):
         self.email = email
@@ -40,7 +35,6 @@ class User(AbstractTable):
 
 class PlayList(AbstractTable):
     table_name = 'play_lists'
-    columns = "(name, date_created)"
 
     def __init__(self, user_id,  name, date_created):
         self.user_id = user_id
@@ -50,20 +44,22 @@ class PlayList(AbstractTable):
 
 class Artist(AbstractTable):
     table_name = 'artists'
-    columns = "(name, description)"
 
-    def __init__(self, name, description):
+    def __init__(self, name, description, img, play_count):
         self.name = name
         self.description = description
+        self.img = img
+        self.play_count = play_count
 
 
 class Track(AbstractTable):
     table_name = 'tracks'
-    columns = "(name, img, lyrics, description)"
 
-    def __init__(self, artist_id, name, img, lyrics, description):
+    def __init__(self, artist_id, name, album, play_count, img, lyrics, description):
         self.artist_id = artist_id
         self.name = name
+        self.album = album
+        self.play_count = play_count
         self.img = img
         self.lyrics = lyrics
         self.description = description
@@ -71,7 +67,6 @@ class Track(AbstractTable):
 
 class TrackToTag(AbstractTable):
     table_name = 'tracks_to_tags'
-    columns = "(track_id, tag_id)"
 
     def __init__(self, track_id, tag_id):
         self.track_id = track_id
@@ -80,11 +75,10 @@ class TrackToTag(AbstractTable):
 
 class Youtube(AbstractTable):
     table_name = 'youtubes'
-    columns = "(video_id, duration, date_published, description)"
 
-    def __init__(self, track_id, video_id, duration, date_published, description):
+    def __init__(self, track_id, url, duration, date_published, description):
         self.track_id = track_id
-        self.video_id = video_id
+        self.url = url
         self.duration = duration
         self.date_published = date_published
         self.description = description
@@ -92,7 +86,6 @@ class Youtube(AbstractTable):
 
 class Tag(AbstractTable):
     table_name = 'tags'
-    columns = "(name)"
 
     def __init__(self, name):
         self.name = name
@@ -103,13 +96,15 @@ class Tag(AbstractTable):
         row = cursor.fetchone()
         return None if row is None else row[0]
 
+
 class Event(AbstractTable):
     table_name = 'events'
-    columns = "(location, date, uri)"
 
-    def __init__(self, artist_id, location, date, time, uri):
+    def __init__(self, artist_id, location, date, url, description, title):
         self.artist_id = artist_id
         self.location = location
         self.date = date
-        self.uri = uri
+        self.url = url
+        self.description = description
+        self.title = title
 

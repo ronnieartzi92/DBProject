@@ -57,20 +57,20 @@ class MysqlScripts:
 
             # Artist
             for artist_dict in artists_list:
-                artist = Artist(artist_dict['name'], artist_dict['description'])
+                artist = Artist(artist_dict['name'], artist_dict['description'], artist_dict['img'], artist_dict['play_count'])
                 artist_track_list = artist_dict['tracks']
                 artist_event_list = artist_dict['events']
                 artist_id = artist.insert(cursor)
 
                 # Track
                 for track_dict in artist_track_list:
-                    track = Track(artist_id, track_dict['name'], track_dict['img'], track_dict['lyrics'], track_dict['description'])
+                    track = Track(artist_id, track_dict['name'], track_dict['album'], track_dict['play_count'], track_dict['img'], track_dict['lyrics'], track_dict['description'])
                     tag_list = track_dict['tags']
                     youtube_dict = track_dict['youtube']
                     track_id = track.insert(cursor)
 
                     # Youtube
-                    youtube = Youtube(track_id, youtube_dict['video_id'], youtube_dict['duration'], youtube_dict['date_published'], youtube_dict['description'])
+                    youtube = Youtube(track_id, youtube_dict['url'], youtube_dict['duration'], youtube_dict['date_published'], youtube_dict['description'])
 
                     print("\ttrack:", track.__dict__)
                     print("\t\tyoutube:", youtube.__dict__)
@@ -82,10 +82,14 @@ class MysqlScripts:
                         if tag_id is None: # Tag isn't in DB
                             tag_id = tag.insert()
 
-                        TrackToTag(track_id, tag_id)
+                        # TrackToTag
+                        track_to_tag = TrackToTag(track_id, tag_id)
+                        track_to_tag.insert(cursor)
+
                 # Event
                 for event_dict in artist_event_list:
-                    event = Event(event_dict['location'], event_dict['date'], event_dict['uri'])
+                    event = Event(artist_id, event_dict['location'], event_dict['date'], event_dict['url'], event_dict['description'], event_dict['title'])
+                    event.insert(cursor)
                     print("\tevent:", event.__dict__)
 
                 # closing resources
