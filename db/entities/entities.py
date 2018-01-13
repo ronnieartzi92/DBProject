@@ -16,10 +16,12 @@ class AbstractTable(ABC):
         return '(' + '%s, ' * (self.num_of_columns() - 1) + '%s)'
 
     def insert(self, cursor):
-        command = "INSERT INTO %s %s " % (self.table_name, self.columns) + self.create_str_values()
+        command = "INSERT INTO %s %s " % (self.table_name, self.columns) + "VALUES " + self.create_str_values()
         data = self.__dict__
-        return command
-        # cursor.execute(add_employee, data_employee)
+        data = ("mike@gmail.com", "sahhjsa", "sahjgjsaa", 1)
+        print(command)
+        cursor.execute(command, data)
+
 
 
 class User(AbstractTable):

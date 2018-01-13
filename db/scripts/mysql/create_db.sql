@@ -10,7 +10,7 @@ CREATE TABLE users (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE playlists (
+CREATE TABLE play_lists (
 	id INT AUTO_INCREMENT, 
 	user_id INT NOT NULL, 
 	name VARCHAR(255), 

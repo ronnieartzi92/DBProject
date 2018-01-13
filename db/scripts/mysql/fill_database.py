@@ -55,6 +55,17 @@ class MysqlScripts:
         else:
           cnx.close()
 
+    def insert(self):
+        cnx = mysql.connector.connect(user=self.user, database=self.database)
+        cursor = cnx.cursor()
+        b = User("mike@gmail.com", "sahhjsa", "sahjgjsaa", 1)
+        b.insert(cursor)
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+
+
+
     @staticmethod
     def main(path):
         with open(path) as fp:
@@ -88,9 +99,6 @@ class MysqlScripts:
 
 
 if __name__ == "__main__":
-    # mysql_scripts = MysqlScripts('root', 'fogi')
-    # mysql_scripts.connect()
+    mysql_scripts = MysqlScripts('root', 'fogi')
+    mysql_scripts.insert()
     # MysqlScripts.main('example.json')
-    value = User("sadlk",1,1,1)
-    # value = Tag(1)
-    print(value.insert(1))
