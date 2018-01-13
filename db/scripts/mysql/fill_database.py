@@ -91,7 +91,6 @@ if __name__ == "__main__":
     # mysql_scripts = MysqlScripts('root', 'fogi')
     # mysql_scripts.connect()
     # MysqlScripts.main('example.json')
-    add_employee = ("INSERT INTO employees "
-                    "(first_name, last_name, hire_date, gender, birth_date) "
-                    "VALUES (%s, %s, %s, %s, %s)")
-    print(add_employee)
+    value = User("sadlk",1,1,1)
+    # value = Tag(1)
+    print(value.insert(1))

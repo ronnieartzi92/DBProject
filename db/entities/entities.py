@@ -1,5 +1,28 @@
+from abc import ABC, abstractmethod
 
-class User:
+class AbstractTable(ABC):
+    @property
+    def table_name(self):
+        raise NotImplementedError
+
+    @property
+    def columns(self):
+        raise NotImplementedError
+
+    def num_of_columns(self):
+        return self.columns.count(',') + 1
+
+    def create_str_values(self):
+        return '(' + '%s, ' * (self.num_of_columns() - 1) + '%s)'
+
+    def insert(self, cursor):
+        command = "INSERT INTO %s %s " % (self.table_name, self.columns) + self.create_str_values()
+        data = self.__dict__
+        return command
+        # cursor.execute(add_employee, data_employee)
+
+
+class User(AbstractTable):
     table_name = 'users'
     columns = "(email, google_id, google_img, is_admin)"
 
@@ -10,7 +33,7 @@ class User:
         self.is_admin = is_admin
 
 
-class PlayList:
+class PlayList(AbstractTable):
     table_name = 'play_lists'
     columns = "(name, date_created)"
 
@@ -19,7 +42,7 @@ class PlayList:
         self.date_created = date_created
 
 
-class Artist:
+class Artist(AbstractTable):
     table_name = 'artists'
     columns = "(name, description)"
 
@@ -28,7 +51,7 @@ class Artist:
         self.description = description
 
 
-class Track:
+class Track(AbstractTable):
     table_name = 'tracks'
     columns = "(name, img, lyrics, description)"
 
@@ -39,7 +62,7 @@ class Track:
         self.description = description
 
 
-class TrackToTag:
+class TrackToTag(AbstractTable):
     table_name = 'tracks_to_tags'
     columns = "(track_id, tag_id)"
 
@@ -48,7 +71,7 @@ class TrackToTag:
         self.tag_id = tag_id
 
 
-class Youtube:
+class Youtube(AbstractTable):
     table_name = 'youtubes'
     columns = "(video_id, duration, date_published, description)"
 
@@ -59,7 +82,7 @@ class Youtube:
         self.description = description
 
 
-class Tag:
+class Tag(AbstractTable):
     table_name = 'tags'
     columns = "(name)"
 
@@ -67,7 +90,7 @@ class Tag:
         self.name = name
 
 
-class Event:
+class Event(AbstractTable):
     table_name = 'events'
     columns = "(location, date, uri)"
 
