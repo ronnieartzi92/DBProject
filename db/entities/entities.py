@@ -1,15 +1,10 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 
 
 class AbstractTable(ABC):
     @property
     def table_name(self):
         raise NotImplementedError
-
-    def create_str_values(self):
-        def num_of_columns(self):
-            return self.columns.count(',') + 1
-        return '(' + '%s, ' * (self.num_of_columns() - 1) + '%s)'
 
     def get_columns_values(self):
         keys = tuple(self.__dict__.keys())
@@ -18,7 +13,7 @@ class AbstractTable(ABC):
 
     def insert(self, cursor):
         columns, values = self.get_columns_values()
-        command = "INSERT INTO %s %s " % (self.table_name, str(columns).replace("'","")) + "VALUES " + '(' + '%s, ' * (len(columns) - 1) + '%s)'
+        command = "INSERT INTO %s %s " % (self.table_name, str(columns).replace("'", "").replace(",)", ")")) + "VALUES " + '(' + '%s, ' * (len(columns) - 1) + '%s)'
         cursor.execute(command, values)
         return cursor.lastrowid
 

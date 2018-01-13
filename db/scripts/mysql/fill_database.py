@@ -1,9 +1,11 @@
 from __future__ import print_function
-from datetime import date, datetime, timedelta
-import mysql.connector
+
 import json
-from db.entities.entities import *
+
+import mysql.connector
 from mysql.connector import errorcode
+
+from db.entities.entities import *
 
 
 class MysqlScripts:
@@ -33,18 +35,7 @@ class MysqlScripts:
         else:
           cnx.close()
 
-    def insert(self):
-        cnx = mysql.connector.connect(user=self.user, database=self.database)
-        cursor = cnx.cursor()
-        b = User("mike@gmail.com", "number2-lastlast", "sahjgjsaa", 1)
-        b.insert(cursor)
-        emp_no = cursor.lastrowid
-        print(emp_no)
-        cnx.commit()
-        cursor.close()
-        cnx.close()
-
-    def insert_artists(self, path):
+    def insert(self, path):
 
         # creating connection to db
         cnx = mysql.connector.connect(user=self.user, database=self.database)
@@ -71,16 +62,14 @@ class MysqlScripts:
 
                     # Youtube
                     youtube = Youtube(track_id, youtube_dict['url'], youtube_dict['duration'], youtube_dict['date_published'], youtube_dict['description'])
-
-                    print("\ttrack:", track.__dict__)
-                    print("\t\tyoutube:", youtube.__dict__)
+                    youtube.insert(cursor)
 
                     # Tag
                     for tag_str in tag_list:
                         tag = Tag(tag_str)
                         tag_id = tag.find_id_by_name(cursor)
                         if tag_id is None: # Tag isn't in DB
-                            tag_id = tag.insert()
+                            tag_id = tag.insert(cursor)
 
                         # TrackToTag
                         track_to_tag = TrackToTag(track_id, tag_id)
@@ -90,17 +79,14 @@ class MysqlScripts:
                 for event_dict in artist_event_list:
                     event = Event(artist_id, event_dict['location'], event_dict['date'], event_dict['url'], event_dict['description'], event_dict['title'])
                     event.insert(cursor)
-                    print("\tevent:", event.__dict__)
 
-                # closing resources
-                cnx.commit()
-                cursor.close()
-                cnx.close()
-
+        # closing resources
+        cnx.commit()
+        cursor.close()
+        cnx.close()
 
 
 if __name__ == "__main__":
     mysql_scripts = MysqlScripts('root', 'fogi')
-    # mysql_scripts.insert()
-    # MysqlScripts.insert_artists('example.json')
-    mysql_scripts.connect()
+    mysql_scripts.insert('example.json')
+    # MysqlScripts.insert()
