@@ -68,6 +68,14 @@ class TrackToTag(AbstractTable):
         self.tag_id = tag_id
 
 
+class TrackToPlayList(AbstractTable):
+    table_name = 'tracks_to_play_lists'
+
+    def __init__(self, play_list_id, track_id):
+        self.play_list_id = play_list_id
+        self.track_id = track_id
+
+
 class Youtube(AbstractTable):
     table_name = 'youtubes'
 

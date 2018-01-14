@@ -78,3 +78,11 @@ CREATE TABLE tracks_to_tags (
     FOREIGN KEY (track_id) REFERENCES tracks(id),
     FOREIGN KEY (tag_id) REFERENCES tags(id)
 );
+
+CREATE TABLE tracks_to_play_lists (
+	play_list_id INT NOT NULL,
+	track_id INT NOT NULL,
+	PRIMARY KEY (play_list_id, track_id),
+    FOREIGN KEY (play_list_id) REFERENCES play_lists(id),
+    FOREIGN KEY (track_id) REFERENCES tracks(id)
+);
