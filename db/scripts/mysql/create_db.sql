@@ -44,7 +44,7 @@ CREATE TABLE tracks (
 CREATE TABLE youtubes (
 	id INT AUTO_INCREMENT, 
 	track_id INT NOT NULL, 
-	url VARCHAR(255),
+	video_id VARCHAR(255) NOT NULL,
 	duration INT, 
 	date_published DATETIME,  
 	description TEXT,

@@ -15,7 +15,7 @@
 				"description": "good song",
 				"youtube": 
 					{
-						"url": "ndsqondqdqASD123X",
+						"video_id": "ndsqondqdqASD123X",
 						"duration":  5,
 						"date_published": "1990-10-09 15:15:20",
 						"description": "very good youtube"
@@ -32,7 +32,7 @@
 				"description": "good song",
 				"youtube":
 					{
-						"url": "ndsqondqdqASD123X",
+						"video_id": "ndsqondqdqASD123X",
 						"duration":  5,
 						"date_published": "1990-10-09 15:15:20",
 						"description": "youtube 2"
@@ -73,7 +73,7 @@
 				"description": "good song",
 				"youtube":
 					{
-						"url": "ndsqondqdqASD123X",
+						"video_id": "ndsqondqdqASD123X",
 						"duration":  5,
 						"date_published": "1990-10-09 15:15:20",
 						"description": "very good youtube"
@@ -89,7 +89,7 @@
 				"description": "good song",
 				"youtube":
 					{
-						"url": "ndsqondqdqASD123X",
+						"video_id": "ndsqondqdqASD123X",
 						"duration":  5,
 						"date_published": "1990-10-09 15:15:20",
 						"description": "youtube 2"

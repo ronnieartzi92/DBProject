@@ -79,9 +79,9 @@ class TrackToPlayList(AbstractTable):
 class Youtube(AbstractTable):
     table_name = 'youtubes'
 
-    def __init__(self, track_id, url, duration, date_published, description):
+    def __init__(self, track_id, video_id, duration, date_published, description):
         self.track_id = track_id
-        self.url = url
+        self.video_id = video_id
         self.duration = duration
         self.date_published = date_published
         self.description = description

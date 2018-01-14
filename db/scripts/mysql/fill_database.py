@@ -35,7 +35,7 @@ class MysqlScripts:
                     track_id = track.insert(cursor)
 
                     # Youtube
-                    youtube = Youtube(track_id, youtube_dict['url'], youtube_dict['duration'], youtube_dict['date_published'], youtube_dict['description'])
+                    youtube = Youtube(track_id, youtube_dict['video_id'], youtube_dict['duration'], youtube_dict['date_published'], youtube_dict['description'])
                     youtube.insert(cursor)
 
                     # Tag
@@ -62,4 +62,4 @@ class MysqlScripts:
 
 if __name__ == "__main__":
     mysql_scripts = MysqlScripts('root', 'fogi')
-    mysql_scripts.insert('example.json')
+    mysql_scripts.insert('collect_example.json')
