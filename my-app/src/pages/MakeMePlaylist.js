@@ -9,7 +9,7 @@ import Tags from 'react-tagging-input';
 export default class MyPlaylists extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {showPlaylist : false, freeText: "", isLoading: false, tags: ['foo', 'bar']};
+        this.state = {showPlaylist : false, freeText: "", isLoading: false, tags: []};
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -55,7 +55,7 @@ export default class MyPlaylists extends Component {
                         <input name="freeText" value={this.state.freeText} onChange={this.handleInputChange} />
                     <Tags
                     tags={this.state.tags}
-                    placeholder="Add a tag"
+                    placeholder="Add keywords to search by..."
                     onAdded={this.onTagAdded.bind(this)}
                     onRemoved={this.onTagRemoved.bind(this)} />
                     </Form.Field>

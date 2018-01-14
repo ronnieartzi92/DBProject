@@ -13,6 +13,7 @@ import {
     Visibility,
 } from 'semantic-ui-react'
 import image from './img/music.png'
+import headphones from './img/headset.png'
 
 export const HomePage = <div>
     {/*{ visible ? <FixedMenu /> : null }*/}
@@ -22,6 +23,7 @@ export const HomePage = <div>
             <Container text>
                 <Header as='h1' content='Songs Track' inverted
                         style={{fontSize: '4em', fontWeight: 'normal', marginBottom: 0, marginTop: '3em'}}/>
+                <Image src={headphones} size="small" style={{position: 'absolute', top: '152px'}}/>
                 <Header as='h2' content='Listen whatever you want whenever you want.' inverted
                         style={{fontSize: '1.7em', fontWeight: 'normal'}}/>
                 <Button primary size='huge'>
