@@ -62,7 +62,9 @@ CREATE TABLE tags (
 CREATE TABLE events (
 	id INT AUTO_INCREMENT, 
 	artist_id INT NOT NULL, 
-	location VARCHAR(255) NOT NULL, 
+	country VARCHAR(255) NOT NULL,
+	city VARCHAR(255) NOT NULL,
+	venue VARCHAR(255) NOT NULL,
 	date DATETIME NOT NULL,
 	url VARCHAR(255) NOT NULL,
 	description TEXT,
