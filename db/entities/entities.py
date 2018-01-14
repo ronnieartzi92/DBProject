@@ -103,9 +103,11 @@ class Tag(AbstractTable):
 class Event(AbstractTable):
     table_name = 'events'
 
-    def __init__(self, artist_id, location, date, url, description, title):
+    def __init__(self, artist_id, country, city, venue, date, url, description, title):
         self.artist_id = artist_id
-        self.location = location
+        self.country = country
+        self.city = city
+        self.venue = venue
         self.date = date
         self.url = url
         self.description = description
