@@ -1,1 +1,1 @@
-drop database fogi;
+drop database songs_track;

@@ -1,5 +1,5 @@
-CREATE DATABASE fogi;
-USE fogi;
+CREATE DATABASE songs_track CHARSET UTF8;
+USE songs_track;
 
 CREATE TABLE users (
 	id INT AUTO_INCREMENT, 
@@ -62,9 +62,9 @@ CREATE TABLE tags (
 CREATE TABLE events (
 	id INT AUTO_INCREMENT, 
 	artist_id INT NOT NULL, 
-	country VARCHAR(255) NOT NULL,
-	city VARCHAR(255) NOT NULL,
-	venue VARCHAR(255) NOT NULL,
+	country VARCHAR(255),
+	city VARCHAR(255),
+	venue VARCHAR(255),
 	date DATETIME NOT NULL,
 	url VARCHAR(255) NOT NULL,
 	description TEXT,
