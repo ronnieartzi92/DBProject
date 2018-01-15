@@ -49,7 +49,6 @@
     width: 250px;
 }
 
-
 .ui.tiny.image{
     width: 150px !important;
 }
@@ -81,6 +80,9 @@
     width: 500px;
 }
 
+.buttonsGrid{
+    margin-left: 120px !important;
+}
 
 .react-tags input, .react-tags__container > li {
   font-size: 12px;

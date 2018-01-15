@@ -2,14 +2,14 @@
  * Created by guyy on 1/11/2018.
  */
 import React, {Component} from 'react'
-import { Form, Button, Segment } from 'semantic-ui-react'
+import { Form, Button, Segment , Grid} from 'semantic-ui-react'
 import Playlist from "./Playlist";
 import Tags from 'react-tagging-input';
 
 export default class MyPlaylists extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {showPlaylist : false, freeText: "", isLoading: false, tags: []};
+        this.state = {showPlaylist : false, freeText: "", isLoading: false, tags: [], playlistSongs: []};
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -61,10 +61,47 @@ export default class MyPlaylists extends Component {
                     </Form.Field>
                     <Form.Field id='form-button-control-public' control={Button} content='Search' />
                 </Form>
-            </Segment>
-                {this.state.showPlaylist && <Playlist/>}
-          </div>
 
+            </Segment>
+              <Segment>
+                  <Grid className="buttonsGrid">
+                      <Grid.Row columns={5}>
+                          <Grid.Column>
+                              <Button size='big' color='violet'>
+                                  Take me to a show
+                              </Button>
+                              <div>Show me songs that .....</div>
+                          </Grid.Column>
+                          <Grid.Column>
+                              <Button size='big'  color='violet'>
+                                  Take me to a show
+                              </Button>
+                              <div>Show me songs that .....</div>
+                          </Grid.Column>
+                          <Grid.Column>
+                              <Button size='big' color='violet'>
+                                  Take me to a show
+                              </Button>
+                              <div>Show me songs that .....</div>
+                          </Grid.Column>
+                          <Grid.Column>
+                              <Button size='big'  color='violet'>
+                                  Take me to a show
+                              </Button>
+                              <div>Show me songs that .....</div>
+                          </Grid.Column>
+                          <Grid.Column>
+                              <Button size='big' color='violet'>
+                                  Take me to a show
+                              </Button>
+                              <div>Show me songs that .....</div>
+                          </Grid.Column>
+                      </Grid.Row>
+                  </Grid>
+
+              </Segment>
+                {this.state.showPlaylist && <Playlist playlistSongs={this.state.playlistSongs}/>}
+          </div>
         )
     }
 }
