@@ -61,5 +61,5 @@ class MysqlScripts:
 
 
 if __name__ == "__main__":
-    mysql_scripts = MysqlScripts('root', 'fogi')
-    mysql_scripts.insert('collect_example.json')
+    mysql_scripts = MysqlScripts('root', 'songs_track')
+    mysql_scripts.insert('small_db.json')
