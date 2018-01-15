@@ -10,11 +10,13 @@ import re
 # tab of
 #   https://cloud.google.com/console
 # Please ensure that you have enabled the YouTube Data API for your project.
-DEVELOPER_KEY = "AIzaSyCucB_A9LUg90yKMNZxVYePGdWghZFcODo"
+DEVELOPER_KEY2 = "AIzaSyCucB_A9LUg90yKMNZxVYePGdWghZFcODo"
+DEVELOPER_KEY = "AIzaSyCOGtOfnRtzX4LcRa8VXFOOyFGujCRSlvc"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
 YOUTUBE_LINK = 'https://www.youtube.com/watch?v={0}'
+
 
 def find_lyrics(artist, name):
     try:
