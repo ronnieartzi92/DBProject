@@ -25,7 +25,7 @@ export default class MyPlaylists extends Component {
         this.setState({ isLoading: true });
         sdk.getPlaylistSongs(this.props.userToken, id).then( (data) =>{
             console.log(data);
-            this.setState({ showPlaylist: true, playlistSongs: data, isLoading: false });
+            this.setState({ showPlaylist: true, playlistSongs: data.songs, isLoading: false });
         }, (reason)=> {
             alert("Server Not Responding....");
             this.setState({isLoading: false });
