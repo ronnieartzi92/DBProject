@@ -122,8 +122,8 @@ export default class App extends Component {
                                                     {/*<Menu.Item as='a' active></Menu.Item>*/}
                                                     <Menu.Item position='right'>
                                                         {!this.state.isLoggedIn && <div>
-                                                        <Button as='a' inverted style={{marginLeft: '0.5em'}} onClick={this.openSignup.bind(this)}>Sign Up</Button>
-                                                        <Button as='a' inverted onClick={this.openLogin.bind(this)}>Log in</Button>
+                                                        {/*<Button as='a' inverted style={{marginLeft: '0.5em'}} onClick={this.openSignup.bind(this)}>Sign Up</Button>*/}
+                                                        {/*<Button as='a' inverted onClick={this.openLogin.bind(this)}>Log in</Button>*/}
                                                         </div>}
                                                             {!this.state.isLoggedIn && <GoogleLogin
                                                             clientId="60150906703-els4j53jkve5kd9ijdf70s5l7k40ccsd.apps.googleusercontent.com"
