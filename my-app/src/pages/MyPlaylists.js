@@ -25,7 +25,7 @@ export default class MyPlaylists extends Component {
         this.setState({ isLoading: true });
         sdk.getPlaylistSongs(this.props.userToken, id).then( (data) =>{
             console.log(data);
-            this.setState({ showPlaylist: true, playlistSongs: data.songs, isLoading: false });
+            this.setState({ showPlaylist: true, playlist: data, isLoading: false });
         }, (reason)=> {
             alert("Server Not Responding....");
             this.setState({isLoading: false });
@@ -53,10 +53,10 @@ export default class MyPlaylists extends Component {
                     })}
                 </List>
             </Segment>
-                {this.state.showPlaylist && this.state.playlistSongs.length >0 && <Segment>
-                 <Playlist playlistSongs={this.state.playlistSongs}/>
+                {this.state.showPlaylist && this.state.playlist.songs.length >0 && <Segment>
+                 <Playlist playlistSongs={this.state.playlist.songs} listId={this.state.playlist.id}/>
                 </Segment>}
-                {this.state.showPlaylist && this.state.playlistSongs.length === 0 && <Segment>
+                {this.state.showPlaylist && this.state.playlist.songs.length === 0 && <Segment>
                     <div>We couldn't find any songs :(</div>
                     <div>Try to rephrase your search</div>
                 </Segment>}

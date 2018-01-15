@@ -44,5 +44,8 @@ export default {
     },
     searchForPlaylist: function (token, searchText) {
         return axios.post(`/playlist/create`, {text: searchText}, AuthHeader(token)).then(extractData);
+    },
+    savePlaylistTags: function (token, id, tags) {
+        return axios.post(`/playlist/tags?id=${id}`, {tags}, AuthHeader(token)).then(extractData);
     }
 }

@@ -7,13 +7,13 @@ import { Button, Icon, Item, Label } from 'semantic-ui-react'
 
 export const ArtistNextConcerts = ({concerts = []}) => {
     if(concerts === []) return <div>No Future Concerts :(</div>;
-
     return (
 
         <Item.Group divided>
             {concerts.map((item, index) => {
+                const image = item.img ? item.img : "http://www.mehek.in/wp-content/uploads/2014/09/night-out-with-friends.jpg";
                 return <Item key={index}>
-                    <Item.Image src={item.img} />
+                    <Item.Image src={image} />
                     <Item.Content>
                         <Item.Header as='a' href={item.url} target="_blank">{item.title}</Item.Header>
                         <Item.Meta>

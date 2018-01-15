@@ -85,7 +85,10 @@
 .buttonsGrid{
     margin-left: 120px !important;
 }
-
+.tags-container{
+    margin: 25px;
+    width: 340px;
+}
 .react-tags input, .react-tags__container > li {
   font-size: 12px;
   height: 26px;
