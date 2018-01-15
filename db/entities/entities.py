@@ -71,9 +71,10 @@ class TrackToTag(AbstractTable):
 class TrackToPlayList(AbstractTable):
     table_name = 'tracks_to_play_lists'
 
-    def __init__(self, play_list_id, track_id):
+    def __init__(self, play_list_id, track_id, track_position):
         self.play_list_id = play_list_id
         self.track_id = track_id
+        self.track_position = track_position
 
 
 class Youtube(AbstractTable):
@@ -103,7 +104,7 @@ class Tag(AbstractTable):
 class Event(AbstractTable):
     table_name = 'events'
 
-    def __init__(self, artist_id, country, city, venue, date, url, description, title):
+    def __init__(self, artist_id, country, city, venue, date, url, description, title, img):
         self.artist_id = artist_id
         self.country = country
         self.city = city
@@ -112,4 +113,4 @@ class Event(AbstractTable):
         self.url = url
         self.description = description
         self.title = title
-
+        self.img = img
