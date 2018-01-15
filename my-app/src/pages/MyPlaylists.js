@@ -3,31 +3,47 @@
  */
 import React, {Component} from 'react'
 import { List, Segment } from 'semantic-ui-react'
+import sdk from "./../sdk/sdk"
+import Playlist from "./Playlist";
 
 export default class MyPlaylists extends Component {
     constructor(props, context) {
         super(props, context);
-        const playlist = this.props.playlist ? this.props.playlist : [{name: "my songs", date: "01.01.2017"}, {name: "my songs 2222", date: "02.02.2017"}];
-        this.state = {playlist};
+        this.state = {isLoading: false};
+        sdk.getPlaylists(this.props.userToken).then( (data) =>{
+            console.log(data);
+            this.setState({playlists : data, isLoading: false});
+        }, (reason)=> {
+            const playlists = [{name: "my songs", date: "01.01.2017", id: 1}, {name: "my songs 2222", date: "02.02.2017", id: 2}];
+            this.setState({playlists, isLoading: false});
+            alert("Server Not Responding....");
+        });
     }
 
-
-
-    startPlaylist(index){
-        alert("play playlist #"+index);
+    startPlaylist(id){
+        alert("play playlist #"+id);
+        this.setState({ isLoading: true });
+        sdk.getPlaylistSongs(this.props.userToken, id).then( (data) =>{
+            console.log(data);
+            this.setState({ showPlaylist: true, playlistSongs: data, isLoading: false });
+        }, (reason)=> {
+            alert("Server Not Responding....");
+            this.setState({isLoading: false });
+        });
     }
     render() {
-        const playlist = this.state.playlist;
+        const playlists = this.state.playlists;
 
-        if(!playlist || playlist.length === 0 )
+        if(!playlists || playlists.length === 0 )
             return <Segment inverted>
                     <div>You don't have any playlists saved</div>
                     </Segment>
         else return (
-            <Segment inverted>
+            <div>
+            <Segment inverted loading={this.state.isLoading}>
                 <List divided inverted relaxed>
-                    {playlist.map((item, index) => {
-                        return <List.Item onClick={this.startPlaylist.bind(this,index)}  key={index}>
+                    {playlists.map((item, index) => {
+                        return <List.Item onClick={this.startPlaylist.bind(this,item.id)}  key={index}>
                             <List.Content>
                                 <List.Header>{item.name}</List.Header>
                                 {item.date}
@@ -37,6 +53,11 @@ export default class MyPlaylists extends Component {
                     })}
                 </List>
             </Segment>
+                {this.state.showPlaylist && <Segment>
+                 <Playlist playlistSongs={this.state.playlistSongs}/>
+                </Segment>}
+            </div>
+
         )
     }
 }
