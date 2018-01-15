@@ -25,30 +25,35 @@ class data():
                     artists = raw_arstits['artist']
                     art_count = 1
                     for artist in artists:
-                        name = artist['name']
-                        req = Request("http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist={0}&api_key={1}&format=json".format(
-                                        name, LAST_FM_API))
-                        response_body = json.loads(urlopen(req).read())['artist']
-                        info = response_body
-                        events = None
                         try:
-                            events = get_events(artist['name'])
-                        except Exception as e:
-                            print "cannot get events for artists; {0}".format(artist['name'])
-                            print e
-                        try:
-                            tracks = self.get_tracks(artist['name'])
-                            if tracks is None:
+                            name = artist['name']
+                            req = Request("http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist={0}&api_key={1}&format=json".format(
+                                            name, LAST_FM_API))
+                            response_body = json.loads(urlopen(req).read())['artist']
+                            info = response_body
+                            events = None
+                            try:
+                                events = get_events(artist['name'])
+                            except Exception as e:
+                                print "cannot get events for artists; {0}".format(artist['name'])
+                                print e
+                            try:
+                                tracks = self.get_tracks(artist['name'])
+                                if tracks is None:
+                                    continue
+                            except Exception as e:
+                                print "cannot get tracks for artists; {0}".format(artist['name'])
+                                print e
                                 continue
+                            new_artist = {'name': name, 'description': info['bio']['content'], 'img': info['image'][1]['#text'],
+                                          'play_count': info['stats']['playcount'], 'tracks': tracks,
+                                          'events': events}
+                            if artist not in self.artists:
+                                self.artists.append(new_artist)
                         except Exception as e:
-                            print "cannot get tracks for artists; {0}".format(artist['name'])
+                            print "cannot generate artist {0}".format(artist['name'])
                             print e
                             continue
-                        new_artist = {'name': name, 'description': info['bio']['content'], 'img': info['image'][1]['#text'],
-                                      'play_count': info['stats']['playcount'], 'tracks': tracks,
-                                      'events': events}
-                        if artist not in self.artists:
-                            self.artists.append(new_artist)
                         result = {"artists": self.artists}
                         art_count += 1
                         if art_count % 10 == 0:
@@ -61,10 +66,9 @@ class data():
                     filename = "artists{0}-{1}.json".format(i, art_count)
                     with open(filename, 'w') as feedsjson:
                         json.dump(result, feedsjson)
-                    print "page {0} didn't finished totally".format(i)
+                    print "{0} didn't finished totally".format(filename)
                     print self.print_stats()
                     print e
-                    continue
         except Exception as e:
             print "cannot get top artists"
             print self.print_stats()
@@ -75,14 +79,13 @@ class data():
             art = artist.replace(' ', '%20')
             result = []
             request = Request("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist={0}&limit={1}&api_key={2}&format=json".format(
-                              art, '15', LAST_FM_API))
+                              art, '30', LAST_FM_API))
             response_body = json.loads(urlopen(request).read())
             raw_tracks = response_body['toptracks']
             tracks = raw_tracks['track']
             for track in tracks:
                 try:
                     name = track['name']
-                    image = track['image'][2]['#text']
                     track_search_name = name.replace(' ', '%20')
                     req = Request("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key={0}&artist={1}&track={2}&format=json".format(
                                      general.last_fm_creds.get('API_key'), art, track_search_name))
@@ -104,6 +107,8 @@ class data():
                         print "cannot get youtube for track: {0}".format(artist+'/'+name)
                         print e
                         continue
+                    image = youtube['image']
+                    del youtube['image']
                     lyrics = None
                     try:
                         lyrics = find_lyrics(artist, name)

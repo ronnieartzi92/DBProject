@@ -45,6 +45,7 @@ def youtube_search(artist, name):
         #search_result['snippet'] = [u'thumbnails', u'title', u'channelId', u'publishedAt', u'liveBroadcastContent', u'channelTitle', u'description']
         video_id = search_result['id']['videoId']
         youtube_published_raw = parser.parse(search_result['snippet']['publishedAt'])
+        image = search_result['snippet']['thumbnails']['medium']['url']
         youtube_published = datetime.strftime(youtube_published_raw, "%Y-%m-%d %X")
         youtube_description = search_result['snippet']['description']
         searchUrl="https://www.googleapis.com/youtube/v3/videos?id="+video_id+"&key="+DEVELOPER_KEY+"&part=contentDetails"
@@ -57,8 +58,10 @@ def youtube_search(artist, name):
         seconds = 0 if duration[4] == '' else int(duration[2])
         final_duration = int(minutes) * 60 + int(seconds)
         youtube_song = {'description': youtube_description, 'duration': final_duration,
-                        'date_published': youtube_published, 'video_id': video_id}
+                        'date_published': youtube_published, 'video_id': video_id, 'image': image}
         return youtube_song
     except Exception as e:
         print "error youtube for: {0}".format(query)
         print e
+
+youtube_search('avicii', ' ')
