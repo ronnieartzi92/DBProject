@@ -51,7 +51,8 @@ class MysqlScripts:
 
                 # Event
                 for event_dict in artist_event_list:
-                    event = Event(artist_id, event_dict['country'], event_dict['city'], event_dict['venue'], event_dict['date'], event_dict['url'], event_dict['description'], event_dict['title'])
+                    # TODO - insert to event init event_dict['img']
+                    event = Event(artist_id, event_dict['country'], event_dict['city'], event_dict['venue'], event_dict['date'], event_dict['url'], event_dict['description'], event_dict['title'], "img")
                     event.insert(cursor)
 
         # closing resources
