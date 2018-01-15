@@ -70,7 +70,7 @@ export default class MyPlaylists extends Component {
                 <Form onSubmit={this.handleSubmit} loading={this.state.isLoading}>
                     <Form.Group>
                     <Form.Field width="5" className="searchInput" >
-                        <label>Free Text Search</label>
+                        <label>What do you want to hear ?</label>
                         <input name="freeText" value={this.state.freeText} onChange={this.handleInputChange} />
                     {/*<Tags*/}
                     {/*tags={this.state.tags}*/}
@@ -78,7 +78,7 @@ export default class MyPlaylists extends Component {
                     {/*onAdded={this.onTagAdded.bind(this)}*/}
                     {/*onRemoved={this.onTagRemoved.bind(this)} />*/}
                     </Form.Field>
-                    <Form.Field id='form-button-control-public' control={Button} content='Search' color="blue" style={{marginTop: "28px"}} />
+                    <Form.Field id='form-button-control-public' control={Button} content='Play!' color="blue" style={{marginTop: "28px"}} />
                     </Form.Group>
 
                 </Form>
