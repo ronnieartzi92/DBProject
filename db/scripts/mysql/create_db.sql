@@ -1,4 +1,4 @@
-CREATE DATABASE songs_track CHARSET UTF8;
+CREATE DATABASE songs_track CHARSET utf8;
 USE songs_track;
 
 CREATE TABLE users (
