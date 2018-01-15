@@ -67,7 +67,7 @@ export default class App extends Component {
     }
 
     logout = () => {
-        this.setState({isLoggedIn: false});
+        this.setState({isLoggedIn: false, visible: false});
         this.setPage("home");
     };
 
