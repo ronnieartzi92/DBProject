@@ -34,7 +34,7 @@ export default class MyPlaylists extends Component {
     render() {
         const playlists = this.state.playlists;
 
-        if(!playlists || playlists.length === 0 )
+        if(!playlists || playlists.length === 0 || playlists===[] || playlists === undefined )
             return <Segment inverted>
                     <div>You don't have any playlists saved</div>
                     </Segment>
