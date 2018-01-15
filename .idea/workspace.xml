@@ -22,9 +22,10 @@
     <option name="FILTER_BY_CURRENT_PROJECT" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0de7e4f7-9915-47d2-853b-cd018ecdee28" name="Default" comment="add login+signup">
+    <list default="true" id="0de7e4f7-9915-47d2-853b-cd018ecdee28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/my-app/src/Components/GroupButtons.js" afterPath="$PROJECT_DIR$/my-app/src/Components/GroupButtons.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/my-app/src/pages/MakeMePlaylist.js" afterPath="$PROJECT_DIR$/my-app/src/pages/MakeMePlaylist.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/my-app/src/pages/MyPlaylists.js" afterPath="$PROJECT_DIR$/my-app/src/pages/MyPlaylists.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -48,7 +49,7 @@
       <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/my-app/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-46">
+            <state relative-caret-position="20">
               <caret line="126" column="55" lean-forward="false" selection-start-line="126" selection-start-column="55" selection-end-line="126" selection-end-column="55" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
@@ -61,8 +62,9 @@
         <entry file="file://$PROJECT_DIR$/my-app/src/pages/MakeMePlaylist.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="396">
-              <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+              <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding>
+                <element signature="n#!!doc" expanded="true" />
                 <element signature="e#41#79#0" expanded="true" />
               </folding>
             </state>
@@ -72,10 +74,10 @@
       <file leaf-file-name="GroupButtons.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/my-app/src/Components/GroupButtons.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="7" column="33" lean-forward="false" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="33" />
+            <state relative-caret-position="370">
+              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding>
-                <element signature="e#41#66#0" expanded="true" />
+                <element signature="e#41#79#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -104,8 +106,8 @@
       <file leaf-file-name="MyPlaylists.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/my-app/src/pages/MyPlaylists.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="36" column="92" lean-forward="false" selection-start-line="36" selection-start-column="92" selection-end-line="36" selection-end-column="92" />
+            <state relative-caret-position="106">
+              <caret line="35" column="31" lean-forward="false" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#41#79#0" expanded="true" />
@@ -175,9 +177,9 @@
         <option value="$PROJECT_DIR$/my-app/src/pages/Playlist.js" />
         <option value="$PROJECT_DIR$/my-app/src/App.js" />
         <option value="$PROJECT_DIR$/my-app/src/HomePage.js" />
-        <option value="$PROJECT_DIR$/my-app/src/pages/MakeMePlaylist.js" />
         <option value="$PROJECT_DIR$/my-app/src/css/main.css" />
         <option value="$PROJECT_DIR$/my-app/src/sdk/sdk.js" />
+        <option value="$PROJECT_DIR$/my-app/src/pages/MakeMePlaylist.js" />
         <option value="$PROJECT_DIR$/my-app/src/Components/GroupButtons.js" />
         <option value="$PROJECT_DIR$/my-app/src/pages/MyPlaylists.js" />
       </list>
@@ -652,7 +654,7 @@
       <workItem from="1515671235578" duration="16000" />
       <workItem from="1515677135316" duration="3260000" />
       <workItem from="1515916547913" duration="2757000" />
-      <workItem from="1516006391345" duration="9331000" />
+      <workItem from="1516006391345" duration="10135000" />
     </task>
     <task id="LOCAL-00001" summary="add packeges">
       <created>1515578285507</created>
@@ -822,11 +824,18 @@
       <option name="project" value="LOCAL" />
       <updated>1516021629625</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="fix search">
+      <created>1516022175721</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1516022175721</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40542000" />
+    <option name="totallyTimeSpent" value="41346000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
@@ -884,7 +893,8 @@
     <MESSAGE value="add sdk" />
     <MESSAGE value="add buttons" />
     <MESSAGE value="Authorization" />
-    <option name="LAST_COMMIT_MESSAGE" value="Authorization" />
+    <MESSAGE value="fix search" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix search" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1198,28 +1208,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-46">
-          <caret line="126" column="55" lean-forward="false" selection-start-line="126" selection-start-column="55" selection-end-line="126" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/my-app/src/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
           <caret line="73" column="0" lean-forward="true" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/src/sdk/sdk.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="21" column="25" lean-forward="false" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -1240,14 +1232,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/src/Components/YoutubeFrame.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="41" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/my-app/src/Components/PlaylistItem.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -1256,12 +1240,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/src/Components/GroupButtons.js">
+    <entry file="file://$PROJECT_DIR$/my-app/src/Components/YoutubeFrame.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="7" column="33" lean-forward="false" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="33" />
+        <state relative-caret-position="242">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="41" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/sdk/sdk.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="21" column="25" lean-forward="false" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="126" column="55" lean-forward="false" selection-start-line="126" selection-start-column="55" selection-end-line="126" selection-end-column="55" />
           <folding>
-            <element signature="e#41#66#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1269,7 +1269,18 @@
     <entry file="file://$PROJECT_DIR$/my-app/src/pages/MakeMePlaylist.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
-          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#41#79#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/Components/GroupButtons.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
             <element signature="e#41#79#0" expanded="true" />
           </folding>
@@ -1278,8 +1289,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/my-app/src/pages/MyPlaylists.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="36" column="92" lean-forward="false" selection-start-line="36" selection-start-column="92" selection-end-line="36" selection-end-column="92" />
+        <state relative-caret-position="106">
+          <caret line="35" column="31" lean-forward="false" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#41#79#0" expanded="true" />
