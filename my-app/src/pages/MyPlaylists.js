@@ -33,7 +33,7 @@ export default class MyPlaylists extends Component {
     }
     render() {
         const playlists = this.state.playlists;
-
+        console.log(playlists);
         if(!playlists || playlists.length === 0 || playlists===[] || playlists === undefined )
             return <Segment inverted>
                     <div>You don't have any playlists saved</div>
@@ -46,7 +46,7 @@ export default class MyPlaylists extends Component {
                         return <List.Item onClick={this.startPlaylist.bind(this,item.id)}  key={index}>
                             <List.Content>
                                 <List.Header>{item.name}</List.Header>
-                                {item.date}
+                                {item.date_created}
                             </List.Content>
                         </List.Item>
 
