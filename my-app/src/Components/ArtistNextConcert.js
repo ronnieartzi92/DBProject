@@ -4,10 +4,6 @@
 import React from 'react'
 import { Button, Icon, Item, Label } from 'semantic-ui-react'
 
-const openUrl = (url)=>{
-    window.open(url, '_blank');
-};
-
 
 export const ArtistNextConcerts = ({concerts = []}) => {
     if(concerts === []) return <div>No Future Concerts :(</div>;
@@ -17,9 +13,9 @@ export const ArtistNextConcerts = ({concerts = []}) => {
         <Item.Group divided>
             {concerts.map((item, index) => {
                 return <Item key={index}>
-                    {/*<Item.Image src={item.img} />*/}
+                    <Item.Image src={item.img} />
                     <Item.Content>
-                        <Item.Header as='a'>{item.title}</Item.Header>
+                        <Item.Header as='a' href={item.url} target="_blank">{item.title}</Item.Header>
                         <Item.Meta>
                             <span className='cinema'>{item.city} - {item.country}</span>
                         </Item.Meta>
