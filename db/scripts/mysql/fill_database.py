@@ -1,5 +1,7 @@
 from __future__ import print_function
 import json
+import os
+
 import mysql.connector
 from db.entities.entities import *
 
@@ -32,7 +34,10 @@ class MysqlScripts:
                     track = Track(artist_id, track_dict['name'], track_dict['album'], track_dict['play_count'], track_dict['img'], track_dict['lyrics'], track_dict['description'])
                     tag_list = track_dict['tags']
                     youtube_dict = track_dict['youtube']
-                    track_id = track.insert(cursor)
+                    try:
+                        track_id = track.insert(cursor)
+                    except Exception as e:
+                        MysqlScripts.print_entity(e, track)
 
                     # Youtube
                     youtube = Youtube(track_id, youtube_dict['video_id'], youtube_dict['duration'], youtube_dict['date_published'], youtube_dict['description'])
@@ -60,7 +65,23 @@ class MysqlScripts:
         cursor.close()
         cnx.close()
 
+    def insert_folder(self, folder):
+        for file in os.listdir(folder):
+            full_path = folder + '/' + file
+            print("starting", full_path)
+            self.insert(full_path)
+            print("done", full_path)
+
+    @staticmethod
+    def print_entity(exp, obj):
+        print("-------------- Exception---------------------")
+        print(exp)
+        print("class:", obj.__class__)
+        for key in obj.__dict__:
+            print(key + ":", obj.__dict__[key])
+        print("--------------------------------------------")
+
 
 if __name__ == "__main__":
     mysql_scripts = MysqlScripts('root', 'songs_track')
-    mysql_scripts.insert('small_db.json')
+    mysql_scripts.insert_folder("create_data/files")

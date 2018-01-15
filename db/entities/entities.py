@@ -92,10 +92,10 @@ class Tag(AbstractTable):
     table_name = 'tags'
 
     def __init__(self, name):
-        self.name = name
+        self.name = name.replace('"',"'").lower()
 
     def find_id_by_name(self, cursor):
-        command = "SELECT id FROM %s WHERE tags.name='%s'" % (self.table_name, self.name)
+        command = 'SELECT id FROM %s WHERE tags.name="%s"' % (self.table_name, self.name)
         cursor.execute(command)
         row = cursor.fetchone()
         return None if row is None else row[0]
