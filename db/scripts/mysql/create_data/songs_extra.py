@@ -53,7 +53,9 @@ def youtube_search(artist, name):
         all_data = data['items']
         duration = all_data[0]['contentDetails']['duration']
         duration = re.findall('[0-9]*', duration)
-        final_duration = int(duration[2])*60 + int(duration[4])
+        minutes = 0 if duration[2] == '' else int(duration[2])
+        seconds = 0 if duration[4] == '' else int(duration[2])
+        final_duration = int(minutes) * 60 + int(seconds)
         youtube_song = {'description': youtube_description, 'duration': final_duration,
                         'date_published': youtube_published, 'video_id': video_id}
         return youtube_song
