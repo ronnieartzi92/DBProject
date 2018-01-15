@@ -1,10 +1,6 @@
 from __future__ import print_function
-
 import json
-
 import mysql.connector
-from mysql.connector import errorcode
-
 from db.entities.entities import *
 
 
@@ -12,28 +8,6 @@ class MysqlScripts:
     def __init__(self, user, database):
         self.user = user
         self.database = database
-
-    def connect(self):
-        try:
-            cnx = mysql.connector.connect(user=self.user, database=self.database)
-            cursor = cnx.cursor()
-
-            emp_no = cursor.lastrowid
-            db_tag_id = Tag("rock").find_id_by_name(cursor)
-
-            # Make sure data is committed to the database
-            cnx.commit()
-            cursor.close()
-            cnx.close()
-        except mysql.connector.Error as err:
-          if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print("Something is wrong with your user name or password")
-          elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print("Database does not exist")
-          else:
-            print(err)
-        else:
-          cnx.close()
 
     def insert(self, path):
 
@@ -44,7 +18,7 @@ class MysqlScripts:
         # inserting json file to db
         with open(path) as fp:
             json_file = json.load(fp)
-            artists_list  = json_file['artists']
+            artists_list = json_file['artists']
 
             # Artist
             for artist_dict in artists_list:
@@ -61,7 +35,7 @@ class MysqlScripts:
                     track_id = track.insert(cursor)
 
                     # Youtube
-                    youtube = Youtube(track_id, youtube_dict['url'], youtube_dict['duration'], youtube_dict['date_published'], youtube_dict['description'])
+                    youtube = Youtube(track_id, youtube_dict['video_id'], youtube_dict['duration'], youtube_dict['date_published'], youtube_dict['description'])
                     youtube.insert(cursor)
 
                     # Tag
@@ -77,7 +51,7 @@ class MysqlScripts:
 
                 # Event
                 for event_dict in artist_event_list:
-                    event = Event(artist_id, event_dict['location'], event_dict['date'], event_dict['url'], event_dict['description'], event_dict['title'])
+                    event = Event(artist_id, event_dict['country'], event_dict['city'], event_dict['venue'], event_dict['date'], event_dict['url'], event_dict['description'], event_dict['title'])
                     event.insert(cursor)
 
         # closing resources
@@ -87,6 +61,5 @@ class MysqlScripts:
 
 
 if __name__ == "__main__":
-    mysql_scripts = MysqlScripts('root', 'fogi')
-    mysql_scripts.insert('example.json')
-    # MysqlScripts.insert()
+    mysql_scripts = MysqlScripts('root', 'songs_track')
+    mysql_scripts.insert('small_db.json')
