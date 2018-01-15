@@ -19,7 +19,7 @@ axios.defaults.headers.put['Content-Type'] = 'application/json';
 const AuthHeader = (token) => {
     return {
         headers: {
-            Authentication: `OAuth ${token}`
+            Authorization: `OAuth ${token}`
         }
     }
 };
