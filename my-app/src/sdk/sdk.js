@@ -36,5 +36,8 @@ export default {
     },
     getPlaylistSongs: function(token, playlistId) {
         return axios.get(`/playlist?id=${playlistId}`, AuthHeader(token))
+    },
+    getArtistConcerts: function(token, artistId) {
+        return axios.get(`/artist/concers?id=${artistId}`, AuthHeader(token))
     }
 }

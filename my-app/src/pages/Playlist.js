@@ -17,16 +17,28 @@ const concerts = [{artistName : "justin bieber", imageURL : "data:image/jpeg;bas
 export default class Playlist extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {playlist: this.props.playlistSongs ? this.props.playlistSongs : items, currentPlayedIndex: 0};
+        this.state = {playlist: this.props.playlistSongs ? this.props.playlistSongs : items, currentPlayedIndex: 0, concerts};
+        if(this.state.playlist.length > 0){
+            this.playSong(0);
+        }
     };
+
 
     playSong(index){
         this.setState({currentPlayedIndex : index});
+        const currentArtistId = this.playlist[index].artistId;
+        sdk.getArtistConcerts(this.props.userToken, currentArtistId).then( (data) =>{
+            console.log(data);
+            this.setState({concerts : data});
+        }, (reason)=> {
+            this.setState({concerts : []});
+            alert("Server Not Responding....");
+        });
     }
     playNextSong(){
         if(this.state.currentPlayedIndex < this.state.playlist.length-1)
-            this.setState({currentPlayedIndex : this.state.currentPlayedIndex + 1});
-        else this.setState({currentPlayedIndex : 0});
+            this.playSong(this.state.currentPlayedIndex + 1);
+        else this.playSong(0);
     }
 
     render() {
