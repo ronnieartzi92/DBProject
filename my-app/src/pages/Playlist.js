@@ -18,9 +18,6 @@ export default class Playlist extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {playlist: this.props.playlistSongs ? this.props.playlistSongs : items, currentPlayedIndex: 0, concerts};
-        if(this.state.playlist.length > 0){
-            this.playSong(0);
-        }
     };
 
 

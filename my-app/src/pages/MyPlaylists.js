@@ -53,8 +53,12 @@ export default class MyPlaylists extends Component {
                     })}
                 </List>
             </Segment>
-                {this.state.showPlaylist && <Segment>
+                {this.state.showPlaylist && this.state.playlistSongs.length >0 && <Segment>
                  <Playlist playlistSongs={this.state.playlistSongs}/>
+                </Segment>}
+                {this.state.showPlaylist && this.state.playlistSongs.length === 0 && <Segment>
+                    <div>We couldn't find any songs :(</div>
+                    <div>Try to rephrase your search</div>
                 </Segment>}
             </div>
 
