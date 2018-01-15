@@ -36,6 +36,9 @@ export default {
         return axios.get(`/playlist?id=${playlistId}`, AuthHeader(token)).then(extractData);
     },
     getArtistConcerts: function(token, artistId) {
-        return axios.get(`/artist/concers?id=${artistId}`, AuthHeader(token)).then(extractData);
+        return axios.get(`/artist/events?id=${artistId}`, AuthHeader(token)).then(extractData);
+    },
+    searchForPlaylist: function (token, searchText) {
+        return axios.post(`/playlist/create`, {text: searchText}, AuthHeader(token)).then(extractData);
     }
 }
