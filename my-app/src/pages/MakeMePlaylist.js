@@ -5,6 +5,7 @@ import React, {Component} from 'react'
 import { Form, Button, Segment , Grid} from 'semantic-ui-react'
 import Playlist from "./Playlist";
 import Tags from 'react-tagging-input';
+import GroupButtons from "../Components/GroupButtons";
 
 export default class MyPlaylists extends Component {
     constructor(props, context) {
@@ -43,6 +44,9 @@ export default class MyPlaylists extends Component {
             tags: this.state.tags.filter((tag, i) => i !== index)
         });
     }
+    addOptionToSearch(option){
+        this.setState({ freeText: this.state.freeText + " "+option  });
+    }
 
     render() {
 
@@ -59,7 +63,8 @@ export default class MyPlaylists extends Component {
                     onAdded={this.onTagAdded.bind(this)}
                     onRemoved={this.onTagRemoved.bind(this)} />
                     </Form.Field>
-                    <Form.Field id='form-button-control-public' control={Button} content='Search' />
+                    <Form.Field id='form-button-control-public' control={Button} content='Search' type="submit" />
+                    <GroupButtons options={['pop', 'rock', 'classic']} chooseOption={this.addOptionToSearch}/>
                 </Form>
 
             </Segment>

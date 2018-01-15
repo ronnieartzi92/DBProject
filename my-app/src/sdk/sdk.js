@@ -7,14 +7,12 @@ axios.defaults.baseURL = 'http://localhost:5000/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.put['Content-Type'] = 'application/json';
 
-//
-// const extractData = (response) => {
-//     const data = response.data;
-//     const requestId = response.headers["x-dfio-req-id"];
-//     if(data) {
-//         return data;
-//     }else return {requestId};
-// };
+
+const extractData = (response) => {
+    const data = response.data;
+    if(data) return data;
+    else return null;
+};
 
 const AuthHeader = (token) => {
     return {
@@ -29,15 +27,15 @@ export default {
         return axios.get(`/session/new`)
     },
     savePlaylist: function (token, list) {
-        return axios.post(`/playlist`, {list}, AuthHeader(token))
+        return axios.post(`/playlist`, {list}, AuthHeader(token)).then(extractData);
     },
     getPlaylists: function (token) {
-        return axios.get(`/playlist`, AuthHeader(token))
+        return axios.get(`/playlist`, AuthHeader(token)).then(extractData);
     },
     getPlaylistSongs: function(token, playlistId) {
-        return axios.get(`/playlist?id=${playlistId}`, AuthHeader(token))
+        return axios.get(`/playlist?id=${playlistId}`, AuthHeader(token)).then(extractData);
     },
     getArtistConcerts: function(token, artistId) {
-        return axios.get(`/artist/concers?id=${artistId}`, AuthHeader(token))
+        return axios.get(`/artist/concers?id=${artistId}`, AuthHeader(token)).then(extractData);
     }
 }
