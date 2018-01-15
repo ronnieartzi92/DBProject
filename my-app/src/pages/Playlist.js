@@ -26,7 +26,7 @@ export default class Playlist extends Component {
 
     playSong(index){
         this.setState({currentPlayedIndex : index});
-        const currentArtistId = this.playlist[index].artistId;
+        const currentArtistId = this.playlist[index].artist_id;
         sdk.getArtistConcerts(this.props.userToken, currentArtistId).then( (data) =>{
             console.log(data);
             this.setState({concerts : data});
@@ -43,14 +43,14 @@ export default class Playlist extends Component {
 
     render() {
         const currVid = this.state.playlist &&
-        this.state.playlist[this.state.currentPlayedIndex] ? this.state.playlist[this.state.currentPlayedIndex].videoId : "";
+        this.state.playlist[this.state.currentPlayedIndex] ? this.state.playlist[this.state.currentPlayedIndex].video_id : "";
 
         return(
             <div className="playlist-container">
                 <div className="playlist-left">
                 <Item.Group>
                     {this.state.playlist.map((item, index) => {
-                        return <div onClick={this.playSong.bind(this,index)} key={index}><PlayListItem key={index} title={item.title} artist={item.artist} imageURL={item.imageURL} videoId={item.videoId}/></div>
+                        return <div onClick={this.playSong.bind(this,index)} key={index}><PlayListItem key={index} title={item.name} artist={item.artist_name} imageURL={item.img} videoId={item.video_id}/></div>
                     })}
                 </Item.Group>
                 </div>

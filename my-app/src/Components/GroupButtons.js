@@ -21,6 +21,7 @@ export default class GroupButtons extends Component {
         {/*return <div><Button onClick={this.props.chooseOption.bind(this, item)}>One</Button><Button.Or /></div>*/}
         {/*})}*/}
 
+
         return (
             <div>
                 {options.length === 2 &&
@@ -47,6 +48,8 @@ export default class GroupButtons extends Component {
                     <Button.Or/>
                     <Button onClick={this.props.chooseOption.bind(this, options[3])}>{options[3]}</Button>
                 </Button.Group>}
+                <Button color='black' onClick={this.props.chooseOption.bind(this, "none")} style={{marginLeft: "10px"}}>None</Button>
+
             </div>
         )
     }
