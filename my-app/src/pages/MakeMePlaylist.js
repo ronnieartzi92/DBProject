@@ -4,7 +4,6 @@
 import React, {Component} from 'react'
 import { Form, Button, Segment , Grid} from 'semantic-ui-react'
 import Playlist from "./Playlist";
-import Tags from 'react-tagging-input';
 import GroupButtons from "../Components/GroupButtons";
 import sdk from "./../sdk/sdk"
 import {songsList} from "../utils/consts";
@@ -65,17 +64,6 @@ export default class MyPlaylists extends Component {
     }
 
 
-    onTagAdded(tag) {
-        this.setState({
-            tags: [...this.state.tags, tag]
-        });
-    }
-
-    onTagRemoved(tag, index) {
-        this.setState({
-            tags: this.state.tags.filter((tag, i) => i !== index)
-        });
-    }
     addOptionToSearch(option){
         if(option === "none")
             this.setState({ suggestIndex: this.state.suggestIndex +1 });
@@ -92,11 +80,6 @@ export default class MyPlaylists extends Component {
                     <Form.Field width="5" className="searchInput" >
                         <label>What do you want to hear ?</label>
                         <input name="freeText" value={this.state.freeText} onChange={this.handleInputChange} />
-                    {/*<Tags*/}
-                    {/*tags={this.state.tags}*/}
-                    {/*placeholder="Add keywords to search by..."*/}
-                    {/*onAdded={this.onTagAdded.bind(this)}*/}
-                    {/*onRemoved={this.onTagRemoved.bind(this)} />*/}
                     </Form.Field>
                     <Form.Field id='form-button-control-public' control={Button} content='Play!' color="blue" style={{marginTop: "28px"}} />
                     </Form.Group>

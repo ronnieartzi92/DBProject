@@ -2,20 +2,43 @@
  * Created by guyy on 1/10/2018.
  */
 import React, {Component} from 'react'
-import { Item } from 'semantic-ui-react'
+import { Item ,Button} from 'semantic-ui-react'
 import {PlayListItem} from './../Components/PlaylistItem';
 import YoutubeFrame from "../Components/YoutubeFrame";
 import {ArtistNextConcerts} from "../Components/ArtistNextConcert";
 import sdk from "./../sdk/sdk"
 import {concerts, songsList} from "../utils/consts";
+import Tags from 'react-tagging-input';
 
 
 export default class Playlist extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {playlist: this.props.playlistSongs ? this.props.playlistSongs : songsList, currentPlayedIndex: 0, concerts};
+        this.state = {playlist: this.props.playlistSongs ? this.props.playlistSongs : songsList, currentPlayedIndex: 0, concerts, tags: [], listId: this.props.listId};
     };
 
+
+    onTagAdded(tag) {
+        this.setState({
+            tags: [...this.state.tags, tag]
+        });
+    }
+
+    onTagRemoved(tag, index) {
+        this.setState({
+            tags: this.state.tags.filter((tag, i) => i !== index)
+        });
+    }
+
+    saveTags(){
+        sdk.savePlaylistTags(this.props.userToken, this.state.listId, this.state.tags).then( (data) =>{
+            console.log(data);
+            this.setState({tags : []});
+            alert("Tags Saved!");
+        }, (reason)=> {
+            alert("Server Not Responding....");
+        });
+    }
 
     playSong(index){
         this.setState({currentPlayedIndex : index});
@@ -41,6 +64,18 @@ export default class Playlist extends Component {
         this.state.playlist[this.state.currentPlayedIndex] ? this.state.playlist[this.state.currentPlayedIndex].artist_name : "the artist";
         return(
             <div className="playlist-container">
+                {this.state.listId && <div className="tags-container">
+                    Add tags to this playlist:
+                    <Tags
+                        tags={this.state.tags}
+                        placeholder="Add tags to your playlist..."
+                        onAdded={this.onTagAdded.bind(this)}
+                        onRemoved={this.onTagRemoved.bind(this)}/>
+                    <Button size='mini' onClick={this.saveTags.bind(this)}>
+                        Save Tags
+                    </Button>
+                </div>
+                }
                 <div className="playlist-left">
                 <Item.Group>
                     {this.state.playlist.map((item, index) => {

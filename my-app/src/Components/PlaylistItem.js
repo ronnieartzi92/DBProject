@@ -4,13 +4,16 @@
 import { Item } from 'semantic-ui-react'
 import React from 'react'
 
-export const PlayListItem = ({title, artist, imageURL}) => (
-    <Item>
-        <Item.Image size='tiny' src={imageURL} />
-        <Item.Content verticalAlign='middle'>
-            <Item.Header as='a'>{title}
-                <div>{artist}</div>
-            </Item.Header>
-        </Item.Content>
-    </Item>
-);
+export const PlayListItem = ({title, artist, imageURL}) => {
+    const image = imageURL ? imageURL : "http://www.pixempire.com/images/preview/social-youtube-circle-icon.jpg";
+    return (
+        <Item>
+            <Item.Image size='tiny' src={image} />
+            <Item.Content verticalAlign='middle'>
+                <Item.Header as='a'>{title}
+                    <div>{artist}</div>
+                </Item.Header>
+            </Item.Content>
+        </Item>
+    );
+};
