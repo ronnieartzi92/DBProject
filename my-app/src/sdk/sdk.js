@@ -16,20 +16,25 @@ axios.defaults.headers.put['Content-Type'] = 'application/json';
 //     }else return {requestId};
 // };
 
+const AuthHeader = (token) => {
+    return {
+        headers: {
+            Authentication: `OAuth ${token}`
+        }
+    }
+};
+
 export default {
-    startSession: function () {
+    login: function () {
         return axios.get(`/session/new`)
     },
-    rankByPrice: function (sessionId, price, rank) {
-        return axios.put(`/session/rank/price/smaller/${sessionId}`, {price, rank})
+    savePlaylist: function (token, list) {
+        return axios.post(`/playlist`, {list}, AuthHeader(token))
     },
-    rankByCategory: function (sessionId, category, rank) {
-        return axios.put(`/session/rank/price/smaller/${sessionId}`, {category, rank})
+    getPlaylists: function (token) {
+        return axios.get(`/playlist`, AuthHeader(token))
     },
-    getTopResturants: function(sessionId, count) {
-        return axios.get(`/session/top/${sessionId}?count=${count}`)
-    },
-    getQuestions: function(answers, count) {
-        return axios.post(`/restaurant/top/${count}`, answers)
+    getPlaylistSongs: function(token, playlistId) {
+        return axios.get(`/playlist?id=${playlistId}`, AuthHeader(token))
     }
 }
