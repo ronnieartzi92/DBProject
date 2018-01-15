@@ -7,23 +7,19 @@ import {PlayListItem} from './../Components/PlaylistItem';
 import YoutubeFrame from "../Components/YoutubeFrame";
 import {ArtistNextConcerts} from "../Components/ArtistNextConcert";
 import sdk from "./../sdk/sdk"
-
-const items = [{title: "123123", artist: "dsfsdfds", videoId: "2g811Eo7K8U", imageURL: "https://i.ytimg.com/vi/gA-NDZb29I4/hqdefault.jpg?sqp=-oaymwEWCKgBEF5IWvKriqkDCQgBFQAAiEIYAQ==&rs=AOn4CLDLu2dZe9U8hgI1L0_518Ge3bd7Cg"},
-    {title: "67867876876", artist: "dsfsdfds", videoId: "lrvqjdMcjjQ", imageURL: "https://i.ytimg.com/vi/gA-NDZb29I4/hqdefault.jpg?sqp=-oaymwEWCKgBEF5IWvKriqkDCQgBFQAAiEIYAQ==&rs=AOn4CLDLu2dZe9U8hgI1L0_518Ge3bd7Cg"}];
-
-const concerts = [{artistName : "justin bieber", imageURL : "https://i.ytimg.com/vi/gA-NDZb29I4/hqdefault.jpg?sqp=-oaymwEWCKgBEF5IWvKriqkDCQgBFQAAiEIYAQ==&rs=AOn4CLDLu2dZe9U8hgI1L0_518Ge3bd7Cg", location: "New York", date: "01.01.2019", time: "20:00", url: "http://www.justinbiebermusic.com/"}];
+import {concerts, songsList} from "../utils/consts";
 
 
 export default class Playlist extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {playlist: this.props.playlistSongs ? this.props.playlistSongs : items, currentPlayedIndex: 0, concerts};
+        this.state = {playlist: this.props.playlistSongs ? this.props.playlistSongs : songsList, currentPlayedIndex: 0, concerts};
     };
 
 
     playSong(index){
         this.setState({currentPlayedIndex : index});
-        const currentArtistId = this.playlist[index].artist_id;
+        const currentArtistId = this.state.playlist[index].artist_id;
         sdk.getArtistConcerts(this.props.userToken, currentArtistId).then( (data) =>{
             console.log(data);
             this.setState({concerts : data});
@@ -41,7 +37,8 @@ export default class Playlist extends Component {
     render() {
         const currVid = this.state.playlist &&
         this.state.playlist[this.state.currentPlayedIndex] ? this.state.playlist[this.state.currentPlayedIndex].video_id : "";
-
+        const artistName = this.state.playlist &&
+        this.state.playlist[this.state.currentPlayedIndex] ? this.state.playlist[this.state.currentPlayedIndex].artist_name : "the artist";
         return(
             <div className="playlist-container">
                 <div className="playlist-left">
@@ -55,6 +52,7 @@ export default class Playlist extends Component {
                <YoutubeFrame videoId={currVid} onEnd={this.playNextSong.bind(this)}/>
                 </div>
                 <div className="concerts">
+                    <div style={{color: "black"}}>Check-Out {artistName}'s upcoming shows:</div>
                     <ArtistNextConcerts concerts={concerts}/>
                 </div>
             </div>

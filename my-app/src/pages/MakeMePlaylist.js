@@ -6,6 +6,8 @@ import { Form, Button, Segment , Grid} from 'semantic-ui-react'
 import Playlist from "./Playlist";
 import Tags from 'react-tagging-input';
 import GroupButtons from "../Components/GroupButtons";
+import sdk from "./../sdk/sdk"
+import {songsList} from "../utils/consts";
 
 
 const suggestedWords = [
@@ -41,9 +43,16 @@ export default class MyPlaylists extends Component {
     handleSubmit(event) {
         this.setState({ isLoading: true });
         alert('A search was submitted: '+this.state.freeText );
-        this.setState({ showPlaylist: true, isLoading: false });
+        sdk.searchForPlaylist(this.props.userToken, this.state.freeText).then( (data) =>{
+            console.log(data);
+            this.setState({playlistSongs : data, isLoading: false, showPlaylist: true});
+        }, (reason)=> {
+            this.setState({playlistSongs: songsList, isLoading: false, showPlaylist: true});
+            alert("Server Not Responding....");
+        });
         event.preventDefault();
     }
+
 
     onTagAdded(tag) {
         this.setState({
@@ -125,7 +134,14 @@ export default class MyPlaylists extends Component {
                   </Grid>
 
               </Segment>
-                {this.state.showPlaylist && <Playlist playlistSongs={this.state.playlistSongs}/>}
+                {this.state.showPlaylist && this.state.playlistSongs.length >0 &&
+                <Playlist playlistSongs={this.state.playlistSongs}/>}
+              {this.state.showPlaylist && this.state.playlistSongs.length === 0 &&
+              <div>
+                  <div>We couldn't find any songs :(</div>
+                  <div>Try to rephrase your search</div>
+              </div>
+              }
           </div>
         )
     }

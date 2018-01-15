@@ -50,7 +50,7 @@
 }
 
 .ui.tiny.image{
-    width: 150px !important;
+    width: 116px !important;
 }
 .searchInput{
     margin-left: 200px !important;
@@ -73,8 +73,10 @@
 }
 
 .concerts{
-    width: 650px;
+    width: 835px;
     margin: auto auto;
+    overflow-y: scroll;
+    height: 467px;
 }
 .loginForm{
     width: 500px;
