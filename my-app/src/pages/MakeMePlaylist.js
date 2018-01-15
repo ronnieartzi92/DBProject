@@ -11,9 +11,11 @@ import GroupButtons from "../Components/GroupButtons";
 const suggestedWords = [
     ["pop","rock","alternative"],
     ["60s", "70s","80s","90s"],
+    ["love", "beautiful"],
     ["2014", "2015","2016","2017"],
     ["Coldplay", "Sia","Ed Sheeran"],
-    ["dance", "chillout", "soul"]
+    ["dance", "chillout"],
+    ["acoustic", "downtempo"]
 ];
 
 
@@ -38,7 +40,7 @@ export default class MyPlaylists extends Component {
 
     handleSubmit(event) {
         this.setState({ isLoading: true });
-        alert('A name was submitted: ' );
+        alert('A search was submitted: '+this.state.freeText );
         this.setState({ showPlaylist: true, isLoading: false });
         event.preventDefault();
     }
