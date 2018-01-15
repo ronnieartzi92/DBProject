@@ -26,8 +26,12 @@ export default {
     login: function () {
         return axios.get(`/session/new`)
     },
-    savePlaylist: function (token, list) {
-        return axios.post(`/playlist`, {list}, AuthHeader(token)).then(extractData);
+    savePlaylist: function (token, name, list) {
+        let ids = [];
+        list.forEach((item) => {
+            ids.push(item.id)
+        });
+        return axios.post(`/playlist`, {name, songs: ids}, AuthHeader(token)).then(extractData);
     },
     getPlaylists: function (token) {
         return axios.get(`/playlist`, AuthHeader(token)).then(extractData);

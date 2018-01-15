@@ -24,10 +24,11 @@ const suggestedWords = [
 export default class MyPlaylists extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {showPlaylist : false, freeText: "", isLoading: false, tags: [], playlistSongs: [], suggestIndex: 0};
+        this.state = {showPlaylist : false, freeText: "", isLoading: false, tags: [], playlistSongs: [], suggestIndex: 0, playlistName: "", canSavePlaylist: true};
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.savePlaylist = this.savePlaylist.bind(this);
     }
 
     handleInputChange(event) {
@@ -48,6 +49,16 @@ export default class MyPlaylists extends Component {
             this.setState({playlistSongs : data, isLoading: false, showPlaylist: true});
         }, (reason)=> {
             this.setState({playlistSongs: songsList, isLoading: false, showPlaylist: true});
+            alert("Server Not Responding....");
+        });
+        event.preventDefault();
+    }
+
+    savePlaylist(event) {
+        sdk.savePlaylist(this.props.userToken, this.state.playlistName, this.state.playlistSongs).then( (data) =>{
+            console.log(data);
+            this.setState({canSavePlaylist : false});
+        }, (reason)=> {
             alert("Server Not Responding....");
         });
         event.preventDefault();
@@ -135,7 +146,19 @@ export default class MyPlaylists extends Component {
 
               </Segment>
                 {this.state.showPlaylist && this.state.playlistSongs.length >0 &&
-                <Playlist playlistSongs={this.state.playlistSongs}/>}
+                    <div>
+                        {this.state.canSavePlaylist &&
+                        <Form onSubmit={this.savePlaylist} style={{float: 'right'}}>
+                            <Form.Group>
+                                <Form.Input placeholder='PlaylistName' name='playlistName' value={this.state.playlistName}
+                                            onChange={this.handleInputChange}/>
+                                <Form.Button content='Save Playlist' color="red"/>
+                            </Form.Group>
+                        </Form>
+                        }
+
+                <Playlist playlistSongs={this.state.playlistSongs}/>
+                    </div>}
               {this.state.showPlaylist && this.state.playlistSongs.length === 0 &&
               <div>
                   <div>We couldn't find any songs :(</div>
