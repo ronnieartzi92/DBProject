@@ -7,10 +7,20 @@ import Playlist from "./Playlist";
 import Tags from 'react-tagging-input';
 import GroupButtons from "../Components/GroupButtons";
 
+
+const suggestedWords = [
+    ["pop","rock","alternative"],
+    ["60s", "70s","80s","90s"],
+    ["2014", "2015","2016","2017"],
+    ["Coldplay", "Sia","Ed Sheeran"],
+    ["dance", "chillout", "soul"]
+];
+
+
 export default class MyPlaylists extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {showPlaylist : false, freeText: "", isLoading: false, tags: [], playlistSongs: []};
+        this.state = {showPlaylist : false, freeText: "", isLoading: false, tags: [], playlistSongs: [], suggestIndex: 0};
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,29 +55,37 @@ export default class MyPlaylists extends Component {
         });
     }
     addOptionToSearch(option){
-        this.setState({ freeText: this.state.freeText + " "+option  });
+        if(option === "none")
+            this.setState({ suggestIndex: this.state.suggestIndex +1 });
+        else this.setState({ freeText: `${this.state.freeText} ${option}`, suggestIndex: this.state.suggestIndex +1 });
     }
 
-    render() {
 
+    render() {
       return (
           <div>
             <Segment>
                 <Form onSubmit={this.handleSubmit} loading={this.state.isLoading}>
+                    <Form.Group>
                     <Form.Field width="5" className="searchInput" >
                         <label>Free Text Search</label>
                         <input name="freeText" value={this.state.freeText} onChange={this.handleInputChange} />
-                    <Tags
-                    tags={this.state.tags}
-                    placeholder="Add keywords to search by..."
-                    onAdded={this.onTagAdded.bind(this)}
-                    onRemoved={this.onTagRemoved.bind(this)} />
+                    {/*<Tags*/}
+                    {/*tags={this.state.tags}*/}
+                    {/*placeholder="Add keywords to search by..."*/}
+                    {/*onAdded={this.onTagAdded.bind(this)}*/}
+                    {/*onRemoved={this.onTagRemoved.bind(this)} />*/}
                     </Form.Field>
-                    <Form.Field id='form-button-control-public' control={Button} content='Search' type="submit" />
-                    <GroupButtons options={['pop', 'rock', 'classic']} chooseOption={this.addOptionToSearch}/>
-                </Form>
+                    <Form.Field id='form-button-control-public' control={Button} content='Search' color="blue" style={{marginTop: "28px"}} />
+                    </Form.Group>
 
+                </Form>
+                {suggestedWords.length > this.state.suggestIndex && <div style={{marginTop: "30px", marginBottom: "20px"}}>
+                    You can serach for things like:
+                <GroupButtons options={suggestedWords[this.state.suggestIndex]} chooseOption={this.addOptionToSearch.bind(this)}/>
+                </div>}
             </Segment>
+
               <Segment>
                   <Grid className="buttonsGrid">
                       <Grid.Row columns={5}>
