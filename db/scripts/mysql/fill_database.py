@@ -90,9 +90,9 @@ class MysqlScripts:
     def insert_folder(self, folder):
         for file in os.listdir(folder):
             full_path = folder + '/' + file
-            print("starting", full_path)
+            print(">>>>>>>>>>>>>>>>>>> Starting", full_path)
             self.insert(full_path)
-            print("done", full_path)
+            print("<<<<<<<<<<<<<<<<<<< Done", full_path)
 
     @staticmethod
     def print_entity(exp, obj):
