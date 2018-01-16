@@ -30,10 +30,11 @@ export default class App extends Component {
     toggleVisibility = () => this.setState({ visible: !this.state.visible });
     openSignup = () => this.setState({modalOpen: true, modelType: "Sign Up"});
     openLogin = () => this.setState({modalOpen: true, modelType: "Login"});
-    validateEmail = (email) => {
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email.toLowerCase());
-    };
+
+    // validateEmail = (email) => {
+    //     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //     return re.test(email.toLowerCase());
+    // };
 
     stopQuestionsStartRest(answers = {}) {
 
@@ -55,7 +56,7 @@ export default class App extends Component {
         if(response && response.profileObj){
             this.setState({isLoggedIn: true, userFullName: response.profileObj.name,
                             userToken: response.tokenId,
-                            userImage : response.profileObj.imageUrl, userToken: response.tokenId, visible: true});
+                            userImage : response.profileObj.imageUrl, visible: true});
         } console.log(response.tokenId);
     };
 
@@ -103,14 +104,14 @@ export default class App extends Component {
                                 <Icon name='home' />
                                 Home
                             </Menu.Item>
-                            <Menu.Item name='list layout' onClick={this.setPage.bind(this,"myplaylists")}>
+                            {this.state.isLoggedIn && <Menu.Item name='list layout' onClick={this.setPage.bind(this,"myplaylists")}>
                                 <Icon name='list layout' />
                                 My Playlists
-                            </Menu.Item>
-                            <Menu.Item name='music' onClick={this.setPage.bind(this,"makeplaylist")}>
+                            </Menu.Item>}
+                            {this.state.isLoggedIn && <Menu.Item name='music' onClick={this.setPage.bind(this,"makeplaylist")}>
                                 <Icon name='music' />
                                 Make Me A Playlist
-                            </Menu.Item>
+                            </Menu.Item>}
                         </Sidebar>
                         <Sidebar.Pusher>
                             <Segment basic>
