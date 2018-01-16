@@ -10,6 +10,14 @@ class MysqlScripts:
     def __init__(self, user, database):
         self.user = user
         self.database = database
+        self.artists = 0
+        self.tracks = 0
+        self.tags = 0
+        self.yotubes = 0
+        self.tracks_to_tags = 0
+        self.events = 0
+
+
 
     def insert(self, path):
 
@@ -29,6 +37,9 @@ class MysqlScripts:
                 artist_event_list = artist_dict['events']
                 try:
                     artist_id = artist.insert(cursor)
+                    self.artists += 1
+                    if self.artists % 50 == 0:
+                        print("Entered " + str(self.artists) + " Artists")
                 except Exception as e:
                     MysqlScripts.print_entity(e, artist)
                     continue
@@ -41,6 +52,7 @@ class MysqlScripts:
                     youtube_dict = track_dict['youtube']
                     try:
                         track_id = track.insert(cursor)
+                        self.tracks += 1
                     except Exception as e:
                         MysqlScripts.print_entity(e, track)
                         continue
@@ -49,6 +61,7 @@ class MysqlScripts:
                     youtube = Youtube(track_id, youtube_dict['video_id'], youtube_dict['duration'], youtube_dict['date_published'], youtube_dict['description'])
                     try:
                         youtube.insert(cursor)
+                        self.yotubes += 1
                     except Exception as e:
                         MysqlScripts.print_entity(e, youtube)
                         continue
@@ -61,6 +74,7 @@ class MysqlScripts:
                         if tag_id is None: # Tag isn't in DB
                             try:
                                 tag_id = tag.insert(cursor)
+                                self.tags += 1
                             except Exception as e:
                                 MysqlScripts.print_entity(e, tag)
                                 continue
@@ -69,6 +83,7 @@ class MysqlScripts:
                         track_to_tag = TrackToTag(track_id, tag_id)
                         try:
                             track_to_tag.insert(cursor)
+                            self.tracks_to_tags += 1
                         except Exception as e:
                             MysqlScripts.print_entity(e, track_to_tag)
                             continue
@@ -78,6 +93,7 @@ class MysqlScripts:
                     event = Event(artist_id, event_dict['country'], event_dict['city'], event_dict['venue'], event_dict['date'], event_dict['url'], event_dict['description'], event_dict['title'], event_dict['img'])
                     try:
                         event.insert(cursor)
+                        self.events += 1
                     except Exception as e:
                         MysqlScripts.print_entity(e, event)
                         continue
@@ -118,6 +134,9 @@ class MysqlScripts:
         cursor.close()
         cnx.close()
 
+    def __repr__(self):
+        return "Artists: {}, Tracks: {}, Youtubes: {}, Tags: {}, Track To Tags: {}, Events: {}.".format(self.artists, self.tracks, self.yotubes, self.tags, self.tracks_to_tags, self.events)
+
 
 if __name__ == "__main__":
     # d = {"description": "\u201cCloser\u201d is a millennial romance anthem that celebrates youth and heartbreak. It features vocals from singer-songwriter Halsey and Chainsmokers member Andrew Taggart, marking the first time The Chainsmokers sung on their own track and the first time they\u2019ve collaborated with Halsey.\n\nOn Twitter, the duo wrote about the meaning of the song:\n\nThis song is dedicated to anyone that hooked up with their EX and right after remember all the reasons why they broke up.\n\n\u201cCloser\u201d was premiered at Bonnaroo by Halsey and she later confirmed its release on her Instagram:\n\n\"You heard it tonight. My phone hasn\u2019t had service in 2 days, bonnaroo but I\u2019m pullin enough juice to inform you that @thechainsmokers and I have a BRAND NEW SONG coming out soon. Those of you who got to witness it tonight, lucky you.\nHalsey also teased the track on Twitter a week prior to the release by releasing a cropped version of the photo featured the single\u2019s art. <a href=\"http://www.last.fm/music/The+Chainsmokers/_/Closer\">Read more on Last.fm</a>. User-contributed text is available under the Creative Commons By-SA License; additional terms may apply."}
@@ -125,6 +144,8 @@ if __name__ == "__main__":
     # track = Track(1, "mike", "dumb", 1223, "img", "lyrics", d["description"])
     # mysql_scripts.stam(track)
     # print(string)
+    # mysql_scripts.insert_folder("create_data/files")
 
     mysql_scripts = MysqlScripts('root', 'songs_track')
-    mysql_scripts.insert_folder("create_data/files")
+    mysql_scripts.insert("create_data/files/final.json")
+    print(mysql_scripts)
