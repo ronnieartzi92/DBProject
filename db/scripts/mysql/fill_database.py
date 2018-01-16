@@ -1,5 +1,7 @@
 from __future__ import print_function
 import json
+import os
+
 import mysql.connector
 from db.entities.entities import *
 
@@ -59,6 +61,22 @@ class MysqlScripts:
         cnx.commit()
         cursor.close()
         cnx.close()
+
+    def insert_folder(self, folder):
+        for file in os.listdir(folder):
+            full_path = folder + '/' + file
+            print("starting", full_path)
+            self.insert(full_path)
+            print("done", full_path)
+
+    @staticmethod
+    def print_entity(exp, obj):
+        print("-------------- Exception---------------------")
+        print(exp)
+        print("class:", obj.__class__)
+        for key in obj.__dict__:
+            print(key + ":", obj.__dict__[key])
+        print("--------------------------------------------")
 
 
 if __name__ == "__main__":
