@@ -104,14 +104,14 @@ export default class App extends Component {
                                 <Icon name='home' />
                                 Home
                             </Menu.Item>
-                            <Menu.Item name='list layout' onClick={this.setPage.bind(this,"myplaylists")}>
+                            {this.state.isLoggedIn && <Menu.Item name='list layout' onClick={this.setPage.bind(this,"myplaylists")}>
                                 <Icon name='list layout' />
                                 My Playlists
-                            </Menu.Item>
-                            <Menu.Item name='music' onClick={this.setPage.bind(this,"makeplaylist")}>
+                            </Menu.Item>}
+                            {this.state.isLoggedIn && <Menu.Item name='music' onClick={this.setPage.bind(this,"makeplaylist")}>
                                 <Icon name='music' />
                                 Make Me A Playlist
-                            </Menu.Item>
+                            </Menu.Item>}
                         </Sidebar>
                         <Sidebar.Pusher>
                             <Segment basic>
