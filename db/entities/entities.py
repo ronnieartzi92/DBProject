@@ -22,9 +22,9 @@ class User(AbstractTable):
     table_name = 'users'
 
     def __init__(self, email, google_id, google_img, is_admin):
-        self.email = email
-        self.google_id = google_id
-        self.google_img = google_img
+        self.email = email.lower()
+        self.google_id = google_id.lower()
+        self.google_img = google_img.lower()
         self.is_admin = is_admin
 
 
@@ -41,7 +41,7 @@ class Artist(AbstractTable):
     table_name = 'artists'
 
     def __init__(self, name, description, img, play_count):
-        self.name = name
+        self.name = name.title()
         self.description = description
         self.img = img
         self.play_count = play_count
@@ -52,7 +52,7 @@ class Track(AbstractTable):
 
     def __init__(self, artist_id, name, album, play_count, img, lyrics, description):
         self.artist_id = artist_id
-        self.name = name
+        self.name = name.title()
         self.album = album
         self.play_count = play_count
         self.img = img
@@ -92,10 +92,10 @@ class Tag(AbstractTable):
     table_name = 'tags'
 
     def __init__(self, name):
-        self.name = name
+        self.name = name.replace('"',"'").lower()
 
     def find_id_by_name(self, cursor):
-        command = "SELECT id FROM %s WHERE tags.name='%s'" % (self.table_name, self.name)
+        command = 'SELECT id FROM %s WHERE tags.name="%s"' % (self.table_name, self.name)
         cursor.execute(command)
         row = cursor.fetchone()
         return None if row is None else row[0]
