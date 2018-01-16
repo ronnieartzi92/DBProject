@@ -2,7 +2,7 @@
  * Created by guyy on 1/11/2018.
  */
 import React from 'react'
-import { Button, Icon, Item, Label } from 'semantic-ui-react'
+import { Button, Icon, Item } from 'semantic-ui-react'
 
 
 export const ArtistNextConcerts = ({concerts = []}) => {
