@@ -3,33 +3,52 @@
  */
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:8080/';
+axios.defaults.baseURL = 'http://localhost:5000/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.put['Content-Type'] = 'application/json';
 
-//
-// const extractData = (response) => {
-//     const data = response.data;
-//     const requestId = response.headers["x-dfio-req-id"];
-//     if(data) {
-//         return data;
-//     }else return {requestId};
-// };
+
+const extractData = (response) => {
+    const data = response.data;
+    if(data) return data;
+    else return null;
+};
+
+const AuthHeader = (token) => {
+    return {
+        headers: {
+            Authorization: `OAuth ${token}`
+        }
+    }
+};
 
 export default {
-    startSession: function () {
+    login: function () {
         return axios.get(`/session/new`)
     },
-    rankByPrice: function (sessionId, price, rank) {
-        return axios.put(`/session/rank/price/smaller/${sessionId}`, {price, rank})
+    savePlaylist: function (token, name, list) {
+        let ids = [];
+        list.forEach((item) => {
+            ids.push(item.id)
+        });
+        return axios.post(`/playlist`, {name, songs: ids}, AuthHeader(token)).then(extractData);
     },
-    rankByCategory: function (sessionId, category, rank) {
-        return axios.put(`/session/rank/price/smaller/${sessionId}`, {category, rank})
+    getPlaylists: function (token) {
+        return axios.get(`/playlist`, AuthHeader(token)).then(extractData);
     },
-    getTopResturants: function(sessionId, count) {
-        return axios.get(`/session/top/${sessionId}?count=${count}`)
+    getPlaylistSongs: function(token, playlistId) {
+        return axios.get(`/playlist?id=${playlistId}`, AuthHeader(token)).then(extractData);
     },
-    getQuestions: function(answers, count) {
-        return axios.post(`/restaurant/top/${count}`, answers)
+    getArtistConcerts: function(token, artistId) {
+        return axios.get(`/artist/events?id=${artistId}`, AuthHeader(token)).then(extractData);
+    },
+    searchForPlaylist: function (token, searchText) {
+        return axios.post(`/playlist/search`, {text: searchText}, AuthHeader(token)).then(extractData);
+    },
+    savePlaylistTags: function (token, id, tags) {
+        return axios.post(`/playlist/tags?id=${id}`, {tags}, AuthHeader(token)).then(extractData);
+    },
+    getTags: function (token) {
+        return axios.get(`/tag`,AuthHeader(token)).then(extractData);
     }
 }

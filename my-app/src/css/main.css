@@ -49,9 +49,8 @@
     width: 250px;
 }
 
-
 .ui.tiny.image{
-    width: 150px !important;
+    width: 116px !important;
 }
 .searchInput{
     margin-left: 200px !important;
@@ -74,14 +73,28 @@
 }
 
 .concerts{
-    width: 650px;
+    width: 835px;
     margin: auto auto;
+    overflow-y: scroll;
+    height: 467px;
 }
 .loginForm{
     width: 500px;
 }
+.dropdown-input{
+    position: absolute !important;
+    margin-top: 38px;
+    float: left;
+    margin-left: -525px;
+}
 
-
+.buttonsGrid{
+    margin-left: 120px !important;
+}
+.tags-container{
+    margin: 25px;
+    width: 340px;
+}
 .react-tags input, .react-tags__container > li {
   font-size: 12px;
   height: 26px;

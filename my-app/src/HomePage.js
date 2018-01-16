@@ -3,22 +3,20 @@
  */
 import React from 'react'
 import {
-    Button,
     Container,
     Grid,
     Header,
-    Icon,
     Image,
     Segment,
     Visibility,
 } from 'semantic-ui-react'
 import image from './img/music.png'
-import headphones from './img/headset.png'
+import headphones from './img/music-icon.png'
 
 export const HomePage = <div>
     {/*{ visible ? <FixedMenu /> : null }*/}
     <Visibility /*onBottomPassed={this.showFixedMenu} onBottomVisible={this.hideFixedMenu}*/ once={false}>
-        <Segment inverted textAlign='center' style={{minHeight: 700, padding: '1em 0em'}} vertical>
+        <Segment inverted textAlign='center' style={{minHeight: 450, padding: '1em 0em'}} vertical>
 
             <Container text>
                 <Header as='h1' content='Songs Track' inverted
@@ -26,10 +24,10 @@ export const HomePage = <div>
                 <Image src={headphones} size="small" style={{position: 'absolute', top: '152px'}}/>
                 <Header as='h2' content='Listen whatever you want whenever you want.' inverted
                         style={{fontSize: '1.7em', fontWeight: 'normal'}}/>
-                <Button primary size='huge'>
-                    Get Started
-                    <Icon name='right arrow'/>
-                </Button>
+                {/*<Button primary size='huge'>*/}
+                    {/*Get Started*/}
+                    {/*<Icon name='right arrow'/>*/}
+                {/*</Button>*/}
             </Container>
         </Segment>
     </Visibility>

@@ -1,0 +1,1 @@
+drop database songs_track;
