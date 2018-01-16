@@ -2,7 +2,7 @@
  * Created by guyy on 1/11/2018.
  */
 import React, {Component} from 'react'
-import { Form, Button, Segment , Grid} from 'semantic-ui-react'
+import { Form, Button, Segment , Grid, Dropdown} from 'semantic-ui-react'
 import Playlist from "./Playlist";
 import GroupButtons from "../Components/GroupButtons";
 import sdk from "./../sdk/sdk"
@@ -23,11 +23,23 @@ const suggestedWords = [
 export default class MyPlaylists extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {showPlaylist : false, freeText: "", isLoading: false, tags: [], playlistSongs: [], suggestIndex: 0, playlistName: "", canSavePlaylist: true};
+        this.state = {showPlaylist : false, freeText: "", isLoading: false, tags: [], playlistSongs: [], suggestIndex: 0, playlistName: "", canSavePlaylist: true, optionalTags:[]};
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.savePlaylist = this.savePlaylist.bind(this);
+
+        sdk.getTags(this.props.userToken).then( (data) =>{
+            console.log(data);
+            let tags = [];
+            data.forEach((el) => {
+                tags.push({key: el, value: el, text: el});
+            });
+            this.setState({optionalTags : tags});
+        }, (reason)=> {
+            this.setState({optionalTags: []});
+            alert("Server Not Responding....");
+        });
     }
 
     handleInputChange(event) {
@@ -63,13 +75,15 @@ export default class MyPlaylists extends Component {
         event.preventDefault();
     }
 
-
     addOptionToSearch(option){
         if(option === "none")
             this.setState({ suggestIndex: this.state.suggestIndex +1 });
         else this.setState({ freeText: `${this.state.freeText} ${option}`, suggestIndex: this.state.suggestIndex +1 });
     }
 
+    addFromTags(event, data){
+        this.addOptionToSearch(data.value);
+    }
 
     render() {
       return (
@@ -85,10 +99,15 @@ export default class MyPlaylists extends Component {
                     </Form.Group>
 
                 </Form>
+                {/*<Dropdown placeholder='Choose from out most common tags...' fluid multiple search selection options={this.state.optionalTags} className="dropdown-input" />*/}
+
+                {this.state.optionalTags.length >0 && <div className="dropdown-input"><Dropdown placeholder='Choose from our most common tags...' search selection options={this.state.optionalTags}  onChange={this.addFromTags.bind(this)} disabled={this.state.optionalTags.length === 0} /></div>}
+
                 {suggestedWords.length > this.state.suggestIndex && <div style={{marginTop: "30px", marginBottom: "20px"}}>
                     You can serach for things like:
                 <GroupButtons options={suggestedWords[this.state.suggestIndex]} chooseOption={this.addOptionToSearch.bind(this)}/>
                 </div>}
+
             </Segment>
 
               <Segment>

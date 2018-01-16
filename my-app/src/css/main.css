@@ -81,6 +81,12 @@
 .loginForm{
     width: 500px;
 }
+.dropdown-input{
+    position: absolute !important;
+    margin-top: 38px;
+    float: left;
+    margin-left: -525px;
+}
 
 .buttonsGrid{
     margin-left: 120px !important;
