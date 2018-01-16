@@ -75,8 +75,7 @@ class MysqlScripts:
 
                 # Event
                 for event_dict in artist_event_list:
-                    # TODO - insert to event init event_dict['img']
-                    event = Event(artist_id, event_dict['country'], event_dict['city'], event_dict['venue'], event_dict['date'], event_dict['url'], event_dict['description'], event_dict['title'], "img")
+                    event = Event(artist_id, event_dict['country'], event_dict['city'], event_dict['venue'], event_dict['date'], event_dict['url'], event_dict['description'], event_dict['title'], event_dict['img'])
                     try:
                         event.insert(cursor)
                     except Exception as e:
@@ -91,9 +90,9 @@ class MysqlScripts:
     def insert_folder(self, folder):
         for file in os.listdir(folder):
             full_path = folder + '/' + file
-            print("starting", full_path)
+            print(">>>>>>>>>>>>>>>>>>> Starting", full_path)
             self.insert(full_path)
-            print("done", full_path)
+            print("<<<<<<<<<<<<<<<<<<< Done", full_path)
 
     @staticmethod
     def print_entity(exp, obj):
@@ -110,7 +109,10 @@ class MysqlScripts:
         try:
             obj.insert(cursor)
         except Exception as e:
-            MysqlScripts.print_entity(e, obj)
+            try:
+                MysqlScripts.print_entity(e, obj)
+            except Exception as e:
+                print("############## failed printing all object fields...... ################")
         # closing resources
         cnx.commit()
         cursor.close()
@@ -118,9 +120,11 @@ class MysqlScripts:
 
 
 if __name__ == "__main__":
-    d = {"description": "\u201cCloser\u201d is a millennial romance anthem that celebrates youth and heartbreak. It features vocals from singer-songwriter Halsey and Chainsmokers member Andrew Taggart, marking the first time The Chainsmokers sung on their own track and the first time they\u2019ve collaborated with Halsey.\n\nOn Twitter, the duo wrote about the meaning of the song:\n\nThis song is dedicated to anyone that hooked up with their EX and right after remember all the reasons why they broke up.\n\n\u201cCloser\u201d was premiered at Bonnaroo by Halsey and she later confirmed its release on her Instagram:\n\n\"You heard it tonight. My phone hasn\u2019t had service in 2 days, bonnaroo but I\u2019m pullin enough juice to inform you that @thechainsmokers and I have a BRAND NEW SONG coming out soon. Those of you who got to witness it tonight, lucky you. \ud83d\udc8b\ud83d\udc8b\ud83d\udc8b\"\n\nHalsey also teased the track on Twitter a week prior to the release by releasing a cropped version of the photo featured the single\u2019s art. <a href=\"http://www.last.fm/music/The+Chainsmokers/_/Closer\">Read more on Last.fm</a>. User-contributed text is available under the Creative Commons By-SA License; additional terms may apply."}
+    # d = {"description": "\u201cCloser\u201d is a millennial romance anthem that celebrates youth and heartbreak. It features vocals from singer-songwriter Halsey and Chainsmokers member Andrew Taggart, marking the first time The Chainsmokers sung on their own track and the first time they\u2019ve collaborated with Halsey.\n\nOn Twitter, the duo wrote about the meaning of the song:\n\nThis song is dedicated to anyone that hooked up with their EX and right after remember all the reasons why they broke up.\n\n\u201cCloser\u201d was premiered at Bonnaroo by Halsey and she later confirmed its release on her Instagram:\n\n\"You heard it tonight. My phone hasn\u2019t had service in 2 days, bonnaroo but I\u2019m pullin enough juice to inform you that @thechainsmokers and I have a BRAND NEW SONG coming out soon. Those of you who got to witness it tonight, lucky you.\nHalsey also teased the track on Twitter a week prior to the release by releasing a cropped version of the photo featured the single\u2019s art. <a href=\"http://www.last.fm/music/The+Chainsmokers/_/Closer\">Read more on Last.fm</a>. User-contributed text is available under the Creative Commons By-SA License; additional terms may apply."}
+    # string = "\ud83d\udc8b\ud83d\udc8b\ud83d\udc8b\"\n"
+    # track = Track(1, "mike", "dumb", 1223, "img", "lyrics", d["description"])
+    # mysql_scripts.stam(track)
+    # print(string)
 
     mysql_scripts = MysqlScripts('root', 'songs_track')
-    # mysql_scripts.insert_folder("create_data/files")
-    track = Track(1, "mike", "dumb", 1223, "img", "lyrics", d["description"])
-    mysql_scripts.stam(track)
+    mysql_scripts.insert_folder("create_data/files")
