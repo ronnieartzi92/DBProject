@@ -1,5 +1,5 @@
-CREATE DATABASE fogi;
-USE fogi;
+CREATE DATABASE songs_track CHARSET utf8;
+USE songs_track;
 
 CREATE TABLE users (
 	id INT AUTO_INCREMENT, 
@@ -62,11 +62,14 @@ CREATE TABLE tags (
 CREATE TABLE events (
 	id INT AUTO_INCREMENT, 
 	artist_id INT NOT NULL, 
-	location VARCHAR(255) NOT NULL, 
+	country VARCHAR(255),
+	city VARCHAR(255),
+	venue VARCHAR(255),
 	date DATETIME NOT NULL,
 	url VARCHAR(255) NOT NULL,
 	description TEXT,
 	title VARCHAR(255),
+	img VARCHAR(255),
 	PRIMARY KEY (id),
     FOREIGN KEY (artist_id) REFERENCES artists(id)
 );
@@ -82,6 +85,7 @@ CREATE TABLE tracks_to_tags (
 CREATE TABLE tracks_to_play_lists (
 	play_list_id INT NOT NULL,
 	track_id INT NOT NULL,
+	track_position INT NOT NULL,
 	PRIMARY KEY (play_list_id, track_id),
     FOREIGN KEY (play_list_id) REFERENCES play_lists(id),
     FOREIGN KEY (track_id) REFERENCES tracks(id)

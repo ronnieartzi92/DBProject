@@ -17,32 +17,12 @@ import MakeMePlaylist from "./pages/MakeMePlaylist";
 import LoginModel from "./Components/LoginModel";
 require('./css/main.css')
 
-// const FixedMenu = () => (
-//     <Menu fixed='top' size='large'>
-//         <Container>
-//             <Menu.Item as='a' active>Home</Menu.Item>
-//             <Menu.Item as='a'>Work</Menu.Item>
-//             <Menu.Item as='a'>Company</Menu.Item>
-//             <Menu.Item as='a'>Careers</Menu.Item>
-//             <Menu.Menu position='right'>
-//                 <Menu.Item className='item'>
-//                     <Button as='a'>Log in</Button>
-//                 </Menu.Item>
-//                 <Menu.Item>
-//                     <Button as='a' primary>Sign Up</Button>
-//                 </Menu.Item>
-//             </Menu.Menu>
-//         </Container>
-//     </Menu>
-// )
-
-
 
 
 export default class App extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {visible :true, isLoggedIn : false, page: "home", modalOpen: false, formError : ""};
+        this.state = {visible :false, isLoggedIn : false, page: "home", modalOpen: false, formError : "", userToken : null};
     }
 
     hideFixedMenu = () => this.setState({visible: false});
@@ -73,10 +53,9 @@ export default class App extends Component {
     responseGoogle = (response) => {
         console.log(response);
         if(response && response.profileObj){
-            // debugger;
             this.setState({isLoggedIn: true, userFullName: response.profileObj.name,
                             userToken: response.tokenId,
-                            userImage : response.profileObj.imageUrl});
+                            userImage : response.profileObj.imageUrl, userToken: response.tokenId, visible: true});
         } console.log(response.tokenId);
     };
 
@@ -88,7 +67,7 @@ export default class App extends Component {
     }
 
     logout = () => {
-        this.setState({isLoggedIn: false});
+        this.setState({isLoggedIn: false, visible: false});
         this.setPage("home");
     };
 
@@ -143,8 +122,8 @@ export default class App extends Component {
                                                     {/*<Menu.Item as='a' active></Menu.Item>*/}
                                                     <Menu.Item position='right'>
                                                         {!this.state.isLoggedIn && <div>
-                                                        <Button as='a' inverted style={{marginLeft: '0.5em'}} onClick={this.openSignup.bind(this)}>Sign Up</Button>
-                                                        <Button as='a' inverted onClick={this.openLogin.bind(this)}>Log in</Button>
+                                                        {/*<Button as='a' inverted style={{marginLeft: '0.5em'}} onClick={this.openSignup.bind(this)}>Sign Up</Button>*/}
+                                                        {/*<Button as='a' inverted onClick={this.openLogin.bind(this)}>Log in</Button>*/}
                                                         </div>}
                                                             {!this.state.isLoggedIn && <GoogleLogin
                                                             clientId="60150906703-els4j53jkve5kd9ijdf70s5l7k40ccsd.apps.googleusercontent.com"
@@ -172,8 +151,8 @@ export default class App extends Component {
                                     <Visibility /*onBottomPassed={this.showFixedMenu} onBottomVisible={this.hideFixedMenu}*/ once={false}>
                                         <Segment inverted textAlign='center' style={{minHeight: 700, padding: '1em 0em', background: 'white', paddingTop: 0}} vertical>
                                     {this.state.page === "home" && HomePage}
-                                    {this.state.page === "myplaylists" && <MyPlaylists/>}
-                                    {this.state.page === "makeplaylist" && <MakeMePlaylist/>}
+                                    {this.state.page === "myplaylists" && <MyPlaylists userToken={this.state.userToken}/>}
+                                    {this.state.page === "makeplaylist" && <MakeMePlaylist userToken={this.state.userToken}/>}
                                         </Segment>
                                     </Visibility>
 

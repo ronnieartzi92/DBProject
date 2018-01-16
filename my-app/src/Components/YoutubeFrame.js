@@ -20,8 +20,7 @@ export default class YoutubeFrame extends Component {
     componentWillReceiveProps(nextProps){
         this.setState({videoId: nextProps.videoId});
     }
-
-
+    
     render() {
         const vidID = this.state.videoId || "2g811Eo7K8U";
 

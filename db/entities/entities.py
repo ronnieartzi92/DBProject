@@ -71,9 +71,10 @@ class TrackToTag(AbstractTable):
 class TrackToPlayList(AbstractTable):
     table_name = 'tracks_to_play_lists'
 
-    def __init__(self, play_list_id, track_id):
+    def __init__(self, play_list_id, track_id, track_position):
         self.play_list_id = play_list_id
         self.track_id = track_id
+        self.track_position = track_position
 
 
 class Youtube(AbstractTable):
@@ -91,10 +92,10 @@ class Tag(AbstractTable):
     table_name = 'tags'
 
     def __init__(self, name):
-        self.name = name
+        self.name = name.replace('"',"'").lower()
 
     def find_id_by_name(self, cursor):
-        command = "SELECT id FROM %s WHERE tags.name='%s'" % (self.table_name, self.name)
+        command = 'SELECT id FROM %s WHERE tags.name="%s"' % (self.table_name, self.name)
         cursor.execute(command)
         row = cursor.fetchone()
         return None if row is None else row[0]
@@ -103,11 +104,13 @@ class Tag(AbstractTable):
 class Event(AbstractTable):
     table_name = 'events'
 
-    def __init__(self, artist_id, location, date, url, description, title):
+    def __init__(self, artist_id, country, city, venue, date, url, description, title, img):
         self.artist_id = artist_id
-        self.location = location
+        self.country = country
+        self.city = city
+        self.venue = venue
         self.date = date
         self.url = url
         self.description = description
         self.title = title
-
+        self.img = img
