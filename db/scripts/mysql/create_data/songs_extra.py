@@ -33,6 +33,7 @@ def find_lyrics(artist, name):
     except Exception, e:
         print "error lyrics for {0}".format(song_name_total)
         print e
+        return None
 
 
 def youtube_search(artist, name):
@@ -66,4 +67,3 @@ def youtube_search(artist, name):
         print "error youtube for: {0}".format(query)
         print e
 
-youtube_search('avicii', ' ')
