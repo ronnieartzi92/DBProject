@@ -33,7 +33,7 @@ export default class MyPlaylists extends Component {
             console.log(data);
             let tags = [];
             data.forEach((el) => {
-                tags.push({key: el, value: el, text: el});
+                tags.push({key: el.id, value: el.name, text: el.name});
             });
             this.setState({optionalTags : tags});
         }, (reason)=> {
