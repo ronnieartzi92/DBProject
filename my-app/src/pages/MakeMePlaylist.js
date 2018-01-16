@@ -75,7 +75,6 @@ export default class MyPlaylists extends Component {
         event.preventDefault();
     }
 
-
     addOptionToSearch(option){
         if(option === "none")
             this.setState({ suggestIndex: this.state.suggestIndex +1 });
@@ -85,7 +84,6 @@ export default class MyPlaylists extends Component {
     addFromTags(event, data){
         this.addOptionToSearch(data.value);
     }
-
 
     render() {
       return (
@@ -103,11 +101,13 @@ export default class MyPlaylists extends Component {
                 </Form>
                 {/*<Dropdown placeholder='Choose from out most common tags...' fluid multiple search selection options={this.state.optionalTags} className="dropdown-input" />*/}
 
-                <div className="dropdown-input"><Dropdown placeholder='Choose from our most common tags...' search selection options={this.state.optionalTags}  onChange={this.addFromTags.bind(this)} disabled={this.state.optionalTags.length === 0} /></div>
+                {this.state.optionalTags.length >0 && <div className="dropdown-input"><Dropdown placeholder='Choose from our most common tags...' search selection options={this.state.optionalTags}  onChange={this.addFromTags.bind(this)} disabled={this.state.optionalTags.length === 0} /></div>}
+
                 {suggestedWords.length > this.state.suggestIndex && <div style={{marginTop: "30px", marginBottom: "20px"}}>
                     You can serach for things like:
                 <GroupButtons options={suggestedWords[this.state.suggestIndex]} chooseOption={this.addOptionToSearch.bind(this)}/>
                 </div>}
+
             </Segment>
 
               <Segment>
