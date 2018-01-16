@@ -95,31 +95,31 @@ export default class MyPlaylists extends Component {
                   <Grid className="buttonsGrid">
                       <Grid.Row columns={5}>
                           <Grid.Column>
-                              <Button size='big' color='violet'>
+                              <Button size='big'  color='orange'>
                                   Take me to a show
                               </Button>
                               <div>Show me songs that .....</div>
                           </Grid.Column>
                           <Grid.Column>
-                              <Button size='big'  color='violet'>
+                              <Button size='big' color='yellow'>
                                   Take me to a show
                               </Button>
                               <div>Show me songs that .....</div>
                           </Grid.Column>
                           <Grid.Column>
-                              <Button size='big' color='violet'>
+                              <Button size='big'  color='olive'>
                                   Take me to a show
                               </Button>
                               <div>Show me songs that .....</div>
                           </Grid.Column>
                           <Grid.Column>
-                              <Button size='big'  color='violet'>
+                              <Button size='big' color='green'>
                                   Take me to a show
                               </Button>
                               <div>Show me songs that .....</div>
                           </Grid.Column>
                           <Grid.Column>
-                              <Button size='big' color='violet'>
+                              <Button size='big' color='teal'>
                                   Take me to a show
                               </Button>
                               <div>Show me songs that .....</div>
