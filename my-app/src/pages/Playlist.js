@@ -69,6 +69,7 @@ export default class Playlist extends Component {
                     <Tags
                         tags={this.state.tags}
                         placeholder="Add tags to your playlist..."
+                        uniqueTags={true}
                         onAdded={this.onTagAdded.bind(this)}
                         onRemoved={this.onTagRemoved.bind(this)}/>
                     <Button size='mini' onClick={this.saveTags.bind(this)}>

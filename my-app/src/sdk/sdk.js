@@ -47,5 +47,8 @@ export default {
     },
     savePlaylistTags: function (token, id, tags) {
         return axios.post(`/playlist/tags?id=${id}`, {tags}, AuthHeader(token)).then(extractData);
+    },
+    getTags: function (token) {
+        return axios.get(`/tag`,AuthHeader(token)).then(extractData);
     }
 }
