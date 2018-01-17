@@ -8,5 +8,4 @@ AND youtubes.date_published = (
     FROM youtubes
 	INNER JOIN tracks ON tracks.id = youtubes.track_id
     WHERE x.id = tracks.artist_id
-)
-ORDER BY youtubes.date_published DESC;
+);
