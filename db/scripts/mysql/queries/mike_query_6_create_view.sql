@@ -1,5 +1,5 @@
 CREATE VIEW artists_newest_track AS
-SELECT DISTINCT tracks.artist_id, x.artist_name, tracks.id as track_id, tracks.track_name, tracks.img, youtubes.video_id, youtubes.date_published
+SELECT DISTINCT tracks.artist_id, x.artist_name, tracks.id as track_id, tracks.track_name, tracks.img, tracks.play_count, youtubes.video_id, youtubes.date_published
 FROM youtubes
 INNER JOIN tracks ON youtubes.track_id = tracks.id
 INNER JOIN artists AS x ON tracks.artist_id = x.id
