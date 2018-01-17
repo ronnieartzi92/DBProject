@@ -31,17 +31,17 @@ class User(AbstractTable):
 class PlayList(AbstractTable):
     table_name = 'play_lists'
 
-    def __init__(self, user_id,  name, date_created):
+    def __init__(self, user_id, play_list_name, date_created):
         self.user_id = user_id
-        self.name = name
+        self.play_list_name = play_list_name
         self.date_created = date_created
 
 
 class Artist(AbstractTable):
     table_name = 'artists'
 
-    def __init__(self, name, description, img, play_count):
-        self.name = name.title()
+    def __init__(self, artist_name, description, img, play_count):
+        self.artist_name = artist_name.title()
         self.description = description
         self.img = img
         self.play_count = play_count
@@ -50,9 +50,9 @@ class Artist(AbstractTable):
 class Track(AbstractTable):
     table_name = 'tracks'
 
-    def __init__(self, artist_id, name, album, play_count, img, lyrics, description):
+    def __init__(self, artist_id, track_name, album, play_count, img, lyrics, description):
         self.artist_id = artist_id
-        self.name = name.title()
+        self.track_name = track_name.title()
         self.album = album
         self.play_count = play_count
         self.img = img
@@ -91,11 +91,11 @@ class Youtube(AbstractTable):
 class Tag(AbstractTable):
     table_name = 'tags'
 
-    def __init__(self, name):
-        self.name = name.replace('"',"'").lower()
+    def __init__(self, tag_name):
+        self.tag_name = tag_name.replace('"', "'").lower()
 
     def find_id_by_name(self, cursor):
-        command = 'SELECT id FROM %s WHERE tags.name="%s"' % (self.table_name, self.name)
+        command = 'SELECT id FROM %s WHERE tags.tag_name="%s"' % (self.table_name, self.tag_name)
         cursor.execute(command)
         row = cursor.fetchone()
         return None if row is None else row[0]
