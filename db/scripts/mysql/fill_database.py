@@ -112,12 +112,12 @@ class MysqlScripts:
 
     @staticmethod
     def print_entity(exp, obj):
-        print("-------------- Exception---------------------")
+        print("------------------------------------------- Exception-----------------------------------------")
         print(exp)
         print("class:", obj.__class__)
         for key in obj.__dict__:
             print(key + ":", obj.__dict__[key])
-        print("--------------------------------------------")
+        print("----------------------------------------------------------------------------------------------")
 
     def stam(self, obj):
         cnx = mysql.connector.connect(user=self.user, database=self.database)
@@ -147,5 +147,5 @@ if __name__ == "__main__":
     # mysql_scripts.insert_folder("create_data/files")
 
     mysql_scripts = MysqlScripts('root', 'songs_track')
-    mysql_scripts.insert("create_data/files/final.json")
+    mysql_scripts.insert("create_data/files/final2.json")
     print(mysql_scripts)
