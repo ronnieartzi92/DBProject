@@ -31,28 +31,26 @@ class User(AbstractTable):
 class PlayList(AbstractTable):
     table_name = 'play_lists'
 
-    def __init__(self, user_id,  name, date_created):
+    def __init__(self, user_id, play_list_name, date_created):
         self.user_id = user_id
-        self.name = name
+        self.play_list_name = play_list_name
         self.date_created = date_created
 
 
 class Artist(AbstractTable):
     table_name = 'artists'
 
-    def __init__(self, name, description, img, play_count):
-        self.name = name.title()
-        self.description = description
-        self.img = img
+    def __init__(self, artist_name, play_count):
+        self.artist_name = artist_name.title()
         self.play_count = play_count
 
 
 class Track(AbstractTable):
     table_name = 'tracks'
 
-    def __init__(self, artist_id, name, album, play_count, img, lyrics, description):
+    def __init__(self, artist_id, track_name, album, play_count, img, lyrics, description):
         self.artist_id = artist_id
-        self.name = name.title()
+        self.track_name = track_name.title()
         self.album = album
         self.play_count = play_count
         self.img = img
@@ -80,22 +78,21 @@ class TrackToPlayList(AbstractTable):
 class Youtube(AbstractTable):
     table_name = 'youtubes'
 
-    def __init__(self, track_id, video_id, duration, date_published, description):
+    def __init__(self, track_id, video_id, duration, date_published):
         self.track_id = track_id
         self.video_id = video_id
         self.duration = duration
         self.date_published = date_published
-        self.description = description
 
 
 class Tag(AbstractTable):
     table_name = 'tags'
 
-    def __init__(self, name):
-        self.name = name.replace('"',"'").lower()
+    def __init__(self, tag_name):
+        self.tag_name = tag_name.replace('"', "'").lower()
 
     def find_id_by_name(self, cursor):
-        command = 'SELECT id FROM %s WHERE tags.name="%s"' % (self.table_name, self.name)
+        command = 'SELECT id FROM %s WHERE tags.tag_name="%s"' % (self.table_name, self.tag_name)
         cursor.execute(command)
         row = cursor.fetchone()
         return None if row is None else row[0]
@@ -104,13 +101,12 @@ class Tag(AbstractTable):
 class Event(AbstractTable):
     table_name = 'events'
 
-    def __init__(self, artist_id, country, city, venue, date, url, description, title, img):
+    def __init__(self, artist_id, country, city, venue, date, url, title, img):
         self.artist_id = artist_id
         self.country = country
         self.city = city
         self.venue = venue
         self.date = date
         self.url = url
-        self.description = description
         self.title = title
         self.img = img

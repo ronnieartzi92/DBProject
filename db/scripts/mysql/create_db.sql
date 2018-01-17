@@ -13,7 +13,7 @@ CREATE TABLE users (
 CREATE TABLE play_lists (
 	id INT AUTO_INCREMENT, 
 	user_id INT NOT NULL, 
-	name VARCHAR(255), 
+	play_list_name VARCHAR(255), 
 	date_created DATETIME DEFAULT CURRENT_TIMESTAMP, 
 	PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id)
@@ -21,9 +21,7 @@ CREATE TABLE play_lists (
 
 CREATE TABLE artists (
 	id INT AUTO_INCREMENT, 
-    name VARCHAR(255) NOT NULL UNIQUE,
-	description TEXT,
-    img VARCHAR(255),
+    artist_name VARCHAR(255) NOT NULL UNIQUE,
     play_count BIGINT NOT NULL,
 	PRIMARY KEY (id)
 );
@@ -31,7 +29,7 @@ CREATE TABLE artists (
 CREATE TABLE tracks (
 	id INT AUTO_INCREMENT, 
 	artist_id INT NOT NULL, 
-	name VARCHAR(255) NOT NULL,
+	track_name VARCHAR(255) NOT NULL,
     album VARCHAR(255),
     play_count BIGINT NOT NULL,
 	img VARCHAR(255),
@@ -47,16 +45,15 @@ CREATE TABLE youtubes (
 	video_id VARCHAR(255) NOT NULL,
 	duration INT, 
 	date_published DATETIME NOT NULL,  
-	description TEXT,
 	PRIMARY KEY (id),
     FOREIGN KEY (track_id) REFERENCES tracks(id)
 );
 
 CREATE TABLE tags (
 	id INT AUTO_INCREMENT, 	
-	name VARCHAR(255) NOT NULL UNIQUE, 
+	tag_name VARCHAR(255) NOT NULL UNIQUE, 
 	PRIMARY KEY (id),
-    INDEX(name)
+    INDEX(tag_name)
 );
 
 CREATE TABLE events (
@@ -67,8 +64,7 @@ CREATE TABLE events (
 	venue VARCHAR(255),
 	date DATETIME NOT NULL,
 	url VARCHAR(255) NOT NULL,
-	description TEXT,
-	title VARCHAR(255),
+	title VARCHAR(511),
 	img VARCHAR(255),
 	PRIMARY KEY (id),
     FOREIGN KEY (artist_id) REFERENCES artists(id)

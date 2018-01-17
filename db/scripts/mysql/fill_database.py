@@ -32,7 +32,7 @@ class MysqlScripts:
 
             # Artist
             for artist_dict in artists_list:
-                artist = Artist(artist_dict['name'], artist_dict['description'], artist_dict['img'], artist_dict['play_count'])
+                artist = Artist(artist_dict['name'], artist_dict['play_count'])
                 artist_track_list = artist_dict['tracks']
                 artist_event_list = artist_dict['events']
                 try:
@@ -58,7 +58,7 @@ class MysqlScripts:
                         continue
 
                     # Youtube
-                    youtube = Youtube(track_id, youtube_dict['video_id'], youtube_dict['duration'], youtube_dict['date_published'], youtube_dict['description'])
+                    youtube = Youtube(track_id, youtube_dict['video_id'], youtube_dict['duration'], youtube_dict['date_published'])
                     try:
                         youtube.insert(cursor)
                         self.yotubes += 1
@@ -90,7 +90,7 @@ class MysqlScripts:
 
                 # Event
                 for event_dict in artist_event_list:
-                    event = Event(artist_id, event_dict['country'], event_dict['city'], event_dict['venue'], event_dict['date'], event_dict['url'], event_dict['description'], event_dict['title'], event_dict['img'])
+                    event = Event(artist_id, event_dict['country'], event_dict['city'], event_dict['venue'], event_dict['date'], event_dict['url'], event_dict['title'], event_dict['img'])
                     try:
                         event.insert(cursor)
                         self.events += 1
@@ -147,5 +147,5 @@ if __name__ == "__main__":
     # mysql_scripts.insert_folder("create_data/files")
 
     mysql_scripts = MysqlScripts('root', 'songs_track')
-    mysql_scripts.insert("create_data/files/final2.json")
+    mysql_scripts.insert("../api/final.json")
     print(mysql_scripts)
