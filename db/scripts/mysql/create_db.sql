@@ -22,8 +22,6 @@ CREATE TABLE play_lists (
 CREATE TABLE artists (
 	id INT AUTO_INCREMENT, 
     artist_name VARCHAR(255) NOT NULL UNIQUE,
-	description TEXT,
-    img VARCHAR(255),
     play_count BIGINT NOT NULL,
 	PRIMARY KEY (id)
 );
@@ -47,7 +45,6 @@ CREATE TABLE youtubes (
 	video_id VARCHAR(255) NOT NULL,
 	duration INT, 
 	date_published DATETIME NOT NULL,  
-	description TEXT,
 	PRIMARY KEY (id),
     FOREIGN KEY (track_id) REFERENCES tracks(id)
 );

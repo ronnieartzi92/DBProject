@@ -32,7 +32,7 @@ class MysqlScripts:
 
             # Artist
             for artist_dict in artists_list:
-                artist = Artist(artist_dict['name'], artist_dict['description'], artist_dict['img'], artist_dict['play_count'])
+                artist = Artist(artist_dict['name'], artist_dict['play_count'])
                 artist_track_list = artist_dict['tracks']
                 artist_event_list = artist_dict['events']
                 try:
@@ -58,7 +58,7 @@ class MysqlScripts:
                         continue
 
                     # Youtube
-                    youtube = Youtube(track_id, youtube_dict['video_id'], youtube_dict['duration'], youtube_dict['date_published'], youtube_dict['description'])
+                    youtube = Youtube(track_id, youtube_dict['video_id'], youtube_dict['duration'], youtube_dict['date_published'])
                     try:
                         youtube.insert(cursor)
                         self.yotubes += 1

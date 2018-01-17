@@ -40,10 +40,8 @@ class PlayList(AbstractTable):
 class Artist(AbstractTable):
     table_name = 'artists'
 
-    def __init__(self, artist_name, description, img, play_count):
+    def __init__(self, artist_name, play_count):
         self.artist_name = artist_name.title()
-        self.description = description
-        self.img = img
         self.play_count = play_count
 
 
@@ -80,12 +78,11 @@ class TrackToPlayList(AbstractTable):
 class Youtube(AbstractTable):
     table_name = 'youtubes'
 
-    def __init__(self, track_id, video_id, duration, date_published, description):
+    def __init__(self, track_id, video_id, duration, date_published):
         self.track_id = track_id
         self.video_id = video_id
         self.duration = duration
         self.date_published = date_published
-        self.description = description
 
 
 class Tag(AbstractTable):
