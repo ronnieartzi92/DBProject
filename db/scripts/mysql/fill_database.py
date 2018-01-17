@@ -90,7 +90,7 @@ class MysqlScripts:
 
                 # Event
                 for event_dict in artist_event_list:
-                    event = Event(artist_id, event_dict['country'], event_dict['city'], event_dict['venue'], event_dict['date'], event_dict['url'], event_dict['description'], event_dict['title'], event_dict['img'])
+                    event = Event(artist_id, event_dict['country'], event_dict['city'], event_dict['venue'], event_dict['date'], event_dict['url'], event_dict['title'], event_dict['img'])
                     try:
                         event.insert(cursor)
                         self.events += 1
@@ -147,5 +147,5 @@ if __name__ == "__main__":
     # mysql_scripts.insert_folder("create_data/files")
 
     mysql_scripts = MysqlScripts('root', 'songs_track')
-    mysql_scripts.insert("create_data/files/final2.json")
+    mysql_scripts.insert("../api/final.json")
     print(mysql_scripts)

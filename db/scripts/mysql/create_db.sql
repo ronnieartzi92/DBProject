@@ -67,8 +67,7 @@ CREATE TABLE events (
 	venue VARCHAR(255),
 	date DATETIME NOT NULL,
 	url VARCHAR(255) NOT NULL,
-	description TEXT,
-	title VARCHAR(255),
+	title VARCHAR(511),
 	img VARCHAR(255),
 	PRIMARY KEY (id),
     FOREIGN KEY (artist_id) REFERENCES artists(id)
