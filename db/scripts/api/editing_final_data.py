@@ -37,12 +37,11 @@ class GenerateJson:
         count = 0
         for item in self.final['artists']:
             count += len(item['tracks'])
+        print count
 
+        # writing final file for inserting to Db.
         with open('final_full.json', 'w') as feedsjson:
             json.dump(self.final, feedsjson)
-
-        print count
-        # writing final file for inserting to Db.
 
 
 
