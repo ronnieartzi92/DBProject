@@ -12,11 +12,11 @@ class GenerateJson:
     def __init__(self):
         self.all_artists = []
         self.final = {'artists': []}
-
+ 
     def edit(self):
         # open each file in the library and loads it
         for file in os.listdir('.'):
-            if file == 'general.py':
+            if file == 'editing_final_data.py':
                 continue
             with open(file, 'r') as feedsjson:
                 artists = json.load(feedsjson)
@@ -38,10 +38,12 @@ class GenerateJson:
         for item in self.final['artists']:
             count += len(item['tracks'])
 
+        with open('final_full.json', 'w') as feedsjson:
+            json.dump(self.final, feedsjson)
+
         print count
         # writing final file for inserting to Db.
-        with open('final_final.json', 'w') as feedsjson:
-            json.dump(self.final, feedsjson)
+
 
 
 # script main
