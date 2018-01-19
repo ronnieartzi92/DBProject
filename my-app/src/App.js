@@ -114,7 +114,7 @@ export default class App extends Component {
                             </Menu.Item>}
                         </Sidebar>
                         <Sidebar.Pusher>
-                            <Segment basic>
+                            <Segment basic style={{padding: '0'}}>
                                 <Header as='h3'>
                                     <Visibility /*onBottomPassed={this.showFixedMenu} onBottomVisible={this.hideFixedMenu}*/ once={false}>
                                         <Segment inverted textAlign='center' style={{minHeight: 100, padding: '1em 0em'}} vertical>

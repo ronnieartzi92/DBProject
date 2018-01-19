@@ -118,32 +118,33 @@ export default class MyPlaylists extends Component {
                               <Button size='big'  color='orange'>
                                   Take me to a show
                               </Button>
-                              <div>Show me songs that .....</div>
+                              <div>Get songs of the 5 top artists with the most diverse places of events in the next year</div>
                           </Grid.Column>
                           <Grid.Column>
                               <Button size='big' color='yellow'>
-                                  Take me to a show
+                                  The top of the top
                               </Button>
-                              <div>Show me songs that .....</div>
+                              <div>Get top songs of unique and top artists</div>
                           </Grid.Column>
                           <Grid.Column>
                               <Button size='big'  color='olive'>
-                                  Take me to a show
+                                  Most popular and active artists
                               </Button>
-                              <div>Show me songs that .....</div>
+                              <div>Get songs of the 5 artists who have the most events in the next year and have been listened the most</div>
                           </Grid.Column>
                           <Grid.Column>
                               <Button size='big' color='green'>
-                                  Take me to a show
+                                  Most recent and diverse
                               </Button>
-                              <div>Show me songs that .....</div>
+                              <div>Get songs that has been published in the last year from different artists</div>
                           </Grid.Column>
                           <Grid.Column>
                               <Button size='big' color='teal'>
-                                  Take me to a show
+                                  Gotta be a great album
                               </Button>
-                              <div>Show me songs that .....</div>
+                              <div>Get the songs from the album which contain a top rates song</div>
                           </Grid.Column>
+
                       </Grid.Row>
                   </Grid>
 

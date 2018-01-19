@@ -13,6 +13,7 @@ import {
 import image from './img/music.png'
 import headphones from './img/music-icon.png'
 
+
 export const HomePage = <div>
     {/*{ visible ? <FixedMenu /> : null }*/}
     <Visibility /*onBottomPassed={this.showFixedMenu} onBottomVisible={this.hideFixedMenu}*/ once={false}>
@@ -59,5 +60,4 @@ export const HomePage = <div>
             </Grid.Row>
         </Grid>
     </Segment>
-
 </div>
