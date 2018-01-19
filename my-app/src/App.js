@@ -121,7 +121,7 @@ export default class App extends Component {
                                             <Container>
                                                 <Menu inverted pointing secondary size='large'>
                                                     {/*<Menu.Item as='a' active></Menu.Item>*/}
-                                                    <Menu.Item position='right'>
+                                                    <Menu.Item position='right' style={{width: '90%'}}>
                                                         {!this.state.isLoggedIn && <div>
                                                         {/*<Button as='a' inverted style={{marginLeft: '0.5em'}} onClick={this.openSignup.bind(this)}>Sign Up</Button>*/}
                                                         {/*<Button as='a' inverted onClick={this.openLogin.bind(this)}>Log in</Button>*/}

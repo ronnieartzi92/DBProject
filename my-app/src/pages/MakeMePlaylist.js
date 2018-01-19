@@ -12,7 +12,7 @@ import {songsList} from "../utils/consts";
 const suggestedWords = [
     ["pop","rock","alternative"],
     ["60s", "70s","80s","90s"],
-    ["love", "beautiful"],
+    ["love", "beautiful", "hate"],
     ["2014", "2015","2016","2017"],
     ["Coldplay", "Sia","Ed Sheeran"],
     ["dance", "chillout"],
@@ -30,6 +30,7 @@ export default class MyPlaylists extends Component {
         this.savePlaylist = this.savePlaylist.bind(this);
 
         sdk.getTags(this.props.userToken).then( (data) =>{
+            console.log("get tags:");
             console.log(data);
             let tags = [];
             data.forEach((el) => {

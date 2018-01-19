@@ -14,7 +14,7 @@ import Tags from 'react-tagging-input';
 export default class Playlist extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {playlist: this.props.playlistSongs ? this.props.playlistSongs : songsList, currentPlayedIndex: 0, concerts, tags: [], listId: this.props.listId};
+        this.state = {playlist: this.props.playlistSongs, currentPlayedIndex: 0, concerts: [], tags: [], listId: this.props.listId};
     };
 
 
