@@ -87,7 +87,6 @@
     float: left;
     margin-left: 75px;
 }
-
 .buttonsGrid{
     /*margin-left: 120px !important;*/
 }
@@ -109,6 +108,7 @@
     -webkit-transform: translate3d(8, 0, 0); }
   100% {
     -webkit-transform: translate3d(0, 0, 0); } }
+
 
 @-moz-keyframes slide-left {
   0% {

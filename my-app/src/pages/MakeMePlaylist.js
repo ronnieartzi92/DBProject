@@ -30,10 +30,8 @@ export default class MyPlaylists extends Component {
         this.savePlaylist = this.savePlaylist.bind(this);
 
         sdk.getTags(this.props.userToken).then( (data) =>{
-            console.log("get tags:");
-            console.log(data);
             let tags = [];
-            data.forEach((el) => {
+            data.slice(0, 100).forEach((el) => {
                 tags.push({key: el.id, value: el.tag_name, text: el.tag_name});
             });
             console.log("tags after process");
@@ -86,7 +84,7 @@ export default class MyPlaylists extends Component {
     }
 
     addFromTags(event, data){
-        this.addOptionToSearch(data.value);
+        this.setState({ freeText: `${this.state.freeText} ${data.value}` });
     }
 
     render() {

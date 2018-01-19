@@ -5,6 +5,7 @@ import React, {Component} from 'react'
 import { List, Segment } from 'semantic-ui-react'
 import sdk from "./../sdk/sdk"
 import Playlist from "./Playlist";
+import {songsList} from "../utils/consts";
 
 export default class MyPlaylists extends Component {
     constructor(props, context) {
@@ -28,7 +29,7 @@ export default class MyPlaylists extends Component {
             this.setState({ showPlaylist: true, playlist: data, isLoading: false });
         }, (reason)=> {
             alert("Server Not Responding....");
-            this.setState({isLoading: false });
+            this.setState({isLoading: false, showPlaylist: true, playlist: {songs: songsList, id: 1 } });
         });
     }
     render() {
