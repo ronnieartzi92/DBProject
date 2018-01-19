@@ -48,7 +48,7 @@ export const HomePage = <div>
                     </p>
                 </Grid.Column>
 
-                <Grid.Column floated='right' width={6}>
+                <Grid.Column floated='right' width={6} style={{marginLeft: '60px'}}>
                     <Image bordered rounded size='large' src={image}/>
                 </Grid.Column>
             </Grid.Row>

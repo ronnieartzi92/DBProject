@@ -45,7 +45,7 @@ export default class MyPlaylists extends Component {
                     {playlists.map((item, index) => {
                         return <List.Item onClick={this.startPlaylist.bind(this,item.id)}  key={index}>
                             <List.Content>
-                                <List.Header>{item.name}</List.Header>
+                                <List.Header>{item.play_list_name}</List.Header>
                                 {item.date_created}
                             </List.Content>
                         </List.Item>

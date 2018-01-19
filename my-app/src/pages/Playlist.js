@@ -87,10 +87,11 @@ export default class Playlist extends Component {
                 <div className="youtube-frame">
                <YoutubeFrame videoId={currVid} onEnd={this.playNextSong.bind(this)}/>
                 </div>
-                <div className="concerts">
+                {this.state.concerts.length > 0 && <div className="concerts">
                     <div style={{color: "black"}}>Check-Out {artistName}'s upcoming shows:</div>
                     <ArtistNextConcerts concerts={concerts}/>
                 </div>
+                }
             </div>
         )
     }

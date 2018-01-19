@@ -150,7 +150,7 @@ export default class App extends Component {
                                         </Segment>
                                     </Visibility>
                                     <Visibility /*onBottomPassed={this.showFixedMenu} onBottomVisible={this.hideFixedMenu}*/ once={false}>
-                                        <Segment inverted textAlign='center' style={{minHeight: 700, padding: '1em 0em', background: 'white', paddingTop: 0}} vertical>
+                                        <Segment inverted textAlign='center' style={{minHeight: 700, padding: '1em 0em', background: 'white', paddingTop: 0, marginLeft: "135px"}} vertical>
                                     {this.state.page === "home" && HomePage}
                                     {this.state.page === "myplaylists" && <MyPlaylists userToken={this.state.userToken}/>}
                                     {this.state.page === "makeplaylist" && <MakeMePlaylist userToken={this.state.userToken}/>}
