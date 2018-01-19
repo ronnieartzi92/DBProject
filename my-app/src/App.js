@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import sdk from "./sdk/sdk"
 import {
-    Button,
     Container,
     Header,
     Icon,

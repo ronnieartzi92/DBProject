@@ -82,9 +82,19 @@ export default class MyPlaylists extends Component {
             this.setState({ suggestIndex: this.state.suggestIndex +1 });
         else this.setState({ freeText: `${this.state.freeText} ${option}`, suggestIndex: this.state.suggestIndex +1 });
     }
+    clearValFromTags(oldtag){
+        let tags = [];
+        this.state.optionalTags.forEach((tag) => {
+            if(tag.value !== oldtag.value){
+                tags.push(tag)
+            }
+        })
+        this.setState({optionalTags : tags});
+    }
 
     addFromTags(event, data){
         this.setState({ freeText: `${this.state.freeText} ${data.value}` });
+        this.clearValFromTags(data);
     }
 
     render() {
