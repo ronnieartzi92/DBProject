@@ -92,8 +92,8 @@ export default class MyPlaylists extends Component {
     render() {
       return (
           <div>
-            <Segment>
-                <Form onSubmit={this.handleSubmit} loading={this.state.isLoading}>
+            <Segment loading={this.state.isLoading}>
+                <Form onSubmit={this.handleSubmit}>
                     <Form.Group>
                     <Form.Field width="5" className="searchInput" >
                         <label>What do you want to hear ?</label>
@@ -114,38 +114,38 @@ export default class MyPlaylists extends Component {
 
             </Segment>
 
-              <Segment>
+              <Segment loading={this.state.isLoading}>
                   <Grid className="buttonsGrid">
                       <Grid.Row columns={5}>
                           <Grid.Column>
                               <Button size='big'  color='orange'>
                                   Take me to a show
                               </Button>
-                              <div>Get songs of the 5 top artists with the most diverse places of events in the next year</div>
+                              <div style={{marginTop: '10px'}}>Get songs of the 5 top artists with the most diverse places of events in the next year</div>
                           </Grid.Column>
                           <Grid.Column>
                               <Button size='big' color='yellow'>
                                   The top of the top
                               </Button>
-                              <div>Get top songs of unique and top artists</div>
+                              <div style={{marginTop: '10px'}}>Get top songs of unique and top artists</div>
                           </Grid.Column>
                           <Grid.Column>
                               <Button size='big'  color='olive'>
-                                  Most popular and active artists
+                                  Artists on fire
                               </Button>
-                              <div>Get songs of the 5 artists who have the most events in the next year and have been listened the most</div>
+                              <div style={{marginTop: '10px'}}>Get songs of the 5 artists who have the most events in the next year and have been listened the most</div>
                           </Grid.Column>
                           <Grid.Column>
                               <Button size='big' color='green'>
-                                  Most recent and diverse
+                                  Something new
                               </Button>
-                              <div>Get songs that has been published in the last year from different artists</div>
+                              <div style={{marginTop: '10px'}}>Get songs that has been published in the last year from different artists</div>
                           </Grid.Column>
                           <Grid.Column>
                               <Button size='big' color='teal'>
                                   Gotta be a great album
                               </Button>
-                              <div>Get the songs from the album which contain a top rates song</div>
+                              <div style={{marginTop: '10px'}}>Get the songs from the album which contain a top rates song</div>
                           </Grid.Column>
 
                       </Grid.Row>
@@ -155,7 +155,7 @@ export default class MyPlaylists extends Component {
                 {this.state.showPlaylist && this.state.playlistSongs.length >0 &&
                     <div>
                         {this.state.canSavePlaylist &&
-                        <Form onSubmit={this.savePlaylist} style={{float: 'right'}}>
+                        <Form onSubmit={this.savePlaylist} style={{float: 'right', width: '70%'}}>
                             <Form.Group>
                                 <Form.Input placeholder='PlaylistName' name='playlistName' value={this.state.playlistName}
                                             onChange={this.handleInputChange}/>
