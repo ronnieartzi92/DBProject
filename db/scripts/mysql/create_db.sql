@@ -86,3 +86,16 @@ CREATE TABLE tracks_to_play_lists (
     FOREIGN KEY (play_list_id) REFERENCES play_lists(id),
     FOREIGN KEY (track_id) REFERENCES tracks(id)
 );
+
+CREATE TABLE tracks_isam (
+	id INT AUTO_INCREMENT,
+	artist_id INT NOT NULL,
+	track_name VARCHAR(255) NOT NULL,
+    album VARCHAR(255),
+    play_count BIGINT NOT NULL,
+	img VARCHAR(255),
+	lyrics TEXT,
+	description TEXT,
+	PRIMARY KEY (id),
+    FULLTEXT INDEX (lyrics, description, track_name)
+) ENGINE = MyISAM;
