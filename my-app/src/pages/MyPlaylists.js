@@ -5,6 +5,7 @@ import React, {Component} from 'react'
 import { List, Segment } from 'semantic-ui-react'
 import sdk from "./../sdk/sdk"
 import Playlist from "./Playlist";
+import {songsList} from "../utils/consts";
 
 export default class MyPlaylists extends Component {
     constructor(props, context) {
@@ -14,7 +15,7 @@ export default class MyPlaylists extends Component {
             console.log(data);
             this.setState({playlists : data, isLoading: false});
         }, (reason)=> {
-            const playlists = [{name: "my songs", date: "01.01.2017", id: 1}, {name: "my songs 2222", date: "02.02.2017", id: 2}];
+            const playlists = [{play_list_name: "my songs", date_created: "01.01.2017", id: 1}, {play_list_name: "my songs 2222", date_created: "02.02.2017", id: 2}];
             this.setState({playlists, isLoading: false});
             alert("Server Not Responding....");
         });
@@ -28,7 +29,7 @@ export default class MyPlaylists extends Component {
             this.setState({ showPlaylist: true, playlist: data, isLoading: false });
         }, (reason)=> {
             alert("Server Not Responding....");
-            this.setState({isLoading: false });
+            this.setState({isLoading: false, showPlaylist: true, playlist: {songs: songsList, id: 1 } });
         });
     }
     render() {
@@ -45,7 +46,7 @@ export default class MyPlaylists extends Component {
                     {playlists.map((item, index) => {
                         return <List.Item onClick={this.startPlaylist.bind(this,item.id)}  key={index}>
                             <List.Content>
-                                <List.Header>{item.name}</List.Header>
+                                <List.Header>{item.play_list_name}</List.Header>
                                 {item.date_created}
                             </List.Content>
                         </List.Item>

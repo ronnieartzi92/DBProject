@@ -14,7 +14,7 @@ import Tags from 'react-tagging-input';
 export default class Playlist extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {playlist: this.props.playlistSongs ? this.props.playlistSongs : songsList, currentPlayedIndex: 0, concerts, tags: [], listId: this.props.listId};
+        this.state = {playlist: this.props.playlistSongs, currentPlayedIndex: 0, concerts: [], tags: [], listId: this.props.listId};
     };
 
 
@@ -80,17 +80,18 @@ export default class Playlist extends Component {
                 <div className="playlist-left">
                 <Item.Group>
                     {this.state.playlist.map((item, index) => {
-                        return <div onClick={this.playSong.bind(this,index)} key={index}><PlayListItem key={index} title={item.name} artist={item.artist_name} imageURL={item.img} videoId={item.video_id}/></div>
+                        return <div onClick={this.playSong.bind(this,index)} key={index}><PlayListItem key={index} title={item.track_name} artist={item.artist_name} imageURL={item.img} videoId={item.video_id}/></div>
                     })}
                 </Item.Group>
                 </div>
                 <div className="youtube-frame">
                <YoutubeFrame videoId={currVid} onEnd={this.playNextSong.bind(this)}/>
                 </div>
-                <div className="concerts">
+                {this.state.concerts.length > 0 && <div className="concerts">
                     <div style={{color: "black"}}>Check-Out {artistName}'s upcoming shows:</div>
                     <ArtistNextConcerts concerts={concerts}/>
                 </div>
+                }
             </div>
         )
     }

@@ -43,7 +43,7 @@ export default {
         return axios.get(`/artist/events?id=${artistId}`, AuthHeader(token)).then(extractData);
     },
     searchForPlaylist: function (token, searchText) {
-        return axios.post(`/playlist/search`, {text: searchText}, AuthHeader(token)).then(extractData);
+        return axios.get(`/track/search?text=${searchText}`, AuthHeader(token)).then(extractData);
     },
     savePlaylistTags: function (token, id, tags) {
         return axios.post(`/playlist/tags?id=${id}`, {tags}, AuthHeader(token)).then(extractData);

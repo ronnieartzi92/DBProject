@@ -110,3 +110,17 @@ class Event(AbstractTable):
         self.url = url
         self.title = title
         self.img = img
+
+
+class TrackIsam(AbstractTable):
+    table_name = 'tracks_isam'
+
+    def __init__(self, track):
+        self.artist_id = track.artist_id
+        self.track_name = track.track_name
+        self.album = track.album
+        self.play_count = track.play_count
+        self.img = track.img
+        self.lyrics = track.lyrics
+        self.description = track.description
+

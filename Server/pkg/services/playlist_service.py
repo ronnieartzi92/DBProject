@@ -12,7 +12,7 @@ class PlaylistService:
 
         songs_query = """
             select tracks.artist_id, youtubes.duration,
-            tracks.id, tracks.img, tracks.name, tracks.play_count, youtubes.video_id, artists.name as 'artist_name'
+            tracks.id, tracks.img, tracks.track_name, tracks.play_count, youtubes.video_id, artists.artist_name as 'artist_name'
             from tracks_to_play_lists, tracks, youtubes, artists
             where play_list_id ="""+playlist_id+"""
             and tracks_to_play_lists.track_id = tracks.id
@@ -33,9 +33,9 @@ class PlaylistService:
 
     @staticmethod
     def create_playlist(user_id, playlist):
-        id = run_and_commit_query("insert into play_lists(name,user_id) VALUES('{}',{})".format(playlist["name"], user_id))
+        id = run_and_commit_query("insert into play_lists(play_list_name,user_id) VALUES('{}',{})".format(playlist["name"], user_id))
 
-        base_query = "insert into tracks_to_play_lists(play_list_id, track_id) VALUES({},{})"
+        base_query = "insert into tracks_to_play_lists(play_list_id, track_id,track_position) VALUES({},{},{})"
         for i in range(len(playlist['songs'])):
             query = base_query.format(id, playlist["songs"][i], i+1)
             run_and_commit_query(query)
@@ -46,11 +46,11 @@ class PlaylistService:
     def add_tags_to_playlist(playlist_id,tags):
         playlist = PlaylistService.get_playlist_by_id(0, playlist_id, to_jsonify=False)
         for tag in tags:
-            re = run_get_query("select * from tags where name = '"+tag+"'")
+            re = run_get_query("select * from tags where tag_name = '"+tag+"'")
             if len(re) > 0:
                 id = re[0]["id"]
             else:
-                id = run_and_commit_query("insert into tags(name) VALUES ('"+tag+"')")
+                id = run_and_commit_query("insert into tags(tag_name) VALUES ('"+tag+"')")
             for song in playlist["songs"]:
                 run_and_commit_query("insert into tracks_to_tags(track_id,tag_id) VALUES({},{})".format(song["id"],id))
         return jsonify(True)

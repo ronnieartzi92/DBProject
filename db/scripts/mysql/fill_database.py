@@ -16,6 +16,7 @@ class MysqlScripts:
         self.yotubes = 0
         self.tracks_to_tags = 0
         self.events = 0
+        self.tracks_isam = 0
 
 
 
@@ -46,6 +47,10 @@ class MysqlScripts:
 
 
                 # Track
+                if len(artist_track_list) == 0:
+                    MysqlScripts.print_entity("No tracks", artist)
+                    continue
+
                 for track_dict in artist_track_list:
                     track = Track(artist_id, track_dict['name'], track_dict['album'], track_dict['play_count'], track_dict['img'], track_dict['lyrics'], track_dict['description'])
                     tag_list = track_dict['tags']
@@ -55,6 +60,15 @@ class MysqlScripts:
                         self.tracks += 1
                     except Exception as e:
                         MysqlScripts.print_entity(e, track)
+                        continue
+
+                    # Track_ISAM - for full text search
+                    track_isam = TrackIsam(track)
+                    try:
+                        track_isam.insert(cursor)
+                        self.tracks_isam += 1
+                    except Exception as e:
+                        MysqlScripts.print_entity(e, track_isam)
                         continue
 
                     # Youtube
@@ -119,7 +133,8 @@ class MysqlScripts:
         print("----------------------------------------------------------------------------------------------")
 
     def __repr__(self):
-        return "Artists: {}, Tracks: {}, Youtubes: {}, Tags: {}, Track To Tags: {}, Events: {}.".format(self.artists, self.tracks, self.yotubes, self.tags, self.tracks_to_tags, self.events)
+        return "Artists: {}, Tracks: {}, Youtubes: {}, Tags: {}, Track To Tags: {}, Events: {}, Tracks ISAM: {}."\
+         .format(self.artists, self.tracks, self.yotubes, self.tags, self.tracks_to_tags, self.events, self.tracks_isam)
 
 
 if __name__ == "__main__":

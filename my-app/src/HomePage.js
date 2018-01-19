@@ -13,6 +13,7 @@ import {
 import image from './img/music.png'
 import headphones from './img/music-icon.png'
 
+
 export const HomePage = <div>
     {/*{ visible ? <FixedMenu /> : null }*/}
     <Visibility /*onBottomPassed={this.showFixedMenu} onBottomVisible={this.hideFixedMenu}*/ once={false}>
@@ -48,7 +49,7 @@ export const HomePage = <div>
                     </p>
                 </Grid.Column>
 
-                <Grid.Column floated='right' width={6}>
+                <Grid.Column floated='right' width={6} style={{marginLeft: '60px'}}>
                     <Image bordered rounded size='large' src={image}/>
                 </Grid.Column>
             </Grid.Row>
@@ -59,5 +60,4 @@ export const HomePage = <div>
             </Grid.Row>
         </Grid>
     </Segment>
-
 </div>

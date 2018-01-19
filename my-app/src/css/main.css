@@ -57,7 +57,7 @@
 }
 
 .playlist-container{
-    margin: 100px auto;
+    margin: 75px auto;
     width: 1175px;
 }
 .youtube-frame{
@@ -85,11 +85,10 @@
     position: absolute !important;
     margin-top: 38px;
     float: left;
-    margin-left: -525px;
+    margin-left: 75px;
 }
-
 .buttonsGrid{
-    margin-left: 120px !important;
+    /*margin-left: 120px !important;*/
 }
 .tags-container{
     margin: 25px;
@@ -109,6 +108,7 @@
     -webkit-transform: translate3d(8, 0, 0); }
   100% {
     -webkit-transform: translate3d(0, 0, 0); } }
+
 
 @-moz-keyframes slide-left {
   0% {

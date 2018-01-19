@@ -12,7 +12,7 @@ import {songsList} from "../utils/consts";
 const suggestedWords = [
     ["pop","rock","alternative"],
     ["60s", "70s","80s","90s"],
-    ["love", "beautiful"],
+    ["love", "beautiful", "hate"],
     ["2014", "2015","2016","2017"],
     ["Coldplay", "Sia","Ed Sheeran"],
     ["dance", "chillout"],
@@ -30,11 +30,13 @@ export default class MyPlaylists extends Component {
         this.savePlaylist = this.savePlaylist.bind(this);
 
         sdk.getTags(this.props.userToken).then( (data) =>{
-            console.log(data);
             let tags = [];
-            data.forEach((el) => {
-                tags.push({key: el.id, value: el.name, text: el.name});
+            data.slice(0, 100).forEach((el) => {
+                tags.push({key: el.id, value: el.tag_name, text: el.tag_name});
             });
+            console.log("tags after process");
+            console.log(tags);
+
             this.setState({optionalTags : tags});
         }, (reason)=> {
             this.setState({optionalTags: []});
@@ -80,16 +82,26 @@ export default class MyPlaylists extends Component {
             this.setState({ suggestIndex: this.state.suggestIndex +1 });
         else this.setState({ freeText: `${this.state.freeText} ${option}`, suggestIndex: this.state.suggestIndex +1 });
     }
+    clearValFromTags(oldtag){
+        let tags = [];
+        this.state.optionalTags.forEach((tag) => {
+            if(tag.value !== oldtag.value){
+                tags.push(tag)
+            }
+        })
+        this.setState({optionalTags : tags});
+    }
 
     addFromTags(event, data){
-        this.addOptionToSearch(data.value);
+        this.setState({ freeText: `${this.state.freeText} ${data.value}` });
+        this.clearValFromTags(data);
     }
 
     render() {
       return (
           <div>
-            <Segment>
-                <Form onSubmit={this.handleSubmit} loading={this.state.isLoading}>
+            <Segment loading={this.state.isLoading}>
+                <Form onSubmit={this.handleSubmit}>
                     <Form.Group>
                     <Form.Field width="5" className="searchInput" >
                         <label>What do you want to hear ?</label>
@@ -110,39 +122,40 @@ export default class MyPlaylists extends Component {
 
             </Segment>
 
-              <Segment>
+              <Segment loading={this.state.isLoading}>
                   <Grid className="buttonsGrid">
                       <Grid.Row columns={5}>
                           <Grid.Column>
                               <Button size='big'  color='orange'>
                                   Take me to a show
                               </Button>
-                              <div>Show me songs that .....</div>
+                              <div style={{marginTop: '10px'}}>Get songs of the 5 top artists with the most diverse places of events in the next year</div>
                           </Grid.Column>
                           <Grid.Column>
                               <Button size='big' color='yellow'>
-                                  Take me to a show
+                                  The top of the top
                               </Button>
-                              <div>Show me songs that .....</div>
+                              <div style={{marginTop: '10px'}}>Get top songs of unique and top artists</div>
                           </Grid.Column>
                           <Grid.Column>
                               <Button size='big'  color='olive'>
-                                  Take me to a show
+                                  Artists on fire
                               </Button>
-                              <div>Show me songs that .....</div>
+                              <div style={{marginTop: '10px'}}>Get songs of the 5 artists who have the most events in the next year and have been listened the most</div>
                           </Grid.Column>
                           <Grid.Column>
                               <Button size='big' color='green'>
-                                  Take me to a show
+                                  Something new
                               </Button>
-                              <div>Show me songs that .....</div>
+                              <div style={{marginTop: '10px'}}>Get songs that has been published in the last year from different artists</div>
                           </Grid.Column>
                           <Grid.Column>
                               <Button size='big' color='teal'>
-                                  Take me to a show
+                                  Gotta be a great album
                               </Button>
-                              <div>Show me songs that .....</div>
+                              <div style={{marginTop: '10px'}}>Get the songs from the album which contain a top rates song</div>
                           </Grid.Column>
+
                       </Grid.Row>
                   </Grid>
 
@@ -150,7 +163,7 @@ export default class MyPlaylists extends Component {
                 {this.state.showPlaylist && this.state.playlistSongs.length >0 &&
                     <div>
                         {this.state.canSavePlaylist &&
-                        <Form onSubmit={this.savePlaylist} style={{float: 'right'}}>
+                        <Form onSubmit={this.savePlaylist} style={{float: 'right', width: '70%'}}>
                             <Form.Group>
                                 <Form.Input placeholder='PlaylistName' name='playlistName' value={this.state.playlistName}
                                             onChange={this.handleInputChange}/>

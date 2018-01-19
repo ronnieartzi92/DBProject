@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import sdk from "./sdk/sdk"
 import {
-    Button,
     Container,
     Header,
     Icon,
@@ -97,9 +96,9 @@ export default class App extends Component {
                 <LoginModel modalOpen={this.state.modalOpen} type={this.state.modelType} onSubmit={this.loginOrSignup} error={this.state.formError} handleClose={this.handleCloseModel} />
 
                 <div>
-                    <Button onClick={this.toggleVisibility}>Toggle Menu</Button>
+                    {/*<Button onClick={this.toggleVisibility}>Toggle Menu</Button>*/}
                     <Sidebar.Pushable as={Segment}>
-                        <Sidebar as={Menu} animation='overlay' width='thin' visible={visible} icon='labeled' vertical inverted>
+                        <Sidebar as={Menu} animation='overlay' width='thin' visible={true} icon='labeled' vertical inverted style={{top: '12px'}}>
                             <Menu.Item name='home' onClick={this.setPage.bind(this, "home")}>
                                 <Icon name='home' />
                                 Home
@@ -114,14 +113,14 @@ export default class App extends Component {
                             </Menu.Item>}
                         </Sidebar>
                         <Sidebar.Pusher>
-                            <Segment basic>
+                            <Segment basic style={{padding: '0'}}>
                                 <Header as='h3'>
                                     <Visibility /*onBottomPassed={this.showFixedMenu} onBottomVisible={this.hideFixedMenu}*/ once={false}>
                                         <Segment inverted textAlign='center' style={{minHeight: 100, padding: '1em 0em'}} vertical>
                                             <Container>
                                                 <Menu inverted pointing secondary size='large'>
                                                     {/*<Menu.Item as='a' active></Menu.Item>*/}
-                                                    <Menu.Item position='right'>
+                                                    <Menu.Item position='right' style={{width: '90%'}}>
                                                         {!this.state.isLoggedIn && <div>
                                                         {/*<Button as='a' inverted style={{marginLeft: '0.5em'}} onClick={this.openSignup.bind(this)}>Sign Up</Button>*/}
                                                         {/*<Button as='a' inverted onClick={this.openLogin.bind(this)}>Log in</Button>*/}
@@ -150,7 +149,7 @@ export default class App extends Component {
                                         </Segment>
                                     </Visibility>
                                     <Visibility /*onBottomPassed={this.showFixedMenu} onBottomVisible={this.hideFixedMenu}*/ once={false}>
-                                        <Segment inverted textAlign='center' style={{minHeight: 700, padding: '1em 0em', background: 'white', paddingTop: 0}} vertical>
+                                        <Segment inverted textAlign='center' style={{minHeight: 700, padding: '1em 0em', background: 'white', paddingTop: 0, marginLeft: "135px"}} vertical>
                                     {this.state.page === "home" && HomePage}
                                     {this.state.page === "myplaylists" && <MyPlaylists userToken={this.state.userToken}/>}
                                     {this.state.page === "makeplaylist" && <MakeMePlaylist userToken={this.state.userToken}/>}
