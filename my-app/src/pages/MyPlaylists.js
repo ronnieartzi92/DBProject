@@ -14,7 +14,7 @@ export default class MyPlaylists extends Component {
             console.log(data);
             this.setState({playlists : data, isLoading: false});
         }, (reason)=> {
-            const playlists = [{name: "my songs", date: "01.01.2017", id: 1}, {name: "my songs 2222", date: "02.02.2017", id: 2}];
+            const playlists = [{play_list_name: "my songs", date_created: "01.01.2017", id: 1}, {play_list_name: "my songs 2222", date_created: "02.02.2017", id: 2}];
             this.setState({playlists, isLoading: false});
             alert("Server Not Responding....");
         });

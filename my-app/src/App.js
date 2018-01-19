@@ -97,9 +97,9 @@ export default class App extends Component {
                 <LoginModel modalOpen={this.state.modalOpen} type={this.state.modelType} onSubmit={this.loginOrSignup} error={this.state.formError} handleClose={this.handleCloseModel} />
 
                 <div>
-                    <Button onClick={this.toggleVisibility}>Toggle Menu</Button>
+                    {/*<Button onClick={this.toggleVisibility}>Toggle Menu</Button>*/}
                     <Sidebar.Pushable as={Segment}>
-                        <Sidebar as={Menu} animation='overlay' width='thin' visible={visible} icon='labeled' vertical inverted>
+                        <Sidebar as={Menu} animation='overlay' width='thin' visible={true} icon='labeled' vertical inverted style={{top: '12px'}}>
                             <Menu.Item name='home' onClick={this.setPage.bind(this, "home")}>
                                 <Icon name='home' />
                                 Home
