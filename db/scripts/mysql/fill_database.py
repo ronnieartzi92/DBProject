@@ -47,6 +47,10 @@ class MysqlScripts:
 
 
                 # Track
+                if len(artist_track_list) == 0:
+                    MysqlScripts.print_entity("No tracks", artist)
+                    continue
+
                 for track_dict in artist_track_list:
                     track = Track(artist_id, track_dict['name'], track_dict['album'], track_dict['play_count'], track_dict['img'], track_dict['lyrics'], track_dict['description'])
                     tag_list = track_dict['tags']
