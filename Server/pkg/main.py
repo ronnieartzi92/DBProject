@@ -1,5 +1,9 @@
 from flask import Flask
 
+import sys
+sys.path.append('.')
+sys.path.append('../')
+
 from auth import auth
 from routers.users import users
 from routers.playlist_router import playlist_router
@@ -9,24 +13,6 @@ from mysql_service import *
 
 app = Flask(__name__)
 app.secret_key = "omri22"
-
-
-@app.route("/sql")
-def hello():
-    re = run_and_commit_query(("insert into actor(actor_id,first_name,last_name) values(565,'omro','fdgdf')"))
-    for x in re:
-        print x.keys()
-
-    return "Hello World!"
-
-
-@app.route("/sqlGet")
-def hello2():
-    re = run_get_query(("select * from actor"))
-    for x in re:
-        print x
-
-    return "Hello World!"
 
 
 @app.route('/')
