@@ -80,7 +80,7 @@ export default class Playlist extends Component {
                 <div className="playlist-left">
                 <Item.Group>
                     {this.state.playlist.map((item, index) => {
-                        return <div onClick={this.playSong.bind(this,index)} key={index}><PlayListItem key={index} title={item.name} artist={item.artist_name} imageURL={item.img} videoId={item.video_id}/></div>
+                        return <div onClick={this.playSong.bind(this,index)} key={index}><PlayListItem key={index} title={item.track_name} artist={item.artist_name} imageURL={item.img} videoId={item.video_id}/></div>
                     })}
                 </Item.Group>
                 </div>
