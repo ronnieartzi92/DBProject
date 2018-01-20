@@ -62,7 +62,7 @@ class MysqlScripts:
                         continue
 
                     # Track_ISAM - for full text search
-                    track_isam = TrackIsam(track)
+                    track_isam = TrackIsam(track_id, track)
                     try:
                         track_isam.insert(cursor)
                         self.tracks_isam += 1
