@@ -45,7 +45,6 @@ class MysqlScripts:
                     MysqlScripts.print_entity(e, artist)
                     continue
 
-
                 # Track
                 if len(artist_track_list) == 0:
                     MysqlScripts.print_entity("No tracks", artist)
