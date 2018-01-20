@@ -41,18 +41,6 @@ class Data:
         :return: None, json file is the output
         '''
         try:
-            with open('final.json', 'r') as feedsjson:
-                artists = json.load(feedsjson)
-            for item in artists['artists']:
-                self.all_artists.append(item['name'])
-            with open('final2.json', 'r') as feedsjson:
-                artists = json.load(feedsjson)
-            for item in artists['artists']:
-                self.all_artists.append(item['name'])
-            with open('final3.json', 'r') as feedsjson:
-                artists = json.load(feedsjson)
-            for item in artists['artists']:
-                self.all_artists.append(item['name'])
             for i in ['1']:
                 try:
                     # getting artists list from last.fm
