@@ -22,8 +22,6 @@ collecting X tracks for each artists, for each track collecting:
 track details (get_tracks()) - from last.fm,
 track lyrics (find_lyrics()) - from lyrics.ovh,
 track youtube details (youtube_search()) - from youtube.com
-
-output is written for every 10 artists.
 '''
 
 
