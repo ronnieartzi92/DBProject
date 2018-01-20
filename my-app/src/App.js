@@ -14,7 +14,7 @@ import {HomePage} from "./HomePage";
 import MyPlaylists from "./pages/MyPlaylists";
 import MakeMePlaylist from "./pages/MakeMePlaylist";
 import LoginModel from "./Components/LoginModel";
-require('./css/main.css')
+require('./css/main.css');
 
 
 

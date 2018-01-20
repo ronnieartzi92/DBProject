@@ -23,7 +23,7 @@ const suggestedWords = [
 export default class MyPlaylists extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {showPlaylist : false, freeText: "", isLoading: false, tags: [], playlistSongs: [], suggestIndex: 0, playlistName: "", canSavePlaylist: true, optionalTags:[]};
+        this.state = {showPlaylist : false, freeText: "", isLoading: false, tags: [], playlistSongs: [], suggestIndex: 0, playlistName: "", canSavePlaylist: true, optionalTags:[], songsLimit: 25};
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -57,7 +57,7 @@ export default class MyPlaylists extends Component {
     handleSubmit(event) {
         this.setState({ isLoading: true });
         alert('A search was submitted: '+this.state.freeText );
-        sdk.searchForPlaylist(this.props.userToken, this.state.freeText).then( (data) =>{
+        sdk.searchForPlaylist(this.props.userToken, this.state.freeText, this.state.songsLimit).then( (data) =>{
             console.log(data);
             this.setState({playlistSongs : data, isLoading: false, showPlaylist: true});
         }, (reason)=> {
@@ -71,6 +71,7 @@ export default class MyPlaylists extends Component {
         sdk.savePlaylist(this.props.userToken, this.state.playlistName, this.state.playlistSongs).then( (data) =>{
             console.log(data);
             this.setState({canSavePlaylist : false});
+            alert("Your playlist saved successfully !");
         }, (reason)=> {
             alert("Server Not Responding....");
         });
@@ -88,7 +89,7 @@ export default class MyPlaylists extends Component {
             if(tag.value !== oldtag.value){
                 tags.push(tag)
             }
-        })
+        });
         this.setState({optionalTags : tags});
     }
 
@@ -105,7 +106,11 @@ export default class MyPlaylists extends Component {
                     <Form.Group>
                     <Form.Field width="5" className="searchInput" >
                         <label>What do you want to hear ?</label>
-                        <input name="freeText" value={this.state.freeText} onChange={this.handleInputChange} />
+                        <input name="freeText" value={this.state.freeText} onChange={this.handleInputChange} placeholder="I'm in a mood for..." />
+                    </Form.Field>
+                    <Form.Field width="2" style={{marginTop: '4px'}}>
+                        How many?
+                    <input type='number' name="songsLimit" placeholder="25" max="50" min="5" value={this.state.songsLimit} onChange={this.handleInputChange}  />
                     </Form.Field>
                     <Form.Field id='form-button-control-public' control={Button} content='Play!' color="blue" style={{marginTop: "28px"}} />
                     </Form.Group>
@@ -113,7 +118,7 @@ export default class MyPlaylists extends Component {
                 </Form>
                 {/*<Dropdown placeholder='Choose from out most common tags...' fluid multiple search selection options={this.state.optionalTags} className="dropdown-input" />*/}
 
-                {this.state.optionalTags.length >0 && <div className="dropdown-input"><Dropdown placeholder='Choose from our most common tags...' search selection options={this.state.optionalTags}  onChange={this.addFromTags.bind(this)} disabled={this.state.optionalTags.length === 0} /></div>}
+                {this.state.optionalTags.length >0 && <div className="dropdown-input"><Dropdown placeholder='Choose from our most common tags...' search selection options={this.state.optionalTags}  onChange={this.addFromTags.bind(this)} disabled={this.state.optionalTags.length === 0} text='Choose from our most common tags...'/></div>}
 
                 {suggestedWords.length > this.state.suggestIndex && <div style={{marginTop: "30px", marginBottom: "20px"}}>
                     You can serach for things like:
@@ -162,6 +167,7 @@ export default class MyPlaylists extends Component {
               </Segment>
                 {this.state.showPlaylist && this.state.playlistSongs.length >0 &&
                     <div>
+
                         {this.state.canSavePlaylist &&
                         <Form onSubmit={this.savePlaylist} style={{float: 'right', width: '70%'}}>
                             <Form.Group>

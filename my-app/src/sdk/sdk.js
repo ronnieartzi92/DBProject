@@ -42,8 +42,8 @@ export default {
     getArtistConcerts: function(token, artistId) {
         return axios.get(`/artist/events?id=${artistId}`, AuthHeader(token)).then(extractData);
     },
-    searchForPlaylist: function (token, searchText) {
-        return axios.get(`/track/search?text=${searchText}`, AuthHeader(token)).then(extractData);
+    searchForPlaylist: function (token, searchText, limit) {
+        return axios.get(`/track/search?text=${searchText}&limit=${limit}`, AuthHeader(token)).then(extractData);
     },
     savePlaylistTags: function (token, id, tags) {
         return axios.post(`/playlist/tags?id=${id}`, {tags}, AuthHeader(token)).then(extractData);

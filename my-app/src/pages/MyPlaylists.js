@@ -54,7 +54,7 @@ export default class MyPlaylists extends Component {
                     })}
                 </List>
             </Segment>
-                {this.state.showPlaylist && this.state.playlist.songs.length >0 && <Segment>
+                {this.state.showPlaylist && this.state.playlist.songs.length >0 && <Segment className="playlist-segment">
                  <Playlist playlistSongs={this.state.playlist.songs} listId={this.state.playlist.id}/>
                 </Segment>}
                 {this.state.showPlaylist && this.state.playlist.songs.length === 0 && <Segment>

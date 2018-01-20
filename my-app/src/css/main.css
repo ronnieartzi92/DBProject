@@ -103,6 +103,12 @@
   display: inline-block;
   padding: 0 9px; }
 
+.playlist-segment{
+  border: 0;
+    box-shadow: 0 !important;
+    -webkit-box-shadow: 0 !important;
+}
+
 @-webkit-keyframes slide-left {
   0% {
     -webkit-transform: translate3d(8, 0, 0); }
