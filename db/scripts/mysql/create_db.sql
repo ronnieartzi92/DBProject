@@ -88,12 +88,8 @@ CREATE TABLE tracks_to_play_lists (
 );
 
 CREATE TABLE tracks_isam (
-	id INT AUTO_INCREMENT,
-	artist_id INT NOT NULL,
+	id INT,
 	track_name VARCHAR(255) NOT NULL,
-    album VARCHAR(255),
-    play_count BIGINT NOT NULL,
-	img VARCHAR(255),
 	lyrics TEXT,
 	description TEXT,
 	PRIMARY KEY (id),
