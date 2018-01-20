@@ -5,11 +5,10 @@ sys.path.append('.')
 sys.path.append('../')
 
 from auth import auth
-from routers.users import users
 from routers.playlist_router import playlist_router
 from routers.tag_router import tag_router
 from routers.artist_router import artist_router
-from mysql_service import *
+from routers.track_router import track_router
 
 app = Flask(__name__)
 app.secret_key = "omri22"
@@ -29,8 +28,8 @@ def after_request(response):
     return response
 
 if __name__ == "__main__":
-    # app.register_blueprint(users)
     app.register_blueprint(playlist_router)
     app.register_blueprint(tag_router)
     app.register_blueprint(artist_router)
+    app.register_blueprint(track_router)
     app.run()
