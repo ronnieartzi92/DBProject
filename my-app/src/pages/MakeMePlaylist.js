@@ -54,8 +54,7 @@ export default class MyPlaylists extends Component {
     }
 
     handleSubmit(event) {
-        this.setState({ isLoading: true });
-        alert('A search was submitted: '+this.state.freeText );
+        this.setState({ isLoading: true, showPlaylist: false });
         sdk.searchForPlaylist(this.props.userToken, this.state.freeText, this.state.songsLimit).then( (data) =>{
             console.log(data);
             this.setState({playlistSongs : data, isLoading: false, showPlaylist: true});
