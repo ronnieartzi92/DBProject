@@ -50,5 +50,11 @@ export default {
     },
     getTags: function (token) {
         return axios.get(`/tag`,AuthHeader(token)).then(extractData);
+    },
+    makePlaylist: function (token, path) {
+        return axios.get(`/track/${path}`,AuthHeader(token)).then(extractData);
+    },
+    getSimilarPlaylist: function (token, playId) {
+        return axios.get(`/playlist_mode?playlist_id=${playId}`,AuthHeader(token)).then(extractData);
     }
 }

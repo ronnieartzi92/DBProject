@@ -14,7 +14,7 @@ import Tags from 'react-tagging-input';
 export default class Playlist extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {playlist: this.props.playlistSongs, currentPlayedIndex: 0, concerts: [], tags: [], listId: this.props.listId};
+        this.state = {playlist: this.props.playlistSongs, currentPlayedIndex: 0, concerts: [], tags: [], listId: this.props.listId, playlistName: this.props.playlistName};
     };
 
 
@@ -56,6 +56,14 @@ export default class Playlist extends Component {
             this.playSong(this.state.currentPlayedIndex + 1);
         else this.playSong(0);
     }
+    getSimilarPlaylist(){
+        sdk.getSimilarPlaylist(this.props.userToken, this.state.listId).then( (data) =>{
+            console.log(data);
+            this.setState({playlist : data.songs, currentPlayedIndex: 0, concerts: [], tags: [], listId: data.id, playlistName: data.play_list_name});
+        }, (reason)=> {
+            alert("Server Not Responding....");
+        });
+    }
 
     render() {
         const currVid = this.state.playlist &&
@@ -64,6 +72,7 @@ export default class Playlist extends Component {
         this.state.playlist[this.state.currentPlayedIndex] ? this.state.playlist[this.state.currentPlayedIndex].artist_name : "the artist";
         return(
             <div className="playlist-container">
+                {this.state.playlistName && <h2>{this.state.playlistName}</h2>}
                 {this.state.listId && <div className="tags-container">
                     Add tags to this playlist:
                     <Tags
@@ -74,6 +83,12 @@ export default class Playlist extends Component {
                         onRemoved={this.onTagRemoved.bind(this)}/>
                     <Button size='mini' onClick={this.saveTags.bind(this)}>
                         Save Tags
+                    </Button>
+                </div>
+                }
+                {this.state.listId && <div className="similar-container">
+                    <Button size='medium' color='blue' onClick={this.getSimilarPlaylist.bind(this)}>
+                        Give me a similar playlist
                     </Button>
                 </div>
                 }

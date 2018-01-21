@@ -94,6 +94,11 @@
     margin: 25px;
     width: 340px;
 }
+.similar-container{
+    float: right;
+    margin-top: -85px;
+    margin-right: 25px;
+}
 .react-tags input, .react-tags__container > li {
   font-size: 12px;
   height: 26px;
@@ -104,10 +109,11 @@
   padding: 0 9px; }
 
 .playlist-segment{
-  border: 0;
-    box-shadow: 0 !important;
-    -webkit-box-shadow: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
 }
+
 
 @-webkit-keyframes slide-left {
   0% {

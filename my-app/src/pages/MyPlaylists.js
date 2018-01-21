@@ -23,7 +23,7 @@ export default class MyPlaylists extends Component {
 
     startPlaylist(id){
         alert("play playlist #"+id);
-        this.setState({ isLoading: true });
+        this.setState({ isLoading: true, showPlaylist: false });
         sdk.getPlaylistSongs(this.props.userToken, id).then( (data) =>{
             console.log(data);
             this.setState({ showPlaylist: true, playlist: data, isLoading: false });
@@ -55,7 +55,7 @@ export default class MyPlaylists extends Component {
                 </List>
             </Segment>
                 {this.state.showPlaylist && this.state.playlist.songs.length >0 && <Segment className="playlist-segment">
-                 <Playlist playlistSongs={this.state.playlist.songs} listId={this.state.playlist.id}/>
+                 <Playlist playlistSongs={this.state.playlist.songs} listId={this.state.playlist.id} playlistName={this.state.playlist.play_list_name}/>
                 </Segment>}
                 {this.state.showPlaylist && this.state.playlist.songs.length === 0 && <Segment>
                     <div>We couldn't find any songs :(</div>

@@ -67,6 +67,17 @@ export default class MyPlaylists extends Component {
         event.preventDefault();
     }
 
+    makePlaylist(clickType){
+        this.setState({ isLoading: true });
+        sdk.makePlaylist(this.props.userToken, clickType).then( (data) =>{
+            console.log(data);
+            this.setState({playlistSongs : data, isLoading: false, showPlaylist: true});
+        }, (reason)=> {
+            this.setState({playlistSongs: [], isLoading: false, showPlaylist: true});
+            alert("Server Not Responding....");
+        });
+    }
+
     savePlaylist(event) {
         sdk.savePlaylist(this.props.userToken, this.state.playlistName, this.state.playlistSongs).then( (data) =>{
             console.log(data);
@@ -131,31 +142,31 @@ export default class MyPlaylists extends Component {
                   <Grid className="buttonsGrid">
                       <Grid.Row columns={5}>
                           <Grid.Column>
-                              <Button size='big'  color='orange'>
+                              <Button size='big'  color='orange' onClick={this.makePlaylist.bind(this,'concert_tour')}>
                                   Take me to a show
                               </Button>
                               <div style={{marginTop: '10px'}}>Get songs of the 5 top artists with the most diverse places of events in the next year</div>
                           </Grid.Column>
                           <Grid.Column>
-                              <Button size='big' color='yellow'>
+                              <Button size='big' color='yellow' onClick={this.makePlaylist.bind(this,'top_of_the_top')}>
                                   The top of the top
                               </Button>
                               <div style={{marginTop: '10px'}}>Get top songs of unique and top artists</div>
                           </Grid.Column>
                           <Grid.Column>
-                              <Button size='big'  color='olive'>
+                              <Button size='big'  color='olive' onClick={this.makePlaylist.bind(this,'artist_on_fire')}>
                                   Artists on fire
                               </Button>
                               <div style={{marginTop: '10px'}}>Get songs of the 5 artists who have the most events in the next year and have been listened the most</div>
                           </Grid.Column>
                           <Grid.Column>
-                              <Button size='big' color='green'>
+                              <Button size='big' color='green' onClick={this.makePlaylist.bind(this,'something_new')}>
                                   Something new
                               </Button>
                               <div style={{marginTop: '10px'}}>Get songs that has been published in the last year from different artists</div>
                           </Grid.Column>
                           <Grid.Column>
-                              <Button size='big' color='teal'>
+                              <Button size='big' color='teal' onClick={this.makePlaylist.bind(this,'great_album')}>
                                   Gotta be a great album
                               </Button>
                               <div style={{marginTop: '10px'}}>Get the songs from the album which contain a top rates song</div>
