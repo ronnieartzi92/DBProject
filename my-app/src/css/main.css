@@ -50,7 +50,8 @@
 }
 
 .ui.tiny.image{
-    width: 200px !important;
+    width: 175px !important;
+    height: 160px !important;
 }
 .searchInput{
     margin-left: 200px !important;

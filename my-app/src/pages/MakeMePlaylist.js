@@ -116,7 +116,7 @@ export default class MyPlaylists extends Component {
                     <Form.Group>
                     <Form.Field width="5" className="searchInput" >
                         <label>What do you want to hear ?</label>
-                        <input name="freeText" value={this.state.freeText} onChange={this.handleInputChange} placeholder="I'm in a mood for..." />
+                        <input name="freeText" value={this.state.freeText} onChange={this.handleInputChange} placeholder="I'm in a mood for..." required="required"/>
                     </Form.Field>
                     <Form.Field width="2" style={{marginTop: '4px'}}>
                         How many?
