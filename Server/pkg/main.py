@@ -27,8 +27,14 @@ def after_request(response):
     return response
 
 if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        host = "0.0.0.0"
+        port = 5000
+    else:
+        host = sys.argv[1]
+        port = int(sys.argv[2])
     app.register_blueprint(playlist_router)
     app.register_blueprint(tag_router)
     app.register_blueprint(artist_router)
     app.register_blueprint(track_router)
-    app.run(host='delta-tomcat-vm.cs.tau.ac.il', port=40744)
+    app.run(host=host, port=port)
