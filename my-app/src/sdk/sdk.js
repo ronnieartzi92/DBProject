@@ -29,7 +29,7 @@ export default {
     savePlaylist: function (token, name, list) {
         let ids = [];
         list.forEach((item) => {
-            ids.push(item.id)
+            ids.push(item.track_id)
         });
         return axios.post(`/playlist`, {name, songs: ids}, AuthHeader(token)).then(extractData);
     },
