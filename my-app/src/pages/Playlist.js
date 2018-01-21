@@ -7,7 +7,6 @@ import {PlayListItem} from './../Components/PlaylistItem';
 import YoutubeFrame from "../Components/YoutubeFrame";
 import {ArtistNextConcerts} from "../Components/ArtistNextConcert";
 import sdk from "./../sdk/sdk"
-import {concerts, songsList} from "../utils/consts";
 import Tags from 'react-tagging-input';
 
 
@@ -104,7 +103,7 @@ export default class Playlist extends Component {
                 </div>
                 {this.state.concerts.length > 0 && <div className="concerts">
                     <div style={{color: "black"}}>Check-Out {artistName}'s upcoming shows:</div>
-                    <ArtistNextConcerts concerts={concerts}/>
+                    <ArtistNextConcerts concerts={this.state.concerts}/>
                 </div>
                 }
             </div>

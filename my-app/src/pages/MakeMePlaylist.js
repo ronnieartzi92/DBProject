@@ -6,7 +6,6 @@ import { Form, Button, Segment , Grid, Dropdown} from 'semantic-ui-react'
 import Playlist from "./Playlist";
 import GroupButtons from "../Components/GroupButtons";
 import sdk from "./../sdk/sdk"
-import {songsList} from "../utils/consts";
 
 
 const suggestedWords = [
@@ -61,7 +60,7 @@ export default class MyPlaylists extends Component {
             console.log(data);
             this.setState({playlistSongs : data, isLoading: false, showPlaylist: true});
         }, (reason)=> {
-            this.setState({playlistSongs: songsList, isLoading: false, showPlaylist: true});
+            this.setState({playlistSongs: [], isLoading: false, showPlaylist: true});
             alert("Server Not Responding....");
         });
         event.preventDefault();
@@ -192,13 +191,12 @@ export default class MyPlaylists extends Component {
                 <Playlist playlistSongs={this.state.playlistSongs}/>
                     </div>}
               {this.state.showPlaylist && this.state.playlistSongs.length === 0 &&
-              <div>
+              <Segment>
                   <div>We couldn't find any songs :(</div>
                   <div>Try to rephrase your search</div>
-              </div>
+              </Segment>
               }
           </div>
         )
     }
 }
-
