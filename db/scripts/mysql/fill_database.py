@@ -71,7 +71,7 @@ class MysqlScripts:
                         continue
 
                     # Youtube
-                    youtube = Youtube(track_id, youtube_dict['video_id'], youtube_dict['duration'], youtube_dict['date_published'])
+                    youtube = Youtube(track_id, youtube_dict['video_id'], youtube_dict['date_published'])
                     try:
                         youtube.insert(cursor)
                         self.yotubes += 1

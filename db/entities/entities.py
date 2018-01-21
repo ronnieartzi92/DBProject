@@ -21,11 +21,10 @@ class AbstractTable(ABC):
 class User(AbstractTable):
     table_name = 'users'
 
-    def __init__(self, email, google_id, google_img, is_admin):
+    def __init__(self, email, google_id, google_img):
         self.email = email.lower()
         self.google_id = google_id.lower()
         self.google_img = google_img.lower()
-        self.is_admin = is_admin
 
 
 class PlayList(AbstractTable):
@@ -78,10 +77,9 @@ class TrackToPlayList(AbstractTable):
 class Youtube(AbstractTable):
     table_name = 'youtubes'
 
-    def __init__(self, track_id, video_id, duration, date_published):
+    def __init__(self, track_id, video_id, date_published):
         self.track_id = track_id
         self.video_id = video_id
-        self.duration = duration
         self.date_published = date_published
 
 
