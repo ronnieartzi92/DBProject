@@ -18,7 +18,7 @@ def run_get_query(query):
 
 
 def run_and_commit_query(query):
-    nx = mysql.connector.connect(user=USER_NAME, password=PASSWORD, database=DB)
+    nx = mysql.connector.connect(host=HOST, user=USER_NAME, password=PASSWORD, database=DB)
     cursor = nx.cursor(dictionary=True)
     cursor.execute(query)
     nx.commit()
