@@ -71,9 +71,8 @@ def youtube_search(artist, name):
         # reformatting the duration for seconds.
         duration = re.findall('[0-9]*', duration)
         minutes = 0 if duration[2] == '' else int(duration[2])
-        seconds = 0 if duration[4] == '' else int(duration[2])
+        seconds = 0 if duration[4] == '' else int(duration[4])
         final_duration = int(minutes) * 60 + int(seconds)
-
         # generating youtube object and return it.
         youtube_song = {'description': youtube_description, 'duration': final_duration,
                         'date_published': youtube_published, 'video_id': video_id, 'image': image}
@@ -83,4 +82,3 @@ def youtube_search(artist, name):
         print "error youtube for: {0}".format(query)
         print e
         return None
-
