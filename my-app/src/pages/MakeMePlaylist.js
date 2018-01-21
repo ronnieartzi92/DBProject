@@ -30,8 +30,9 @@ export default class MyPlaylists extends Component {
 
         sdk.getTags(this.props.userToken).then( (data) =>{
             let tags = [];
-            data.slice(0, 100).forEach((el) => {
-                tags.push({key: el.id, value: el.tag_name, text: el.tag_name});
+            data.slice(0, 500).forEach((el) => {
+                if(!el.tag_name.contains(' '))
+                 tags.push({key: el.id, value: el.tag_name, text: el.tag_name});
             });
             console.log("tags after process");
             console.log(tags);
