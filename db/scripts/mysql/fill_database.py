@@ -20,8 +20,6 @@ class MysqlScripts:
         self.events = 0
         self.tracks_isam = 0
 
-
-
     def insert(self, path):
 
         # creating connection to db

@@ -1,7 +1,9 @@
-from abc import ABC
+from abc import ABCMeta
 
 
-class AbstractTable(ABC):
+class AbstractTable:
+    __metaclass__ = ABCMeta
+
     @property
     def table_name(self):
         raise NotImplementedError
