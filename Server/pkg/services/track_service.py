@@ -89,18 +89,21 @@ class TrackService:
     @staticmethod
     def top_of_the_top(limit):
         q = """
-                SELECT * 
+                SELECT artists_tracks_youtubes.* 
                 FROM artists_tracks_youtubes
-                WHERE track_id IN (
-                    SELECT MIN(id) FROM tracks
-                    WHERE(tracks.artist_id, tracks.play_count) IN (
+                INNER JOIN 
+                (
+                    SELECT MIN(id) as id 
+                    FROM tracks
+                    INNER JOIN 
+                    (
                         SELECT DISTINCT tracks.artist_id, MAX(tracks.play_count)
                         FROM tracks
                         GROUP BY artist_id
-                    )
-                    GROUP BY artist_id
-                )
-                ORDER BY artist_play_count DESC 
+                    ) AS y ON tracks.artist_id = y.artist_id
+                    GROUP BY tracks.artist_id
+                ) AS x ON artists_tracks_youtubes.track_id = x.id 
+                ORDER BY artist_play_count DESC
                 LIMIT {}
                         """
         q = q.format(limit)
