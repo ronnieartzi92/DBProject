@@ -188,7 +188,7 @@ export default class MyPlaylists extends Component {
                         </Form>
                         }
 
-                <Playlist playlistSongs={this.state.playlistSongs}/>
+                <Playlist playlistSongs={this.state.playlistSongs} userToken={this.props.userToken}/>
                     </div>}
               {this.state.showPlaylist && this.state.playlistSongs.length === 0 &&
               <Segment>

@@ -54,7 +54,7 @@ export default class MyPlaylists extends Component {
                 </List>
             </Segment>
                 {this.state.showPlaylist && this.state.playlist.songs.length >0 && <Segment className="playlist-segment">
-                 <Playlist playlistSongs={this.state.playlist.songs} listId={this.state.playlist.id} playlistName={this.state.playlist.play_list_name}/>
+                 <Playlist userToken={this.props.userToken} playlistSongs={this.state.playlist.songs} listId={this.state.playlist.id} playlistName={this.state.playlist.play_list_name}/>
                 </Segment>}
                 {this.state.showPlaylist && this.state.playlist.songs.length === 0 && <Segment>
                     <div>We couldn't find any songs :(</div>
