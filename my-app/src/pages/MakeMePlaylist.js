@@ -58,7 +58,7 @@ export default class MyPlaylists extends Component {
         this.setState({ isLoading: true, showPlaylist: false });
         sdk.searchForPlaylist(this.props.userToken, this.state.freeText, this.state.songsLimit).then( (data) =>{
             console.log(data);
-            this.setState({playlistSongs : data, isLoading: false, showPlaylist: true});
+            this.setState({playlistSongs : data, isLoading: false, showPlaylist: true, canSavePlaylist: true});
         }, (reason)=> {
             this.setState({playlistSongs: [], isLoading: false, showPlaylist: true});
             alert("Server Not Responding....");
@@ -70,7 +70,7 @@ export default class MyPlaylists extends Component {
         this.setState({ isLoading: true, showPlaylist: false });
         sdk.makePlaylist(this.props.userToken, clickType).then( (data) =>{
             console.log(data);
-            this.setState({playlistSongs : data, isLoading: false, showPlaylist: true});
+            this.setState({playlistSongs : data, isLoading: false, showPlaylist: true, canSavePlaylist: true});
         }, (reason)=> {
             this.setState({playlistSongs: [], isLoading: false, showPlaylist: true});
             alert("Server Not Responding....");
@@ -177,7 +177,6 @@ export default class MyPlaylists extends Component {
               </Segment>
                 {this.state.showPlaylist && this.state.playlistSongs.length >0 &&
                     <div>
-
                         {this.state.canSavePlaylist &&
                         <Form onSubmit={this.savePlaylist} style={{float: 'right', width: '70%'}}>
                             <Form.Group>
@@ -187,12 +186,11 @@ export default class MyPlaylists extends Component {
                             </Form.Group>
                         </Form>
                         }
-
                 <Playlist playlistSongs={this.state.playlistSongs} userToken={this.props.userToken}/>
                     </div>}
               {this.state.showPlaylist && this.state.playlistSongs.length === 0 &&
               <Segment>
-                  <div>We couldn't find any songs :(</div>
+                  <div>We couldn't find any songs, or your search returns too many results :(</div>
                   <div>Try to rephrase your search</div>
               </Segment>
               }

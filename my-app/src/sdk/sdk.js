@@ -3,7 +3,7 @@
  */
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:5000/';
+axios.defaults.baseURL = 'http://delta-tomcat-vm.cs.tau.ac.il:40744/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.put['Content-Type'] = 'application/json';
 
