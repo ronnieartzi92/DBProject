@@ -148,7 +148,7 @@ if __name__ == "__main__":
     else:
         user = 'root'
         password = ''
-        db = 'DbMysql04'
+        db = 'songs_track'
     mysql_scripts = MysqlScripts(user, password, db)
     mysql_scripts.insert_folder("create_data/files")
     print("------------------------------------- STATS -----------------------------------------")
