@@ -9,9 +9,9 @@ export const songsList = [
         "duration": 290,
         "id": 1,
         "img": "https://lastfm-img2.akamaized.net/i/u/174s/fa36962445080a3357cd1585fd2cb474.png",
-        "name": "The A Team",
+        "track_name": "The A Team",
         "play_count": 5084291,
-        "video_id": "UAWcs5H-qgQ"
+        "video_id": "UAWcs5H-qgQ",
     },
     {
         "artist_id": 1,
@@ -19,7 +19,7 @@ export const songsList = [
         "duration": 290,
         "id": 3,
         "img": "https://lastfm-img2.akamaized.net/i/u/174s/fa36962445080a3357cd1585fd2cb474.png",
-        "name": "I See Fire",
+        "track_name": "I See Fire",
         "play_count": 3920075,
         "video_id": "UAWcs5H-qgQ"
     },
@@ -29,7 +29,7 @@ export const songsList = [
         "duration": 290,
         "id": 4,
         "img": "https://lastfm-img2.akamaized.net/i/u/174s/fa36962445080a3357cd1585fd2cb474.png",
-        "name": "Lego House",
+        "track_name": "Lego House",
         "play_count": 3272995,
         "video_id": "UAWcs5H-qgQ"
     }
