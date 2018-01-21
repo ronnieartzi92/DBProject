@@ -17,9 +17,12 @@ export const ArtistNextConcerts = ({concerts = []}) => {
                     <Item.Content>
                         <Item.Header as='a' href={item.url} target="_blank">{item.title}</Item.Header>
                         <Item.Meta>
+                            <span className='cinema'>{item.venue}</span>
+                        </Item.Meta>
+                        <Item.Meta>
                             <span className='cinema'>{item.city} - {item.country}</span>
                         </Item.Meta>
-                        <Item.Description>{item.date}</Item.Description>
+                        <Item.Description>{item.event_date}</Item.Description>
                         <Item.Extra>
                             <a href={item.url} target="_blank">
                             <Button primary floated='right' >
