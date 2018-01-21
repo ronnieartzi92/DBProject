@@ -6,12 +6,28 @@ class TrackService:
 
     @staticmethod
     def full_text_search(str_to_search, limit):
+        splited = ",".join(["'"+n+"'" for n in str_to_search.split(' ')])
+
         q = """
-          SELECT * from artists_tracks_youtubes
-          INNER JOIN (SELECT id FROM tracks_isam WHERE MATCH(lyrics,description,track_name) AGAINST ('{}') LIMIT {}) t 
-          ON artists_tracks_youtubes.track_id = t.id
-        """
-        q = q.format(str_to_search, limit)
+            SELECT * from
+            (
+                SELECT artists_tracks_youtubes.*
+                FROM artists_tracks_youtubes
+                    INNER JOIN (SELECT id
+                                            FROM tracks_isam
+                                            WHERE MATCH(lyrics, description, track_name) AGAINST('{}')) t
+                        ON artists_tracks_youtubes.track_id = t.id
+                UNION DISTINCT
+                (
+                    SELECT DISTINCT artists_tracks_youtubes.*
+                    FROM artists_tracks_youtubes, tracks_to_tags, tags
+                    WHERE artists_tracks_youtubes.track_id = tracks_to_tags.track_id
+                                AND tracks_to_tags.tag_id = tags.id
+                                AND tags.tag_name IN ({}))
+            ) tbl
+        ORDER BY track_play_count DESC limit {}
+                  """
+        q = q.format(str_to_search, splited, limit)
         re = run_get_query(q)
         return jsonify(re)
 
@@ -27,7 +43,7 @@ class TrackService:
                                   SELECT
                                     artist_id,
                                     country
-                                  FROM songs_track.events
+                                  FROM events
                                   GROUP BY artist_id, country
                                 ) t
                            GROUP BY artist_id
@@ -54,8 +70,8 @@ class TrackService:
                                                SELECT
                                                  artist_id,
                                                  count(id) AS 'events'
-                                               FROM songs_track.events
-                                               WHERE date <= DATE_ADD(CURDATE(), INTERVAL 1 YEAR)
+                                               FROM events
+                                               WHERE event_date <= DATE_ADD(CURDATE(), INTERVAL 1 YEAR)
                                                GROUP BY artist_id
                                              ) t
                                WHERE artists.id = t.artist_id
