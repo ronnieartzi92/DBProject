@@ -59,7 +59,7 @@
 .playlist-container{
     margin: 75px auto;
     width: 100%;
-    margin-left: 10% !important;
+    margin-left: 10px !important;
 }
 .youtube-frame{
     float: left;
@@ -68,7 +68,7 @@
 .playlist-left{
     float: left;
     margin-left: 50px;
-    margin-right: 50px;
+    margin-right: 10px;
     overflow-y: scroll;
     height: 400px;
 }
