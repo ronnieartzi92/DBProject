@@ -5,7 +5,6 @@ CREATE TABLE users (
 	email VARCHAR(255) NOT NULL UNIQUE, 
 	google_id VARCHAR(255) NOT NULL, 
 	google_img VARCHAR(255), 
-	is_admin BOOLEAN DEFAULT FALSE, 
 	PRIMARY KEY (id)
 );
 
