@@ -20,7 +20,6 @@ export default class MyPlaylists extends Component {
     }
 
     startPlaylist(id){
-        alert("play playlist #"+id);
         this.setState({ isLoading: true, showPlaylist: false });
         sdk.getPlaylistSongs(this.props.userToken, id).then( (data) =>{
             console.log(data);
