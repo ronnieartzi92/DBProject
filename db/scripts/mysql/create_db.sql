@@ -1,5 +1,4 @@
-CREATE DATABASE songs_track CHARSET utf8;
-USE songs_track;
+USE DbMysql04;
 
 CREATE TABLE users (
 	id INT AUTO_INCREMENT, 
@@ -14,16 +13,18 @@ CREATE TABLE play_lists (
 	id INT AUTO_INCREMENT, 
 	user_id INT NOT NULL, 
 	play_list_name VARCHAR(255), 
-	date_created DATETIME DEFAULT CURRENT_TIMESTAMP, 
+	date_created DATETIME NOT NULL, 
 	PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    INDEX(user_id)
 );
 
 CREATE TABLE artists (
 	id INT AUTO_INCREMENT, 
     artist_name VARCHAR(255) NOT NULL UNIQUE,
     play_count BIGINT NOT NULL,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+    INDEX(play_count)
 );
 
 CREATE TABLE tracks (
@@ -36,7 +37,9 @@ CREATE TABLE tracks (
 	lyrics TEXT, 
 	description TEXT,
 	PRIMARY KEY (id),
-    FOREIGN KEY (artist_id) REFERENCES artists(id)
+    FOREIGN KEY (artist_id) REFERENCES artists(id),
+    INDEX(artist_id),
+    INDEX(play_count)
 );
 
 CREATE TABLE youtubes (
@@ -46,7 +49,9 @@ CREATE TABLE youtubes (
 	duration INT, 
 	date_published DATETIME NOT NULL,  
 	PRIMARY KEY (id),
-    FOREIGN KEY (track_id) REFERENCES tracks(id)
+    FOREIGN KEY (track_id) REFERENCES tracks(id),
+    INDEX(track_id),
+    INDEX(date_published)
 );
 
 CREATE TABLE tags (
@@ -62,12 +67,14 @@ CREATE TABLE events (
 	country VARCHAR(255),
 	city VARCHAR(255),
 	venue VARCHAR(255),
-	date DATETIME NOT NULL,
+	event_date DATETIME NOT NULL,
 	url VARCHAR(255) NOT NULL,
 	title VARCHAR(511),
 	img VARCHAR(255),
 	PRIMARY KEY (id),
-    FOREIGN KEY (artist_id) REFERENCES artists(id)
+    FOREIGN KEY (artist_id) REFERENCES artists(id),
+    INDEX(artist_id),
+    INDEX(event_date)
 );
 
 CREATE TABLE tracks_to_tags (
@@ -75,7 +82,9 @@ CREATE TABLE tracks_to_tags (
 	tag_id INT NOT NULL, 
 	PRIMARY KEY (track_id, tag_id),
     FOREIGN KEY (track_id) REFERENCES tracks(id),
-    FOREIGN KEY (tag_id) REFERENCES tags(id)
+    FOREIGN KEY (tag_id) REFERENCES tags(id),
+    INDEX(track_id),
+    INDEX(tag_id)
 );
 
 CREATE TABLE tracks_to_play_lists (
@@ -84,18 +93,37 @@ CREATE TABLE tracks_to_play_lists (
 	track_position INT NOT NULL,
 	PRIMARY KEY (play_list_id, track_id),
     FOREIGN KEY (play_list_id) REFERENCES play_lists(id),
-    FOREIGN KEY (track_id) REFERENCES tracks(id)
+    FOREIGN KEY (track_id) REFERENCES tracks(id),
+    INDEX(play_list_id),
+    INDEX(track_id)
 );
 
 CREATE TABLE tracks_isam (
-	id INT AUTO_INCREMENT,
-	artist_id INT NOT NULL,
+	id INT,
 	track_name VARCHAR(255) NOT NULL,
-    album VARCHAR(255),
-    play_count BIGINT NOT NULL,
-	img VARCHAR(255),
 	lyrics TEXT,
 	description TEXT,
 	PRIMARY KEY (id),
     FULLTEXT INDEX (lyrics, description, track_name)
 ) ENGINE = MyISAM;
+
+CREATE VIEW artists_tracks_youtubes AS
+SELECT artists.id as artist_id, artists.artist_name, artists.play_count as artist_play_count, tracks.id as track_id, tracks.track_name, tracks.img, 
+	tracks.play_count as track_play_count, youtubes.video_id, youtubes.date_published,
+youtubes.duration
+FROM youtubes
+INNER JOIN tracks ON youtubes.track_id = tracks.id
+INNER JOIN artists ON tracks.artist_id = artists.id;
+
+CREATE VIEW artists_newest_track AS
+SELECT DISTINCT x.id as artist_id, x.artist_name, x.play_count as artist_play_count, tracks.id as track_id,
+    tracks.track_name, tracks.img, tracks.play_count as track_play_count, youtubes.video_id, youtubes.date_published
+FROM youtubes
+INNER JOIN tracks ON youtubes.track_id = tracks.id
+INNER JOIN artists AS x ON tracks.artist_id = x.id
+AND youtubes.date_published = (
+	SELECT MAX(date_published) 
+    FROM youtubes
+	INNER JOIN tracks ON tracks.id = youtubes.track_id
+    WHERE x.id = tracks.artist_id
+);

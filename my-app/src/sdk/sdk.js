@@ -29,7 +29,7 @@ export default {
     savePlaylist: function (token, name, list) {
         let ids = [];
         list.forEach((item) => {
-            ids.push(item.id)
+            ids.push(item.track_id)
         });
         return axios.post(`/playlist`, {name, songs: ids}, AuthHeader(token)).then(extractData);
     },
@@ -42,13 +42,19 @@ export default {
     getArtistConcerts: function(token, artistId) {
         return axios.get(`/artist/events?id=${artistId}`, AuthHeader(token)).then(extractData);
     },
-    searchForPlaylist: function (token, searchText) {
-        return axios.get(`/track/search?text=${searchText}`, AuthHeader(token)).then(extractData);
+    searchForPlaylist: function (token, searchText, limit) {
+        return axios.get(`/track/search?text=${searchText}&limit=${limit}`, AuthHeader(token)).then(extractData);
     },
     savePlaylistTags: function (token, id, tags) {
         return axios.post(`/playlist/tags?id=${id}`, {tags}, AuthHeader(token)).then(extractData);
     },
     getTags: function (token) {
         return axios.get(`/tag`,AuthHeader(token)).then(extractData);
+    },
+    makePlaylist: function (token, path) {
+        return axios.get(`/track/${path}`,AuthHeader(token)).then(extractData);
+    },
+    getSimilarPlaylist: function (token, playId) {
+        return axios.get(`/track/playlist_mode?playlist_id=${playId}`,AuthHeader(token)).then(extractData);
     }
 }

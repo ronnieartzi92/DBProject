@@ -5,7 +5,6 @@ import React, {Component} from 'react'
 import { List, Segment } from 'semantic-ui-react'
 import sdk from "./../sdk/sdk"
 import Playlist from "./Playlist";
-import {songsList} from "../utils/consts";
 
 export default class MyPlaylists extends Component {
     constructor(props, context) {
@@ -15,21 +14,19 @@ export default class MyPlaylists extends Component {
             console.log(data);
             this.setState({playlists : data, isLoading: false});
         }, (reason)=> {
-            const playlists = [{play_list_name: "my songs", date_created: "01.01.2017", id: 1}, {play_list_name: "my songs 2222", date_created: "02.02.2017", id: 2}];
-            this.setState({playlists, isLoading: false});
+            this.setState({playlists: [], isLoading: false});
             alert("Server Not Responding....");
         });
     }
 
     startPlaylist(id){
-        alert("play playlist #"+id);
-        this.setState({ isLoading: true });
+        this.setState({ isLoading: true, showPlaylist: false });
         sdk.getPlaylistSongs(this.props.userToken, id).then( (data) =>{
             console.log(data);
             this.setState({ showPlaylist: true, playlist: data, isLoading: false });
         }, (reason)=> {
             alert("Server Not Responding....");
-            this.setState({isLoading: false, showPlaylist: true, playlist: {songs: songsList, id: 1 } });
+            this.setState({isLoading: false, showPlaylist: false });
         });
     }
     render() {
@@ -54,8 +51,8 @@ export default class MyPlaylists extends Component {
                     })}
                 </List>
             </Segment>
-                {this.state.showPlaylist && this.state.playlist.songs.length >0 && <Segment>
-                 <Playlist playlistSongs={this.state.playlist.songs} listId={this.state.playlist.id}/>
+                {this.state.showPlaylist && this.state.playlist.songs.length >0 && <Segment className="playlist-segment">
+                 <Playlist userToken={this.props.userToken} playlistSongs={this.state.playlist.songs} listId={this.state.playlist.id} playlistName={this.state.playlist.play_list_name}/>
                 </Segment>}
                 {this.state.showPlaylist && this.state.playlist.songs.length === 0 && <Segment>
                     <div>We couldn't find any songs :(</div>

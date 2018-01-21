@@ -42,15 +42,16 @@
     margin: -.21425em 0 0;
     font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 17px;
     cursor: pointer;
     margin-left: 13px;
     line-height: 2;
-    width: 250px;
+    width: 210px;
 }
 
 .ui.tiny.image{
-    width: 116px !important;
+    width: 175px !important;
+    height: 160px !important;
 }
 .searchInput{
     margin-left: 200px !important;
@@ -58,7 +59,7 @@
 
 .playlist-container{
     margin: 75px auto;
-    width: 1175px;
+    width: 1280px;
 }
 .youtube-frame{
     float: left;
@@ -66,8 +67,8 @@
 }
 .playlist-left{
     float: left;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 20px;
+    margin-right: 10px;
     overflow-y: scroll;
     height: 400px;
 }
@@ -94,6 +95,11 @@
     margin: 25px;
     width: 340px;
 }
+.similar-container{
+    margin-top: -85px;
+    float: right;
+    margin-right: 350px;
+}
 .react-tags input, .react-tags__container > li {
   font-size: 12px;
   height: 26px;
@@ -102,6 +108,13 @@
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   display: inline-block;
   padding: 0 9px; }
+
+.playlist-segment{
+  border: 0 !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+
 
 @-webkit-keyframes slide-left {
   0% {

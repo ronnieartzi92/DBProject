@@ -1,14 +1,16 @@
 from __future__ import print_function
 import json
 import os
+import sys
 
 import mysql.connector
-from db.entities.entities import *
+from entities import *
 
 
 class MysqlScripts:
-    def __init__(self, user, database):
+    def __init__(self, user, password, database):
         self.user = user
+        self.password = password
         self.database = database
         self.artists = 0
         self.tracks = 0
@@ -18,12 +20,10 @@ class MysqlScripts:
         self.events = 0
         self.tracks_isam = 0
 
-
-
     def insert(self, path):
 
         # creating connection to db
-        cnx = mysql.connector.connect(user=self.user, database=self.database)
+        cnx = mysql.connector.connect(user=self.user, password=self.password, database=self.database)
         cursor = cnx.cursor()
 
         # inserting json file to db
@@ -45,7 +45,6 @@ class MysqlScripts:
                     MysqlScripts.print_entity(e, artist)
                     continue
 
-
                 # Track
                 if len(artist_track_list) == 0:
                     MysqlScripts.print_entity("No tracks", artist)
@@ -63,7 +62,7 @@ class MysqlScripts:
                         continue
 
                     # Track_ISAM - for full text search
-                    track_isam = TrackIsam(track)
+                    track_isam = TrackIsam(track_id, track)
                     try:
                         track_isam.insert(cursor)
                         self.tracks_isam += 1
@@ -138,7 +137,19 @@ class MysqlScripts:
 
 
 if __name__ == "__main__":
-    mysql_scripts = MysqlScripts('root', 'songs_track')
+    if len(sys.argv) == 2 and sys.argv[1] == 'prod':
+        user = 'DbMysql04'
+        password = 'DbMysql04'
+        db = 'DbMysql04'
+    elif len(sys.argv) == 2 and sys.argv[1] == 'yossefy':
+        user = 'root'
+        password = '123456'
+        db = 'DbMysql04'
+    else:
+        user = 'root'
+        password = ''
+        db = 'DbMysql04'
+    mysql_scripts = MysqlScripts(user, password, db)
     mysql_scripts.insert_folder("create_data/files")
     print("------------------------------------- STATS -----------------------------------------")
     print(mysql_scripts)

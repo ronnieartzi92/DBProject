@@ -22,8 +22,6 @@ collecting X tracks for each artists, for each track collecting:
 track details (get_tracks()) - from last.fm,
 track lyrics (find_lyrics()) - from lyrics.ovh,
 track youtube details (youtube_search()) - from youtube.com
-
-output is written for every 10 artists.
 '''
 
 
@@ -41,18 +39,6 @@ class Data:
         :return: None, json file is the output
         '''
         try:
-            with open('final.json', 'r') as feedsjson:
-                artists = json.load(feedsjson)
-            for item in artists['artists']:
-                self.all_artists.append(item['name'])
-            with open('final2.json', 'r') as feedsjson:
-                artists = json.load(feedsjson)
-            for item in artists['artists']:
-                self.all_artists.append(item['name'])
-            with open('final3.json', 'r') as feedsjson:
-                artists = json.load(feedsjson)
-            for item in artists['artists']:
-                self.all_artists.append(item['name'])
             for i in ['1']:
                 try:
                     # getting artists list from last.fm
