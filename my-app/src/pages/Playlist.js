@@ -13,7 +13,8 @@ import Tags from 'react-tagging-input';
 export default class Playlist extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {playlist: this.props.playlistSongs, currentPlayedIndex: 0, concerts: [], tags: [], listId: this.props.listId, playlistName: this.props.playlistName};
+        this.state = {playlist: this.props.playlistSongs, currentPlayedIndex: 0, concerts: [],
+            tags: [], listId: this.props.listId, playlistName: this.props.playlistName, canSavePlaylist: false};
     };
 
 
@@ -55,14 +56,37 @@ export default class Playlist extends Component {
             this.playSong(this.state.currentPlayedIndex + 1);
         else this.playSong(0);
     }
+
     getSimilarPlaylist(){
         sdk.getSimilarPlaylist(this.props.userToken, this.state.listId).then( (data) =>{
             console.log(data);
-            this.setState({playlist : data, currentPlayedIndex: 0, concerts: [], tags: [], listId: data.id, playlistName: null});
+            this.setState({playlist : data, currentPlayedIndex: 0, concerts: [], tags: [], listId: data.id, playlistName: null, canSavePlaylist: true});
         }, (reason)=> {
             alert("Server Not Responding....");
         });
     }
+
+    savePlaylist(event) {
+        sdk.savePlaylist(this.props.userToken, this.state.playlistName, this.state.playlist).then( (data) =>{
+            console.log(data);
+            this.setState({canSavePlaylist : false});
+            alert("Your playlist saved successfully !");
+        }, (reason)=> {
+            alert("Server Not Responding....");
+        });
+        event.preventDefault();
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
 
     render() {
         const currVid = this.state.playlist &&
@@ -72,6 +96,17 @@ export default class Playlist extends Component {
         return(
             <div className="playlist-container">
                 {this.state.playlistName && <h2>{this.state.playlistName}</h2>}
+
+                {this.state.canSavePlaylist &&
+                <Form onSubmit={this.savePlaylist.bind(this)} style={{float: 'right', width: '70%'}}>
+                    <Form.Group>
+                        <Form.Input placeholder='PlaylistName' name='playlistName' value={this.state.playlistName}
+                                    onChange={this.handleInputChange.bind(this)}/>
+                        <Form.Button content='Save Playlist' color="red"/>
+                    </Form.Group>
+                </Form>
+                }
+                
                 {this.state.listId && <div className="tags-container">
                     Add tags to this playlist:
                     <Tags
