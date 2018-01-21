@@ -23,7 +23,7 @@ export const PlayListItem = ({title, artist, imageURL, duration}) => {
             <Item.Content verticalAlign='middle'>
                 <Item.Header as='a'>{title}
                     <div>{artist}</div>
-                    {duration && <div><small>{formatTime(parseInt(duration))}</small></div>}
+                    {/*{duration && <div><small>{formatTime(parseInt(duration))}</small></div>}*/}
                 </Item.Header>
             </Item.Content>
         </Item>
