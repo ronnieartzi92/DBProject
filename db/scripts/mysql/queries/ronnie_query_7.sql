@@ -1,15 +1,13 @@
-USE songs_track;
-CREATE VIEW rating_song_album AS
 SELECT
-  tracks.artist_id,
-  youtubes.duration,
-  tracks.id,
-  tracks.img,
-  tracks.album,
-  tracks.track_name,
-  tracks.play_count,
-  youtubes.video_id,
-  artists.artist_name AS 'artist_name'
+  artists.id as artist_id,
+  artists.artist_name, 
+  artists.play_count as artist_play_count, 
+  tracks.id as track_id,
+  tracks.track_name, 
+  tracks.img, 
+  tracks.play_count as track_play_count, 
+  youtubes.video_id, 
+  youtubes.date_published
 FROM tracks
   INNER JOIN youtubes ON youtubes.track_id = tracks.id
   INNER JOIN artists ON tracks.artist_id = artists.id
