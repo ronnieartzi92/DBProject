@@ -58,7 +58,7 @@ export default class Playlist extends Component {
     getSimilarPlaylist(){
         sdk.getSimilarPlaylist(this.props.userToken, this.state.listId).then( (data) =>{
             console.log(data);
-            this.setState({playlist : data.songs, currentPlayedIndex: 0, concerts: [], tags: [], listId: data.id, playlistName: data.play_list_name});
+            this.setState({playlist : data, currentPlayedIndex: 0, concerts: [], tags: [], listId: data.id, playlistName: null});
         }, (reason)=> {
             alert("Server Not Responding....");
         });
