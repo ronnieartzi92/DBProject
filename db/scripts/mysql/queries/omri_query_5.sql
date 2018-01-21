@@ -8,7 +8,7 @@ FROM artists_tracks_youtubes
                                  artist_id,
                                  count(id) AS 'events'
                                FROM songs_track.events
-                               WHERE date <= DATE_ADD(CURDATE(), INTERVAL 1 YEAR)
+                               WHERE event_date <= DATE_ADD(CURDATE(), INTERVAL 1 YEAR)
                                GROUP BY artist_id
                              ) t
                WHERE artists.id = t.artist_id

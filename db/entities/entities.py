@@ -106,7 +106,7 @@ class Event(AbstractTable):
         self.country = country
         self.city = city
         self.venue = venue
-        self.date = date
+        self.event_date = date
         self.url = url
         self.title = title
         self.img = img

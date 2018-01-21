@@ -15,14 +15,16 @@ CREATE TABLE play_lists (
 	play_list_name VARCHAR(255), 
 	date_created DATETIME NOT NULL, 
 	PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    INDEX(user_id)
 );
 
 CREATE TABLE artists (
 	id INT AUTO_INCREMENT, 
     artist_name VARCHAR(255) NOT NULL UNIQUE,
     play_count BIGINT NOT NULL,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+    INDEX(play_count)
 );
 
 CREATE TABLE tracks (
@@ -35,7 +37,9 @@ CREATE TABLE tracks (
 	lyrics TEXT, 
 	description TEXT,
 	PRIMARY KEY (id),
-    FOREIGN KEY (artist_id) REFERENCES artists(id)
+    FOREIGN KEY (artist_id) REFERENCES artists(id),
+    INDEX(artist_id),
+    INDEX(play_count)
 );
 
 CREATE TABLE youtubes (
@@ -45,7 +49,9 @@ CREATE TABLE youtubes (
 	duration INT, 
 	date_published DATETIME NOT NULL,  
 	PRIMARY KEY (id),
-    FOREIGN KEY (track_id) REFERENCES tracks(id)
+    FOREIGN KEY (track_id) REFERENCES tracks(id),
+    INDEX(track_id),
+    INDEX(date_published)
 );
 
 CREATE TABLE tags (
@@ -61,12 +67,14 @@ CREATE TABLE events (
 	country VARCHAR(255),
 	city VARCHAR(255),
 	venue VARCHAR(255),
-	date DATETIME NOT NULL,
+	event_date DATETIME NOT NULL,
 	url VARCHAR(255) NOT NULL,
 	title VARCHAR(511),
 	img VARCHAR(255),
 	PRIMARY KEY (id),
-    FOREIGN KEY (artist_id) REFERENCES artists(id)
+    FOREIGN KEY (artist_id) REFERENCES artists(id),
+    INDEX(artist_id),
+    INDEX(event_date)
 );
 
 CREATE TABLE tracks_to_tags (
@@ -74,7 +82,9 @@ CREATE TABLE tracks_to_tags (
 	tag_id INT NOT NULL, 
 	PRIMARY KEY (track_id, tag_id),
     FOREIGN KEY (track_id) REFERENCES tracks(id),
-    FOREIGN KEY (tag_id) REFERENCES tags(id)
+    FOREIGN KEY (tag_id) REFERENCES tags(id),
+    INDEX(track_id),
+    INDEX(tag_id)
 );
 
 CREATE TABLE tracks_to_play_lists (
@@ -83,7 +93,9 @@ CREATE TABLE tracks_to_play_lists (
 	track_position INT NOT NULL,
 	PRIMARY KEY (play_list_id, track_id),
     FOREIGN KEY (play_list_id) REFERENCES play_lists(id),
-    FOREIGN KEY (track_id) REFERENCES tracks(id)
+    FOREIGN KEY (track_id) REFERENCES tracks(id),
+    INDEX(play_list_id),
+    INDEX(track_id)
 );
 
 CREATE TABLE tracks_isam (
