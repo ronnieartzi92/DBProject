@@ -55,6 +55,6 @@ export default {
         return axios.get(`/track/${path}`,AuthHeader(token)).then(extractData);
     },
     getSimilarPlaylist: function (token, playId) {
-        return axios.get(`/playlist_mode?playlist_id=${playId}`,AuthHeader(token)).then(extractData);
+        return axios.get(`/track/playlist_mode?playlist_id=${playId}`,AuthHeader(token)).then(extractData);
     }
 }
