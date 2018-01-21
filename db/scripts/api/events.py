@@ -39,13 +39,13 @@ def get_events(artist):
                                 if detail.tag == 'country_name':
                                     country = detail.text
                                 # trying to bring image which is not must on owr DB
-                                image = None
-                                try:
-                                    if detail.tag == 'image':
+                                if detail.tag == 'image':
+                                    try:
                                         raw_image = detail.__dict__['_children']
                                         image = raw_image[0].text
-                                except Exception:
-                                    print "no image for event {0}".format(title)
+                                    except Exception:
+                                        image = None
+                                        print "no image for event {0}".format(title)
 
                             # generating event object and insert it to the data.
                             final_event = {'title': title, 'url': url, 'date': date,
