@@ -67,7 +67,7 @@ export default class MyPlaylists extends Component {
     }
 
     makePlaylist(clickType){
-        this.setState({ isLoading: true });
+        this.setState({ isLoading: true, showPlaylist: false });
         sdk.makePlaylist(this.props.userToken, clickType).then( (data) =>{
             console.log(data);
             this.setState({playlistSongs : data, isLoading: false, showPlaylist: true});
