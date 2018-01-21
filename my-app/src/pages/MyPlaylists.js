@@ -5,7 +5,6 @@ import React, {Component} from 'react'
 import { List, Segment } from 'semantic-ui-react'
 import sdk from "./../sdk/sdk"
 import Playlist from "./Playlist";
-import {songsList} from "../utils/consts";
 
 export default class MyPlaylists extends Component {
     constructor(props, context) {

@@ -11,7 +11,10 @@ export const ArtistNextConcerts = ({concerts = []}) => {
 
         <Item.Group divided>
             {concerts.map((item, index) => {
-                const image = item.img ? item.img : "http://www.mehek.in/wp-content/uploads/2014/09/night-out-with-friends.jpg";
+                const image = item.img ? item.img :
+                    (index % 4 === 0 ? "https://securecdn.pymnts.com/wp-content/uploads/2017/08/concert.2-457x303.jpg" :
+                        (index % 4 === 1 ? "https://www.ticketswest.com/media/1028/concert_Featured%20Event%20Tile.jpg" :
+                            (index % 4 === 2 ? "https://scottkelby.com/wp-content/uploads/2009/08/concert1.jpg": "http://www.mehek.in/wp-content/uploads/2014/09/night-out-with-friends.jpg")));
                 return <Item key={index}>
                     <Item.Image src={image} />
                     <Item.Content>

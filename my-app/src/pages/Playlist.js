@@ -15,6 +15,7 @@ export default class Playlist extends Component {
         super(props, context);
         this.state = {playlist: this.props.playlistSongs, currentPlayedIndex: 0, concerts: [],
             tags: [], listId: this.props.listId, playlistName: this.props.playlistName, canSavePlaylist: false};
+        this.playSong(0);
     };
 
 
@@ -106,7 +107,6 @@ export default class Playlist extends Component {
                     </Form.Group>
                 </Form>
                 }
-                
                 {this.state.listId && <div className="tags-container">
                     Add tags to this playlist:
                     <Tags

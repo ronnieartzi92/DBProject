@@ -50,7 +50,7 @@
 }
 
 .ui.tiny.image{
-    width: 116px !important;
+    width: 200px !important;
 }
 .searchInput{
     margin-left: 200px !important;
@@ -58,7 +58,8 @@
 
 .playlist-container{
     margin: 75px auto;
-    width: 1175px;
+    width: 100%;
+    margin-left: 10% !important;
 }
 .youtube-frame{
     float: left;
@@ -95,9 +96,9 @@
     width: 340px;
 }
 .similar-container{
-    float: right;
     margin-top: -85px;
-    margin-right: 25px;
+    float: right;
+    margin-right: 350px;
 }
 .react-tags input, .react-tags__container > li {
   font-size: 12px;
