@@ -6,7 +6,6 @@
   "dependencies": {
     "axios": "^0.17.1",
     "css": "^2.2.1",
-    "format-duration": "^1.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-google-login": "^3.0.4",
