@@ -192,7 +192,7 @@ export default class MyPlaylists extends Component {
                     </div>}
               {this.state.showPlaylist && this.state.playlistSongs.length === 0 &&
               <Segment>
-                  <div>We couldn't find any songs :(</div>
+                  <div>We couldn't find any songs, or your search returns too many results :(</div>
                   <div>Try to rephrase your search</div>
               </Segment>
               }
