@@ -33,7 +33,7 @@ class PlaylistService:
 
     @staticmethod
     def create_playlist(user_id, playlist):
-        id = run_and_commit_query("insert into play_lists(play_list_name,user_id) VALUES('{}',{})".format(playlist["name"], user_id))
+        id = run_and_commit_query("insert into play_lists(play_list_name,user_id, date_created) VALUES('{}',{}, NOW())".format(playlist["name"], user_id))
 
         base_query = "insert into tracks_to_play_lists(play_list_id, track_id,track_position) VALUES({},{},{})"
         for i in range(len(playlist['songs'])):

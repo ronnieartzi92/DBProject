@@ -2,7 +2,7 @@ import mysql.connector
 
 USER_NAME = 'root'
 PASSWORD = '123456'
-DB = 'songs_track'
+DB = 'DbMysql04'
 
 
 def run_get_query(query):

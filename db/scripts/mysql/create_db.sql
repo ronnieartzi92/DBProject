@@ -1,5 +1,4 @@
-CREATE DATABASE songs_track CHARSET utf8;
-USE songs_track;
+USE DbMysql04;
 
 CREATE TABLE users (
 	id INT AUTO_INCREMENT, 
@@ -14,7 +13,7 @@ CREATE TABLE play_lists (
 	id INT AUTO_INCREMENT, 
 	user_id INT NOT NULL, 
 	play_list_name VARCHAR(255), 
-	date_created DATETIME DEFAULT CURRENT_TIMESTAMP, 
+	date_created DATETIME NOT_NULL, 
 	PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
