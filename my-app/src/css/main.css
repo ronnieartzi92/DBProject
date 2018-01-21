@@ -46,7 +46,7 @@
     cursor: pointer;
     margin-left: 13px;
     line-height: 2;
-    width: 230px;
+    width: 210px;
 }
 
 .ui.tiny.image{
@@ -68,7 +68,7 @@
 }
 .playlist-left{
     float: left;
-    margin-left: 50px;
+    margin-left: 20px;
     margin-right: 10px;
     overflow-y: scroll;
     height: 400px;
